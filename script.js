@@ -1,5 +1,10 @@
+let canvas;
+let keyboard;
+
 function init() {
     canvas = document.getElementById('canvas');
+    keyboard = new Keyboard();
+    game = new Game(canvas, keyboard);
 }
 
 document.addEventListener('keydown', (event) => {
