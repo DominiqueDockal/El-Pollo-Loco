@@ -39,36 +39,37 @@ function isFullscreen() {
     return !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
 }
 
-
 const canvas = document.getElementById('canvas');
 const BASE_CANVAS_WIDTH = parseInt(canvas.getAttribute('width')) || 720;
 const BASE_CANVAS_HEIGHT = parseInt(canvas.getAttribute('height')) || 480;
 
-function resizeGameArea() {
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
-    const canvas = document.getElementById('canvas');
-    if (!canvasWrapper || !canvas) return;
-    const aspect = BASE_CANVAS_WIDTH / BASE_CANVAS_HEIGHT;
-    let width, height;
-    if (isFullscreen()) {
-        width = window.innerWidth;
-        height = window.innerHeight;
+function getTargetSize(baseWidth, baseHeight, fullscreen) {
+    const aspect = baseWidth / baseHeight;
+    if (fullscreen) {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
         if (width / height > aspect) {
             width = height * aspect;
         } else {
             height = width / aspect;
         }
-    } else {
-        width = BASE_CANVAS_WIDTH;
-        height = BASE_CANVAS_HEIGHT;
+        return [width, height];
     }
+    return [baseWidth, baseHeight];
+}
+
+function resizeGameArea() {
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    const canvas = document.getElementById('canvas');
+    if (!canvasWrapper || !canvas) return;
+    const [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
     canvasWrapper.style.width = width + "px";
     canvasWrapper.style.height = height + "px";
     canvas.width = width;
     canvas.height = height;
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
-} 
+}
 
 function setupFullscreenHandlers() {
     if (!setupFullscreenHandlers.isSetup) {

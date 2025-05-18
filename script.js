@@ -26,7 +26,6 @@ function closeHowToPlayOverlay() {
     toggleHowToPlayOverlay(false);
 }
 
-
 function updateCanvasCssVars() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return;
