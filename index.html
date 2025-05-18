@@ -7,12 +7,37 @@
     <title>El Pollo Loco</title>
     <link rel="icon" href="favicon.png" type="image/x-icon">
 
+    
+
 
 </head>
-<body onload="init()">
-    <div>
-      <h1>El Pollo Loco</h1>
+<body>
+  <div>
+    <h1 id="headline">El Pollo Loco</h1>
+    <div class="canvas-wrapper" style="position: relative; width: 720px; height: 480px;">
       <canvas id="canvas" width="720" height="480"></canvas>
+      <div class="start-screen" id="start_screen">
+        <div class="buttons-start-screen">
+         <button class="game-button">Start Game</button>
+         <button class="game-button" onclick="howToPlay()">How to play</button>
+         <button class="game-button">Impressum</button>
+         
+        </div>
+      </div>
+      <div id="how_to_play" class="how-to-play">
+        <div class="how-to-play-content">
+          <h2>Spielanleitung</h2>
+          <p>Hier steht die eigentliche Spielanleitung...</p>
+          <h2>Tastaturbelegung</h2>
+          <p>Hier steht die Tastaturbelegung...</p>
+          <button onclick="closeOverlay()" class="game-button">Close</button>
+        </div>
+      </div>
     </div>
+    
+    <div id="buttons-mobile"></div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>

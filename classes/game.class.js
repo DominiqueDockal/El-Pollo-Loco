@@ -8,4 +8,5 @@ class Game {
         this.canvas = canvas;
         this.keyboard = keyboard;
     }
+    
 }

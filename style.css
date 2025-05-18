@@ -1,3 +1,8 @@
+@font-face {
+    font-family:zabras ;
+    src: url('fonts/zabars.ttf');
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -9,25 +14,115 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'zabras', Arial, Helvetica, sans-serif;
-    font-size: 56px;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 4px rgb(128,128,128);
 }
 
 h1 {
     text-align: center;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    font-size: 102px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgb(128,128,128);
 }
 
+.d-none {
+    display: none;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 720px;
+    height: 480px;
+}
+  
 canvas {
     background-color: black;
     display: block;
+    position: relative;
+    z-index: 1;
+}
+  
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 780px;
+    height: 480px;
+    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 2; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@font-face {
-    font-family:zabras ;
-    src: url('fonts/zabars.ttf');
+.buttons-start-screen {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;       
+    width: 100%;              
+    padding: 20px 40px 0 40px;   
+    box-sizing: border-box;
+    position: absolute;          
+    top: 0;
+    left: 0;
+  }
+  
+.game-button {
+    font-size: 30px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background: #FFA800;
+    color: black;
+    cursor: pointer;
+    transition: 
+        background 0.2s,
+        box-shadow 0.2s;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25), 0 1.5px 0 #FFD700 inset;
 }
+
+.game-button:hover {
+    background: #FF8800; 
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 2px 0 #FFD700 inset;
+}
+
+.how-to-play {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.how-to-play-content {
+    background: rgba(251, 164, 104, 0.96); 
+    border: 4px solid #ff9900;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    padding: 40px 80px;       
+    width: 70vw;               
+    max-width: 1100px;         
+    min-width: 400px;        
+    color: #222;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+
+  
+  
+
+
+
+
+
+
 
 @media only screen and (max-width: 760px){
     canvas {
@@ -41,5 +136,7 @@ canvas {
     }
 }
 
+
+/*mobile*/
 /* Titel raus wenn spiel startet*/
 /* Buttons dazu wenn Handymodus */

@@ -1,38 +1,25 @@
-let canvas;
-let keyboard;
 
-function init() {
-    canvas = document.getElementById('canvas');
-    keyboard = new Keyboard();
-    game = new Game(canvas, keyboard);
+function startGame() {
+    document.getElementById('start_screen').classList.add('d-none');
+    game = new Game();
 }
 
-document.addEventListener('keydown', (event) => {
-    switch (event.code) {
-        case 'ArrowLeft':  keyboard.LEFT = true; break;
-        case 'ArrowRight': keyboard.RIGHT = true; break;
-        case 'ArrowUp':    keyboard.UP = true; break;
-        case 'ArrowDown':  keyboard.DOWN = true; break;
-        case 'Space':      keyboard.SPACE = true; break;
-    }
-    if (event.key === 'd') keyboard.D = true;
-});
+function howToPlay() {
+    document.getElementById('how_to_play').classList.remove('d-none');
 
-document.addEventListener('keyup', (event) => {
-    switch (event.code) {
-        case 'ArrowLeft':  keyboard.LEFT = false; break;
-        case 'ArrowRight': keyboard.RIGHT = false; break;
-        case 'ArrowUp':    keyboard.UP = false; break;
-        case 'ArrowDown':  keyboard.DOWN = false; break;
-        case 'Space':      keyboard.SPACE = false; break;
-    }
-    if (event.key === 'd') keyboard.D = false;
-});
+}
+
+function closeOverlay() {
+    document.getElementById('how_to_play').classList.add('d-none');
+}
 
 
 
-//  für die mobile ansicht Buttons einfügt, die hier ebenfalls abgefragt werden müssen über Element by ID
 
+// für die mobile ansicht Buttons einfügt, die hier ebenfalls abgefragt werden müssen über Element by ID
+
+
+// Fullscreen Option
 function fullscreen(){
     
 }
