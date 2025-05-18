@@ -9,7 +9,7 @@
     <link rel="icon" href="favicon.png" type="image/x-icon">
 
 </head>
-<body>
+<body  onclick="closeHowToPlayOverlay()">
   <h1 id="headline">El Pollo Loco</h1>
     <div class="canvas-wrapper">
 
@@ -18,13 +18,13 @@
       <div class="start-screen screen-overlay" id="start_screen">
         <div class="buttons-start-screen">
          <button class="game-button" title="Start Game" onclick="startGame()">Start Game</button>
-         <button class="game-button" title="How to play" onclick="howToPlay()">How to play</button>
+         <button class="game-button" title="How to play" onclick="howToPlayOverlay(event)">How to play</button>
          <button class="game-button" title="Impressum">Impressum</button>
          <button class="game-button fullscreen" onclick="fullscreen()" title="Fullscreen">⛶</button>
         </div>
       </div>
       
-      <div id="how_to_play" class="how-to-play d-none">
+      <div id="how_to_play" class="how-to-play d-none" onclick="event.stopPropagation()">
         <div class="how-to-play-content">
           <h2>How to Play</h2>
           <dl class="game-rules">
@@ -86,8 +86,8 @@
 
       <div class="end-screen-won screen-overlay d-none" id="end_screen">
         <div class="buttons-start-screen">
-         <button class="game-button" title="Restart Game">Restart Game</button>
-         <button class="game-button" title="Quit">Quit</button>
+         <button class="game-button" title="Restart Game" onclick="startGame()">Restart Game</button>
+         <button class="game-button" title="Quit" onclick="startScreen()">Quit</button>
          <button class="game-button" title="Impressum">Impressum</button>
          <button class="game-button fullscreen" onclick="fullscreen()" title="Fullscreen">⛶</button>
         </div>

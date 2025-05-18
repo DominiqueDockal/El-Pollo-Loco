@@ -1,16 +1,31 @@
 function startGame() {
-    document.getElementById('start_screen').classList.add('d-none');
-    
+    document.getElementById('start_screen').classList.add('d-none'); 
 }
 
-function howToPlay() {
-    document.getElementById('how_to_play').classList.remove('d-none');
+function startScreen() {
+    document.getElementById('start_screen').classList.remove('d-none');
+    document.getElementById('end_screen').classList.add('d-none');
+}
 
+function toggleHowToPlayOverlay(show) {
+    const overlay = document.getElementById('how_to_play');
+    if (!overlay) return;
+    if (typeof show === 'boolean') {
+        overlay.classList.toggle('d-none', !show);
+    } else {
+        overlay.classList.toggle('d-none');
+    }
+}
+
+function howToPlayOverlay(event) {
+    toggleHowToPlayOverlay(true);
+    if (event) event.stopPropagation(); 
 }
 
 function closeHowToPlayOverlay() {
-    document.getElementById('how_to_play').classList.add('d-none');
+    toggleHowToPlayOverlay(false);
 }
+
 
 function updateCanvasCssVars() {
     const canvas = document.getElementById('canvas');
