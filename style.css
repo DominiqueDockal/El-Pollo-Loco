@@ -35,7 +35,7 @@ h1 {
     align-items: center;
     justify-content: center;
     width: var(--canvas-width);
-    height: var(--canvas-height);  
+    height: var(--canvas-height);
 }
   
 canvas {
@@ -84,7 +84,7 @@ canvas {
     left: 0;
 }
   
-.how-to-play {
+.how-to-play-overlay {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -236,6 +236,9 @@ h2 {
     list-style: disc;
 }
 
+.buttons-mobile {
+    display: none;
+} 
 
 
 
@@ -243,32 +246,96 @@ h2 {
 
 
 
-@media (max-width: 600px) {
-    .keyboard-table {
+@media (max-width: 800px) {
+    h1 {
+        display: none;
+    }
+    
+    .canvas-wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+    }
+
+    .buttons-mobile {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 720px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(251,232,211,0.98);
+        box-shadow: 0 -2px 12px var(--color-shadow-overlay);
+        z-index: 20;
+        height: 38px;
+        min-height: 38px;
+    }
+
+    .sound-container {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .sound-btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-volume::before {
+        content: "🔊";
+        display: inline-block;
+    }
+
+    .game-control-container {
+        display: flex;
+        gap: 8px;
+        background: var(--color-beige-light);
+        border-radius: 16px;
+        padding: 0;
+        box-shadow: 0 2px 8px var(--color-shadow);
+        max-width: 90vw;
+    }
+
+    .mobile-game-btn {
         font-size: 1rem;
-        max-width: 98vw;
+        height: 34px;
+        min-width: 24px;
+        border-radius: 8px;
+        padding: 0 8px;
+        margin: 0;
+        box-shadow: 0 2px 8px var(--color-shadow);
+        letter-spacing: 0.5px;
+        display: flex;                
+        align-items: center;       
+        justify-content: center; 
     }
-    .keyboard-table td {
-        padding: 7px 8px;
+
+    .jump-btn,
+    .throw-btn {
+        min-width: 48px;
+        padding: 0 12px;
+        font-size: 1rem;
     }
-    .keyboard-table .key {
-        min-width: 80px;
+
+    .left-btn,
+    .right-btn {
+        font-size: 1.1rem;
+        min-width: 28px;
     }
 }
 
 
-@media (max-width: 600px) {
-    .keyboard-table {
-        font-size: 1rem;
-        max-width: 98vw;
-    }
-    .keyboard-table td {
-        padding: 7px 8px;
-    }
-    .keyboard-table .key {
-        min-width: 80px;
-    }
-}
+
+
 
 
 

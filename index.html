@@ -15,6 +15,21 @@
 
       <canvas id="canvas" width="720" height="480"></canvas>
 
+      <div class="buttons-mobile">
+        <div class="sound-container">
+          <button class="sound-btn game-button" title="Sound">
+            <span class="icon-volume"></span>
+          </button>
+        </div>
+        <div class="game-control-container">
+          <button class="game-button mobile-game-btn jump-btn" title="Jump">Jump</button>
+          <button class="game-button mobile-game-btn throw-btn" title="Throw">Throw</button>
+          <button class="game-button mobile-game-btn left-btn" title="Left">←</button>
+          <button class="game-button mobile-game-btn right-btn" title="Right">→</button>
+        </div>
+      </div>
+      
+
       <div class="start-screen screen-overlay" id="start_screen">
         <div class="buttons-start-screen">
          <button class="game-button" title="Start Game" onclick="startGame()">Start Game</button>
@@ -24,7 +39,7 @@
         </div>
       </div>
       
-      <div id="how_to_play" class="how-to-play d-none" onclick="event.stopPropagation()">
+      <div id="how_to_play" class="how-to-play-overlay d-none" onclick="event.stopPropagation()">
         <div class="how-to-play-content">
           <h2>How to Play</h2>
           <dl class="game-rules">
@@ -98,3 +113,4 @@
   <script src="javscript/fullscreen.js"></script>
 </body>
 </html>
+

@@ -36,7 +36,7 @@ function updateCanvasCssVars() {
 }
 updateCanvasCssVars(); 
 
-function checkWindowSize() {
+/* function checkWindowSize() {
     const minWidth = 720;
     const minHeight = 480;
     if (window.innerWidth < minWidth || window.innerHeight < minHeight) {
@@ -45,6 +45,7 @@ function checkWindowSize() {
 }
 window.addEventListener('DOMContentLoaded', checkWindowSize);
 window.addEventListener('resize', checkWindowSize); 
+ */
 
 
 
@@ -60,7 +61,8 @@ window.addEventListener('resize', checkWindowSize);
 
 
 
-// für die mobile ansicht Buttons einfügt, die hier ebenfalls abgefragt werden müssen über Element by ID
-// überschrift weg
+
+// hinweis, dass man quer drehen muss
+
 
 
