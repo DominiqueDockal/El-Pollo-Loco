@@ -11,12 +11,11 @@
 </head>
 <body>
   <h1 id="headline">El Pollo Loco</h1>
-  <div class="content-wrapper">
     <div class="canvas-wrapper">
 
       <canvas id="canvas" width="720" height="480"></canvas>
 
-      <div class="start-screen" id="start_screen">
+      <div class="start-screen screen-overlay" id="start_screen">
         <div class="buttons-start-screen">
          <button class="game-button" title="Start Game" onclick="startGame()">Start Game</button>
          <button class="game-button" title="How to play" onclick="howToPlay()">How to play</button>
@@ -84,8 +83,16 @@
           <button onclick="closeHowToPlayOverlay()" class="game-button close-button" title="Close">Close</button>
         </div>
       </div>
+
+      <div class="end-screen-won screen-overlay d-none" id="end_screen">
+        <div class="buttons-start-screen">
+         <button class="game-button" title="Restart Game">Restart Game</button>
+         <button class="game-button" title="Quit">Quit</button>
+         <button class="game-button" title="Impressum">Impressum</button>
+         <button class="game-button fullscreen" onclick="fullscreen()" title="Fullscreen">⛶</button>
+        </div>
+      </div>
     </div> 
-  </div>
   
   <script src="script.js"></script>
   <script src="javscript/fullscreen.js"></script>

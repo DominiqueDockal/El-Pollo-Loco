@@ -1,5 +1,5 @@
 function fullscreen() {
-    const elem = document.querySelector('.content-wrapper');
+    const elem = document.querySelector('.canvas-wrapper');
     if (!isFullscreen()) {
         enterFullscreen(elem)
             .then(() => {
@@ -25,7 +25,6 @@ function enterFullscreen(element) {
     return Promise.reject(new Error("Fullscreen API not supported"));
 }
 
-
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -46,9 +45,9 @@ const BASE_CANVAS_WIDTH = parseInt(canvas.getAttribute('width')) || 720;
 const BASE_CANVAS_HEIGHT = parseInt(canvas.getAttribute('height')) || 480;
 
 function resizeGameArea() {
-    const contentWrapper = document.querySelector('.content-wrapper');
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
     const canvas = document.getElementById('canvas');
-    if (!contentWrapper || !canvas) return;
+    if (!canvasWrapper || !canvas) return;
     const aspect = BASE_CANVAS_WIDTH / BASE_CANVAS_HEIGHT;
     let width, height;
     if (isFullscreen()) {
@@ -63,8 +62,8 @@ function resizeGameArea() {
         width = BASE_CANVAS_WIDTH;
         height = BASE_CANVAS_HEIGHT;
     }
-    contentWrapper.style.width = width + "px";
-    contentWrapper.style.height = height + "px";
+    canvasWrapper.style.width = width + "px";
+    canvasWrapper.style.height = height + "px";
     canvas.width = width;
     canvas.height = height;
     canvas.style.width = width + "px";

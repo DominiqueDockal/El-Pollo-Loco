@@ -1,6 +1,6 @@
 function startGame() {
     document.getElementById('start_screen').classList.add('d-none');
-    game = new Game();
+    
 }
 
 function howToPlay() {
