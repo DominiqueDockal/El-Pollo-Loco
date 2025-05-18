@@ -16,13 +16,15 @@ function fullscreen() {
 
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
-        element.requestFullscreen();
+        return element.requestFullscreen(); 
     } else if (element.webkitRequestFullscreen) { 
-        element.webkitRequestFullscreen();
+        return element.webkitRequestFullscreen();
     } else if (element.msRequestFullscreen) { 
-        element.msRequestFullscreen();
+        return element.msRequestFullscreen(); 
     }
+    return Promise.reject(new Error("Fullscreen API not supported"));
 }
+
 
 function exitFullscreen() {
     if (document.exitFullscreen) {
