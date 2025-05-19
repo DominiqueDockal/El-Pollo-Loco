@@ -48,25 +48,44 @@ updateCanvasCssVars();
     }
 }
 window.addEventListener('DOMContentLoaded', checkWindowSize);
-window.addEventListener('resize', checkWindowSize); 
- */
+window.addEventListener('resize', checkWindowSize);  */
 
 
+function isTouchDevice() {
+    return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+    );
+}
 
+function isMobileUA() {
+    return /iphone|ipod|android.*mobile|windows phone|ipad|tablet/i.test(navigator.userAgent);
+}
 
+function isMobileOrTabletSize() {
+    return window.innerWidth <= 1024; 
+}
 
+function updateRotateOverlay() {
+    const overlay = document.getElementById('rotate-device-overlay');
+    if (isTouchDevice() && isMobileOrTabletSize() && isMobileUA()) {
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            overlay.style.display = 'flex';
+            // Optional: Spiel pausieren, Steuerung blockieren etc.
+        } else {
+            overlay.style.display = 'none';
+            // Optional: Spiel fortsetzen, Steuerung aktivieren etc.
+        }
+    } else {
+        overlay.style.display = 'none';
+    }
+}
 
+window.addEventListener('DOMContentLoaded', updateRotateOverlay);
+window.matchMedia("(orientation: portrait)").addEventListener("change", updateRotateOverlay);
+window.addEventListener('resize', updateRotateOverlay);
 
-
-
-
-
-
-
-
-
-
-// hinweis, dass man quer drehen muss
 
 
 

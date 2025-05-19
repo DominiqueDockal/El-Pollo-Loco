@@ -58,11 +58,38 @@ function getTargetSize(baseWidth, baseHeight, fullscreen) {
     return [baseWidth, baseHeight];
 }
 
-function resizeGameArea() {
+/* function resizeGameArea() {
     const canvasWrapper = document.querySelector('.canvas-wrapper');
     const canvas = document.getElementById('canvas');
     if (!canvasWrapper || !canvas) return;
     const [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
+    canvasWrapper.style.width = width + "px";
+    canvasWrapper.style.height = height + "px";
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+}
+ */
+
+function resizeGameArea() {
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    const canvas = document.getElementById('canvas');
+    if (!canvasWrapper || !canvas) return;
+    let [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
+    if (!isFullscreen()) {
+        const maxViewportWidth = window.innerWidth;
+        const maxViewportHeight = window.innerHeight;
+        const aspect = BASE_CANVAS_WIDTH / BASE_CANVAS_HEIGHT;
+        const scale = Math.min(
+            maxViewportWidth / BASE_CANVAS_WIDTH,
+            maxViewportHeight / BASE_CANVAS_HEIGHT
+        );
+        if (scale < 1) {
+            width = Math.floor(BASE_CANVAS_WIDTH * scale);
+            height = Math.floor(BASE_CANVAS_HEIGHT * scale);
+        }
+    }
     canvasWrapper.style.width = width + "px";
     canvasWrapper.style.height = height + "px";
     canvas.width = width;
@@ -85,15 +112,17 @@ function setupFullscreenHandlers() {
 setupFullscreenHandlers();
 
 function setButtonFullscreenStyle(isFs) {
-    document.querySelectorAll('.game-button').forEach(btn => {
+    document.querySelectorAll('.game-button, .mobile-game-btn, .sound-btn').forEach(btn => {
         btn.classList.toggle('fullscreen-size', isFs);
     });
 }
 
 function handleFullscreenChanges() {
     const headline = document.getElementById('headline');
+    const mobileButtons = document.querySelector('.buttons-mobile');
     const isFs = isFullscreen();
     if (headline) headline.classList.toggle('d-none', isFs);
+    if (mobileButtons) mobileButtons.classList.toggle('fullscreen-mobile-buttons', isFs);
     setButtonFullscreenStyle(isFs);
 } 
 
