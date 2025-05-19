@@ -26,6 +26,10 @@ function closeHowToPlayOverlay() {
     toggleHowToPlayOverlay(false);
 }
 
+function toggleSoundIcon(btn) {
+    btn.classList.toggle('sound-off');
+}
+
 function updateCanvasCssVars() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return;

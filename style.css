@@ -250,7 +250,7 @@ h2 {
     h1 {
         display: none;
     }
-    
+
     .canvas-wrapper {
         flex-direction: column;
         justify-content: flex-start;
@@ -267,7 +267,6 @@ h2 {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        background: rgba(251,232,211,0.98);
         box-shadow: 0 -2px 12px var(--color-shadow-overlay);
         z-index: 20;
         height: 38px;
@@ -293,12 +292,16 @@ h2 {
     .icon-volume::before {
         content: "🔊";
         display: inline-block;
+        transition: content 0.2s;
+    }
+
+    .sound-off .icon-volume::before {
+        content: "🔇"; 
     }
 
     .game-control-container {
         display: flex;
         gap: 8px;
-        background: var(--color-beige-light);
         border-radius: 16px;
         padding: 0;
         box-shadow: 0 2px 8px var(--color-shadow);
