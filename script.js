@@ -40,17 +40,6 @@ function updateCanvasCssVars() {
 }
 updateCanvasCssVars(); 
 
-/* function checkWindowSize() {
-    const minWidth = 720;
-    const minHeight = 480;
-    if (window.innerWidth < minWidth || window.innerHeight < minHeight) {
-        alert(`Please enlarge your browser window to at least ${minWidth}x${minHeight} pixels for the best experience.`);
-    }
-}
-window.addEventListener('DOMContentLoaded', checkWindowSize);
-window.addEventListener('resize', checkWindowSize);  */
-
-
 function isTouchDevice() {
     return (
         'ontouchstart' in window ||

@@ -58,20 +58,6 @@ function getTargetSize(baseWidth, baseHeight, fullscreen) {
     return [baseWidth, baseHeight];
 }
 
-/* function resizeGameArea() {
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
-    const canvas = document.getElementById('canvas');
-    if (!canvasWrapper || !canvas) return;
-    const [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
-    canvasWrapper.style.width = width + "px";
-    canvasWrapper.style.height = height + "px";
-    canvas.width = width;
-    canvas.height = height;
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-}
- */
-
 function resizeGameArea() {
     const canvasWrapper = document.querySelector('.canvas-wrapper');
     const canvas = document.getElementById('canvas');
@@ -112,9 +98,31 @@ function setupFullscreenHandlers() {
 setupFullscreenHandlers();
 
 function handleFullscreenChanges() {
-    const headline = document.getElementById('headline');
     const isFs = isFullscreen();
+    const elementsToToggle = {
+        // Map: [Reguläre Klasse] => Fullscreen-Klasse
+        'game-button': 'game-button-fullscreen',
+        'how-to-play-content': 'how-to-play-content-fullscreen',
+        'keyboard-table': 'keyboard-table-fullscreen',
+        'buttons-start-screen': 'buttons-start-screen-fullscreen',
+        'fullscreen-button': 'fullscreen-button-fullscreen',
+        'buttons-mobile': 'buttons-mobile-fullscreen',
+        'jump-btn': 'jump-btn-fullscreen',
+        'throw-btn': 'throw-btn-fullscreen',
+        'left-btn': 'left-btn-fullscreen',
+        'right-btn': 'right-btn-fullscreen',
+        'sound-btn': 'sound-btn-fullscreen'
+    };
+
+    Object.entries(elementsToToggle).forEach(([baseClass, fsClass]) => {
+        document.querySelectorAll(`.${baseClass}`).forEach(el => {
+            el.classList.toggle(fsClass, isFs);
+        });
+    });
+
+    const headline = document.getElementById('headline');
     if (headline) headline.classList.toggle('d-none', isFs);
 }
+
  
 

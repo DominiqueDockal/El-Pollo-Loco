@@ -37,6 +37,7 @@
     --color-shadow: rgba(186,98,23,0.12);
     --color-shadow-strong: rgba(186,98,23,0.22);
     --color-shadow-overlay: rgba(186,98,23,0.22);
+    --color-bg-light-trans: rgba(251, 232, 211, 0.85);
     --color-shadow-text: #A07B50;
     --color-white: #fff;
     --color-yellow-light: #FFF9E3;
@@ -139,7 +140,3 @@
 
 }
 
-@media only screen and (max-width: 720px) and (orientation: landscape) {
-   
-
-}

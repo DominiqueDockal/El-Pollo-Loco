@@ -318,7 +318,7 @@ h2 {
     }
 }
 
-@media only screen and (max-width: 1444px) and (orientation: landscape) {
+@media only screen and (max-width: 1200px) and (orientation: landscape) {
     h1 {
         display: none;
     }
@@ -330,7 +330,6 @@ h2 {
     .canvas-wrapper {
         width:100vw;
     }
-
 }
 
 @media only screen and (orientation: landscape)  {

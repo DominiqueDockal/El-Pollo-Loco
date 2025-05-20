@@ -1,0 +1,43 @@
+html {
+    scrollbar-color: var(--color-orange-main) var(--color-key-bg);
+    scrollbar-width: thin;
+}
+
+body {
+    background-color: var(--color-bg-light-trans);
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: clamp(1.25rem, 0.7135rem + 1.287vw, 1.875rem);
+
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+    background: var(--color-key-bg);  
+    border-radius: 16px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-orange-main) 0%, var(--color-orange-dark) 100%);
+    border-radius: 16px;
+    border: 3px solid var(--color-key-bg);
+    box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--color-orange-dark) 0%, var(--color-brown-text) 100%);
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--color-key-bg);  
+    border-radius: 16px;
+}
+
+.headline-button-container {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+
+

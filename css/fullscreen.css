@@ -1,0 +1,47 @@
+.game-button-fullscreen {
+    font-size: 60px;
+}
+
+
+.how-to-play-content-fullscreen {
+    font-size: 48px;
+    letter-spacing: 1.4px;
+}
+
+.keyboard-table-fullscreen {
+    max-width: 500px;
+    font-size: 48px;
+}
+
+.buttons-start-screen-fullscreen {
+    max-width: 1200px;              
+}
+
+.fullscreen-button-fullscreen {
+    height:80px;
+}
+
+.buttons-mobile-fullscreen {
+    max-width: 1200px;    
+
+}
+
+.jump-btn-fullscreen,
+.throw-btn-fullscreen {
+    font-size: 30px;
+    height: 60px;
+    width: 150px;
+}
+
+.left-btn-fullscreen,
+.right-btn-fullscreen {
+    font-size: 30px;
+    height: 60px;
+    width: 150px;
+}
+
+.sound-btn-fullscreen {
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+}
