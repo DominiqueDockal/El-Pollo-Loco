@@ -111,18 +111,10 @@ function setupFullscreenHandlers() {
 }
 setupFullscreenHandlers();
 
-function setButtonFullscreenStyle(isFs) {
-    document.querySelectorAll('.game-button, .mobile-game-btn, .sound-btn').forEach(btn => {
-        btn.classList.toggle('fullscreen-size', isFs);
-    });
-}
-
 function handleFullscreenChanges() {
     const headline = document.getElementById('headline');
-    const mobileButtons = document.querySelector('.buttons-mobile');
     const isFs = isFullscreen();
     if (headline) headline.classList.toggle('d-none', isFs);
-    if (mobileButtons) mobileButtons.classList.toggle('fullscreen-mobile-buttons', isFs);
-    setButtonFullscreenStyle(isFs);
-} 
+}
+ 
 

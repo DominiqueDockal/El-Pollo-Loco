@@ -49,7 +49,7 @@
 }
 
 .game-button {
-    font-size: 30px;
+    font-size: 24px;
     padding: 12px 28px;
     border-radius: 14px;
     border: 2.5px solid var(--color-brown-dark); 
@@ -72,18 +72,6 @@
     color: var(--color-yellow-light);
 }
 
-.game-button.fullscreen {  
-    padding: 7px 14px;      
-    min-width: 40px;       
-    min-height: 40px;     
-}
-
-.game-button.fullscreen-size {
-    font-size: 42px;
-    padding: 18px 36px;
-    border-radius: 20px;
-}
-
 .how-to-play-content::-webkit-scrollbar {
     width: 12px;
     background: var(--color-beige-light); 
@@ -104,4 +92,53 @@
 .how-to-play-content::-webkit-scrollbar-track {
     background: var(--color-beige-light);
     border-radius: 16px;
+}
+
+@media (hover: none) and (pointer: coarse)  {
+    .sound-btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-volume::before {
+        content: "🔊";
+        display: inline-block;
+    }
+
+    .sound-off .icon-volume::before {
+        content: "🔇"; 
+    }
+
+    .mobile-game-btn {
+        height: 34px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px var(--color-shadow);
+        display: flex;                
+        align-items: center;       
+        justify-content: center; 
+    }
+
+    .jump-btn,
+    .throw-btn {
+        min-width: 48px;
+        font-size: 16px;
+    }
+
+    .left-btn,
+    .right-btn {
+        font-size: 24px;
+        min-width: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 720px) and (orientation: landscape) {
+   
+
 }
