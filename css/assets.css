@@ -49,8 +49,8 @@
 }
 
 .game-button {
-    font-size: 24px;
-    padding: 12px 28px;
+    font-size: clamp(1.25rem, 0.7135rem + 1.287vw, 1.875rem);
+    padding: 10px 24px;
     border-radius: 14px;
     border: 2.5px solid var(--color-brown-dark); 
     background: linear-gradient(180deg, var(--color-orange-main) 0%, var(--color-orange-dark) 100%);
@@ -94,6 +94,7 @@
     border-radius: 16px;
 }
 
+
 @media (hover: none) and (pointer: coarse)  {
     .sound-btn {
         width: 34px;
@@ -127,12 +128,12 @@
     .jump-btn,
     .throw-btn {
         min-width: 48px;
-        font-size: 16px;
+        font-size: clamp(1rem, 0.3562rem + 1.5444vw, 1.75rem);
     }
 
     .left-btn,
     .right-btn {
-        font-size: 24px;
+        font-size: clamp(1.5rem, 1.1781rem + 0.7722vw, 1.875rem);
         min-width: 30px;
     }
 
