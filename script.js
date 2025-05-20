@@ -40,7 +40,7 @@ function updateCanvasCssVars() {
 }
 updateCanvasCssVars(); 
 
-function isTouchDevice() {
+/* function isTouchDevice() {
     return (
         'ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
@@ -53,7 +53,46 @@ function isMobileUA() {
 }
 
 function isMobileOrTabletSize() {
-    return window.innerWidth <= 1024; 
+    return window.innerWidth <= 1400; 
+}
+
+function updateRotateOverlay() {
+    const overlay = document.getElementById('rotate-device-overlay');
+    if (isTouchDevice() && isMobileOrTabletSize() && isMobileUA()) {
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            overlay.style.display = 'flex';
+            // Optional: Spiel pausieren, Steuerung blockieren etc.
+        } else {
+            overlay.style.display = 'none';
+            // Optional: Spiel fortsetzen, Steuerung aktivieren etc.
+        }
+    } else {
+        overlay.style.display = 'none';
+    }
+}
+
+window.addEventListener('DOMContentLoaded', updateRotateOverlay);
+window.matchMedia("(orientation: portrait)").addEventListener("change", updateRotateOverlay);
+window.addEventListener('resize', updateRotateOverlay); */
+
+function isTouchDevice() {
+    return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+    );
+}
+
+function isMobileUA() {
+    const ua = navigator.userAgent.toLowerCase();
+    return (
+        /iphone|ipod|android.*mobile|windows phone|ipad|tablet/i.test(ua) ||
+        (ua.includes("windows") && navigator.maxTouchPoints > 0)
+    );
+}
+
+function isMobileOrTabletSize() {
+    return window.innerWidth <= 1400 || window.innerHeight <= 900;
 }
 
 function updateRotateOverlay() {
@@ -74,7 +113,6 @@ function updateRotateOverlay() {
 window.addEventListener('DOMContentLoaded', updateRotateOverlay);
 window.matchMedia("(orientation: portrait)").addEventListener("change", updateRotateOverlay);
 window.addEventListener('resize', updateRotateOverlay);
-
 
 
 
