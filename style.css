@@ -241,7 +241,7 @@ h2 {
 }
 
 .fullscreen-button {
-    height: 52px;
+    height:calc(44px + (54 - 44) * ((100vw - 360px) / (1200 - 360)));;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,7 +318,7 @@ h2 {
     }
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (max-width: 1444px) and (orientation: landscape) {
     h1 {
         display: none;
     }
