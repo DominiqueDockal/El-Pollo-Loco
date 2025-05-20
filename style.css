@@ -241,7 +241,7 @@ h2 {
 }
 
 .fullscreen-button {
-    height:calc(44px + (54 - 44) * ((100vw - 360px) / (1200 - 360)));;
+    height:calc(44px + (50 - 44) * ((100vw - 360px) / (1200 - 360)));;
     display: flex;
     align-items: center;
     justify-content: center;
