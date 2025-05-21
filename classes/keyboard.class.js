@@ -22,7 +22,6 @@ class Keyboard{
         }
         if (event.key === 'd') keyboard.D = false;
     });
-
     this.registerMobileButtons();
     }
 

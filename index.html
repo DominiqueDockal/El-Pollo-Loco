@@ -12,7 +12,7 @@
 </head>
 <body onclick="closeHowToPlayOverlay()">
   <h1 id="headline">El Pollo Loco</h1>
-    <div class="canvas-wrapper">
+  <div class="canvas-wrapper">
 
       <canvas id="canvas" width="720" height="480"></canvas>
 
@@ -41,6 +41,28 @@
       
       <div id="how_to_play" class="how-to-play-overlay d-none" onclick="event.stopPropagation()">
         <div class="how-to-play-content">
+          <h2>Keyboard Controls</h2>
+          <table class="keyboard-table">
+            <tbody>
+              <tr>
+                <td class="key">Right Arrow</td>
+                <td class="action">Move right</td>
+              </tr>
+              <tr>
+                <td class="key">Left Arrow</td>
+                <td class="action">Move left</td>
+              </tr>
+              <tr>
+                <td class="key">Spacebar</td>
+                <td class="action">Jump</td>
+              </tr>
+              <tr>
+                <td class="key">D</td>
+                <td class="action">Throw bottle</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h2>How to Play</h2>
           <dl class="game-rules">
             <dt>Objective</dt>
@@ -70,36 +92,13 @@
             </dd>
           </dl>
 
-          <h2>Keyboard Controls</h2>
-          <table class="keyboard-table">
-            <tbody>
-              <tr>
-                <td class="key">Right Arrow</td>
-                <td class="action">Move right</td>
-              </tr>
-              <tr>
-                <td class="key">Left Arrow</td>
-                <td class="action">Move left</td>
-              </tr>
-              <tr>
-                <td class="key">Spacebar</td>
-                <td class="action">Jump</td>
-              </tr>
-              <tr>
-                <td class="key">D</td>
-                <td class="action">Throw bottle</td>
-              </tr>
-            </tbody>
-          </table>
-        
-          
         </div>
         <div class="how-to-play-button-container">
           <button onclick="closeHowToPlayOverlay()" class="game-button close-button" title="Close">Close</button>
         </div>
       </div>
 
-      <div class="end-screen-won screen-overlay d-none" id="end_screen">
+      <div class="screen-overlay d-none" id="end_screen">
         <div class="buttons-start-screen">
          <button class="game-button" title="Restart Game" onclick="startGame()">Restart Game</button>
          <button class="game-button" title="Quit" onclick="startScreen()">Quit</button>
@@ -107,7 +106,7 @@
          <button class="game-button fullscreen" onclick="fullscreen()" title="Fullscreen">⛶</button>
         </div>
       </div>
-    </div> 
+  </div> 
 
     <div id="rotate-device-overlay">
       <div>
