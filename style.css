@@ -61,7 +61,7 @@ canvas {
     justify-content: center;
 }
 
- .start-screen {
+.start-screen {
     background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
 } 
 
@@ -280,7 +280,6 @@ h2 {
     text-shadow: 0 0 12px var(--color-shadow-strong);
 }
 
-  
 @media (hover: none) and (pointer: coarse)  {    
     .canvas-wrapper {
         flex-direction: column;

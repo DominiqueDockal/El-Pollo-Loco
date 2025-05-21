@@ -3,25 +3,6 @@
     src: url('/fonts/zabars.ttf');
 }
 
-/* :root {
-    --color-beige-light: #F9EFE3;
-    --color-black: #23180C;
-    --color-brown-dark: #A0522D;
-    --color-brown-text: #5C3A1A;
-    --color-gold: #FFD700;
-    --color-key-bg: #FFF9ED;
-    --color-orange-main: #FFB366;
-    --color-orange-dark: #FF944D;
-    --color-orange-deep: #BF6B30;
-    --color-overlay-bg: rgba(191,107,48,0.18);
-    --color-shadow: rgba(191,107,48,0.10);
-    --color-shadow-strong: rgba(191,107,48,0.18);
-    --color-shadow-overlay: rgba(191,107,48,0.18);
-    --color-shadow-text: #BCA88E;
-    --color-white: #fff;
-    --color-yellow-light: #FFFBE6;
-}  */
-
 :root {
     --color-beige-light: #FBE8D3;
     --color-black: #1A120B;
@@ -94,7 +75,6 @@
     background: var(--color-beige-light);
     border-radius: 16px;
 }
-
 
 @media (hover: none) and (pointer: coarse)  {
     .sound-btn {

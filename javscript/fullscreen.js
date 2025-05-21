@@ -100,7 +100,6 @@ setupFullscreenHandlers();
 function handleFullscreenChanges() {
     const isFs = isFullscreen();
     const elementsToToggle = {
-        // Map: [Reguläre Klasse] => Fullscreen-Klasse
         'game-button': 'game-button-fullscreen',
         'how-to-play-content': 'how-to-play-content-fullscreen',
         'keyboard-table': 'keyboard-table-fullscreen',
@@ -113,13 +112,11 @@ function handleFullscreenChanges() {
         'right-btn': 'right-btn-fullscreen',
         'sound-btn': 'sound-btn-fullscreen'
     };
-
     Object.entries(elementsToToggle).forEach(([baseClass, fsClass]) => {
         document.querySelectorAll(`.${baseClass}`).forEach(el => {
             el.classList.toggle(fsClass, isFs);
         });
     });
-
     const headline = document.getElementById('headline');
     if (headline) headline.classList.toggle('d-none', isFs);
 }
