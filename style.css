@@ -66,11 +66,11 @@ canvas {
 }
 
 .end-screen-won {
-    background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
+    background-image: url('img/You_won_you_lost/You_Win_A.png');
 }
 
 .end-screen-lost {
-    background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
+    background-image: url('img/You_won_you_lost/Game_over_A.png');
 }
 
 .buttons-start-screen {
@@ -279,7 +279,7 @@ h2 {
 }
 
   
-@media (hover: none) and (pointer: coarse)  {
+@media (hover: none) and (pointer: coarse)  {    
     .canvas-wrapper {
         flex-direction: column;
         justify-content: flex-start;
