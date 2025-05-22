@@ -12,14 +12,13 @@
     font-size: 48px;
 }
 
+.buttons-end-screen.fullscreen,
 .buttons-start-screen-fullscreen {
     max-width: 1200px;              
 }
 
-.buttons-game-started,
-.buttons-mobile-fullscreen {
+.buttons-game-started-fullscreen {
     max-width: 1200px;    
-
 }
 
 .jump-btn-fullscreen,

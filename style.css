@@ -75,6 +75,7 @@ canvas {
     background-size: 40% auto;
 }
 
+.buttons-end-screen,
 .buttons-start-screen {
     display: flex;
     justify-content: space-between; 
