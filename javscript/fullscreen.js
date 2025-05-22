@@ -104,14 +104,14 @@ function handleFullscreenChanges() {
         'how-to-play-content': 'how-to-play-content-fullscreen',
         'keyboard-table': 'keyboard-table-fullscreen',
         'buttons-start-screen': 'buttons-start-screen-fullscreen',
-        'fullscreen-button': 'fullscreen-button-fullscreen',
         'buttons-mobile': 'buttons-mobile-fullscreen',
         'jump-btn': 'jump-btn-fullscreen',
         'throw-btn': 'throw-btn-fullscreen',
         'left-btn': 'left-btn-fullscreen',
         'right-btn': 'right-btn-fullscreen',
         'sound-btn': 'sound-btn-fullscreen',
-        'pause-btn': 'pause-btn-fullscreen'
+        'pause-btn': 'pause-btn-fullscreen',
+        'fullscreen-btn': 'fullscreen-btn-fullscreen'
     };
     Object.entries(elementsToToggle).forEach(([baseClass, fsClass]) => {
         document.querySelectorAll(`.${baseClass}`).forEach(el => {

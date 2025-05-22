@@ -17,7 +17,7 @@
 
       <canvas id="canvas" width="720" height="480"></canvas>
 
-      <div class="buttons-start-game">
+      <div class="buttons-game-started">
         <div id="game_control_left" class="game-control-left d-none">
           <button id="sound_btn" class="sound-btn game-button" title="Sound" onclick="toggleSoundIcon(this)">
             <span class="icon-volume"></span>
@@ -26,6 +26,7 @@
             <span class="pause-icon">&#x23F8;</span>
             <span class="play-icon">&#x25B6;</span>
           </button>
+          <button class="game-button fullscreen-btn" onclick="fullscreen()" title="Fullscreen">⛶</button>
 
         </div>
         <div id="game_control_right" class="game-control-right d-none">
@@ -41,7 +42,6 @@
          <button class="game-button" title="Start Game" onclick="startGame()">Start Game</button>
          <button class="game-button" title="How to play" onclick="howToPlayOverlay(event)">How to play</button>
          <button class="game-button" title="Impressum" onclick="window.location.href='impressum.html'">Impressum</button>
-         <button class="game-button fullscreen-button" onclick="fullscreen()" title="Fullscreen">⛶</button>
         </div>
       </div>
       
@@ -109,7 +109,6 @@
          <button class="game-button" title="Restart Game" onclick="restartGame()">Restart Game</button>
          <button class="game-button" title="Quit" onclick="startScreen()">Quit</button>
          <button class="game-button" title="Impressum" onclick="window.location.href='impressum.html'">Impressum</button>
-         <button class="game-button fullscreen" onclick="fullscreen()" title="Fullscreen">⛶</button>
         </div>
       </div>
   </div> 

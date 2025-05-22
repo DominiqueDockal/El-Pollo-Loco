@@ -16,10 +16,7 @@
     max-width: 1200px;              
 }
 
-.fullscreen-button-fullscreen {
-    height:80px;
-}
-
+.buttons-game-started,
 .buttons-mobile-fullscreen {
     max-width: 1200px;    
 
@@ -39,6 +36,7 @@
     width: 150px;
 }
 
+.fullscreen-btn-fullscreen,
 .pause-btn-fullscreen,
 .sound-btn-fullscreen {
     font-size: 30px;

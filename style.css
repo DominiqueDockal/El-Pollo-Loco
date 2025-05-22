@@ -276,7 +276,7 @@ h2 {
     text-shadow: 0 0 12px var(--color-shadow-strong);
 }
 
-.buttons-start-game {
+.buttons-game-started {
     position: absolute;
     left: 50%;
     bottom: 0.5%;

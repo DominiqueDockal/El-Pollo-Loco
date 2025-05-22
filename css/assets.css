@@ -76,6 +76,7 @@
     border-radius: 16px;
 }
 
+.fullscreen-btn,
 .pause-btn,
 .sound-btn {
     width: 34px;
@@ -99,7 +100,7 @@
 
 .pause-icon,
 .play-icon {
-    color: #808080;
+    color: var(--color-white);
     letter-spacing: 0;
 }
 
@@ -138,6 +139,11 @@
     .mobile-game-btn {
         display: flex !important;
     }
+
+    .fullscreen-btn {
+        display: none !important;
+    }
+
 }
 
 
