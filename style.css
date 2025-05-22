@@ -16,14 +16,15 @@ h1 {
     width: 100vw; 
     text-align: center;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
-    font-size: 102px;
-    letter-spacing: 5px;
-    text-shadow: 2px 2px 4px var(--color-shadow-text);
+    font-size: 6.375em;
+    letter-spacing: 0.049em;
+    text-shadow: 0.02em 0.02em 0.039em var(--color-shadow-text); 
     color: var(--color-yellow-light);
-    margin: 0 0 30px 0;
+    margin: 0 0 30px 0; 
     pointer-events: none; 
     z-index: 10;
 }
+
 
 .canvas-wrapper {
     position: relative;
@@ -101,29 +102,29 @@ canvas {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 12px 48px var(--color-shadow-overlay);
+    box-shadow: 0 0.75em 3em var(--color-shadow-overlay);
 }
 
 .how-to-play-content {
     background: transparent;
-    border-top: 5px solid var(--color-orange-main);
-    border-left: 5px solid var(--color-orange-main);
-    border-right: 5px solid var(--color-orange-main);
+    border-top: 0.3125em solid var(--color-orange-main);   
+    border-left: 0.3125em solid var(--color-orange-main);   
+    border-right: 0.3125em solid var(--color-orange-main);
     border-bottom: none;
-    border-radius: 5px 5px 0 0;
-    padding: 10px;
+    border-radius: 0.3125em 0.3125em 0 0; 
+    padding: 0.625em;
     width: 100%;      
     height: 100%;     
     color: var(--color-brown-text);
-    font-size: 28px;
+    font-size: 1.75em;
     text-align: center;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
-    letter-spacing: 1.1px;
+    letter-spacing: 0.039em;   
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items:center;
-    gap: 20px;
+    gap: 1.25em; 
     overflow: auto;
     overflow-x: hidden;
     scrollbar-width: thin;
@@ -133,35 +134,35 @@ canvas {
 
 .how-to-play-button-container {
     background: transparent;
-    border-bottom: 5px solid var(--color-orange-main);
-    border-left: 5px solid var(--color-orange-main);
-    border-right: 5px solid var(--color-orange-main);
+    border-bottom: 0.3125em solid var(--color-orange-main);  
+    border-left: 0.3125em solid var(--color-orange-main);    
+    border-right: 0.3125em solid var(--color-orange-main);
     border-top: none; 
-    border-radius: 0 0 5px 5px; 
+    border-radius: 0 0 0.3125em 0.3125em;   
     width: 100%;           
     display: flex;         
     justify-content: center;
     align-items: center;
-    padding: 18px 0 18px 0; 
+    padding: 1.125em 0 1.125em 0; 
     box-sizing: border-box;
 }
 
 .keyboard-table {
     width: 100%;
-    max-width: 420px;
-    margin: 24px auto 0 auto;
+    max-width: 26.25em;
+    margin: 0 auto 0 auto; 
     border-collapse: separate;
-    border-spacing: 0 12px;
+    border-spacing: 0 0.75em; 
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 1.3rem;
     color: var(--color-brown-text);
 }
 
 .keyboard-table td {
-    padding: 10px 16px;
+    padding: 0.625em 1em;   
     background: var(--color-beige-light);
-    border-radius: 12px;
-    border: 2px solid var(--color-orange-main);
+    border-radius: 0.75em;  
+    border: 0.125em solid var(--color-orange-main);
     vertical-align: middle;
     text-align: left; 
 }
@@ -170,16 +171,16 @@ canvas {
     font-weight: bold;
     background: var(--color-key-bg);
     color: var(--color-brown-text);
-    min-width: 120px;
+    min-width: 7.5em; 
     border-right: none;
-    border-radius: 12px 0 0 12px;
+    border-radius: 0.75em 0 0 0.75em; 
     box-shadow: none;
     text-align: left;
 }
 
 .keyboard-table .action {
     background: var(--color-beige-light);
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 0.75em 0.75em 0;
     border-left: none;
     color: var(--color-brown-text);
     text-align: left;
@@ -191,9 +192,10 @@ h2 {
 
 .game-rules {
     margin: 0;
+    margin-block-start: 0;
     padding: 0;
     width: 100%;
-    max-width: 600px;
+    max-width: 37.5em; 
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -202,47 +204,40 @@ h2 {
 .game-rules dt {
     font-weight: bold;
     color: var(--color-brown-text);
-    margin-top: 22px;
-    margin-bottom: 6px;
-    font-size: 19px;
-    letter-spacing: 0.5px;
+    margin-top: 1em;                
+    margin-bottom: 0.375em;             
+    font-size: 1.2em;                   
+    letter-spacing: 0.021em;            
     font-family: inherit;
-    padding: 2px 16px;
+    padding: 0.125em 1em;              
     display: inline-block;
-    border-radius: 6px;
+    border-radius: 0.375em;           
     background: radial-gradient(
         ellipse at center,
         var(--color-beige-light) 60%,
-       var(--color-beige-transparent) 100%
+        var(--color-beige-transparent) 100%
     );
 }
 
 .game-rules dd {
-    margin: 0 0 14px 0;
+    margin: 0 0 0.875em 0;              
     padding-left: 0;
-    font-size: 1em;
-    line-height: 1.6;
+    font-size: 1em;                    
+    line-height: 1.6;                   
     color: var(--color-brown-text);
 }
 
 .game-rules ul {
-    margin: 10px 0 0 0;
-    padding-left: 28px;
+    margin: 0.625em 0 0 0;            
+    padding-left: 1.75em;              
 }
 
 .game-rules li {
-    margin-bottom: 7px;
+    margin-bottom: 0.4375em;            
     color: var(--color-brown-text);
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 1em;                     
+    line-height: 1.5;                 
     list-style: disc;
-}
-
-.fullscreen-button {
-    height:calc(44px + (50 - 44) * ((100vw - 360px) / (1200 - 360)));;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #rotate-device-overlay {
@@ -252,12 +247,12 @@ h2 {
     inset: 0;
     background: var(--color-rotate-overlay-bg);
     color: var(--color-yellow-light); 
-    font-size: 32px;
+    font-size: 2em;                    
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.0375em;          
 }
 
 #rotate-device-overlay.active {
@@ -265,15 +260,15 @@ h2 {
 }
 
 #rotate-device-overlay p {
-    margin-bottom: 24px;
+    margin-bottom: 0.75em;             
     color: var(--color-yellow-light);
-    text-shadow: 2px 2px 6px var(--color-shadow-text);
+    text-shadow: 0.0625em 0.0625em 0.1875em var(--color-shadow-text); 
 }
 
 #rotate-device-overlay span {
-    font-size: 56px;
+    font-size: 1.75em;                  
     color: var(--color-gold);
-    text-shadow: 0 0 12px var(--color-shadow-strong);
+    text-shadow: 0 0 0.375em var(--color-shadow-strong); 
 }
 
 .buttons-game-started {
@@ -282,8 +277,8 @@ h2 {
     bottom: 0.5%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 1000px; 
-    display:flex;   
+    max-width: 62.5em;             
+    display: flex;   
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -295,17 +290,17 @@ h2 {
 .game-control-left {
     display: flex;
     align-items: flex-end;
-    padding-left: 10px;
+    padding-left: 0.625em;          
     justify-content: center;
-    gap: 10px;
+    gap: 0.625em;                   
 }
 
 .game-control-right {
-     display: flex;
-     gap: 8px;
-     border-radius: 16px;
-    padding-right: 10px;
-     max-width: 90vw;
+    display: flex;
+    gap: 0.5em;                
+    border-radius: 1em;        
+    padding-right: 0.625em;    
+    max-width: 90vw;        
 }
 
 @media only screen and (max-width: 1200px) and (orientation: landscape) {
