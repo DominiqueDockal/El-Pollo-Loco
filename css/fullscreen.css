@@ -39,6 +39,7 @@
     width: 150px;
 }
 
+.pause-btn-fullscreen,
 .sound-btn-fullscreen {
     font-size: 30px;
     height: 60px;

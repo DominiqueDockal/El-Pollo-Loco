@@ -28,8 +28,8 @@ h1 {
 .canvas-wrapper {
     position: relative;
     display:flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     width: 100%;
     height: auto;
     max-width: var(--canvas-width);
@@ -238,10 +238,6 @@ h2 {
     list-style: disc;
 }
 
-.buttons-mobile {
-    display: none;
-}
-
 .fullscreen-button {
     height:calc(44px + (50 - 44) * ((100vw - 360px) / (1200 - 360)));;
     display: flex;
@@ -280,43 +276,36 @@ h2 {
     text-shadow: 0 0 12px var(--color-shadow-strong);
 }
 
-@media (hover: none) and (pointer: coarse)  {    
-    .canvas-wrapper {
-        flex-direction: column;
-        justify-content: flex-start;
-        height: auto;
-    }
+.buttons-start-game {
+    position: absolute;
+    left: 50%;
+    bottom: 0.5%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px; 
+    display:flex;   
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+    height: 10%;
+    min-height: 10%;
+}
 
-    .buttons-mobile {
-        position: absolute;
-        left: 50%;
-        bottom: 0.5%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 1000px;    
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 20;
-        height: 10%;
-        min-height: 10%;
-    }
+.game-control-left {
+    display: flex;
+    align-items: flex-end;
+    padding-left: 10px;
+    justify-content: center;
+    gap: 10px;
+}
 
-    .sound-container {
-        display: flex;
-        align-items: flex-end;
-        padding-left: 10px;
-        justify-content: center;
-    }
-
-    .game-control-container {
-        display: flex;
-        gap: 8px;
-        border-radius: 16px;
-        padding-right: 10px;
-        max-width: 90vw;
-    }
+.game-control-right {
+     display: flex;
+     gap: 8px;
+     border-radius: 16px;
+    padding-right: 10px;
+     max-width: 90vw;
 }
 
 @media only screen and (max-width: 1200px) and (orientation: landscape) {

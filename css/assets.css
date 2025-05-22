@@ -76,47 +76,63 @@
     border-radius: 16px;
 }
 
-@media (hover: none) and (pointer: coarse)  {
-    .sound-btn {
-        width: 34px;
-        height: 34px;
-        min-width: 34px;
-        min-height: 34px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .icon-volume::before {
-        content: "🔊";
-        display: inline-block;
-    }
-
-    .sound-off .icon-volume::before {
-        content: "🔇"; 
-    }
-
-    .mobile-game-btn {
-        height: 34px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px var(--color-shadow);
-        display: flex;                
-        align-items: center;       
-        justify-content: center; 
-    }
-
-    .jump-btn,
-    .throw-btn {
-        min-width: 48px;
-        font-size: clamp(1rem, 0.3562rem + 1.5444vw, 1.75rem);
-    }
-
-    .left-btn,
-    .right-btn {
-        font-size: clamp(1.5rem, 1.1781rem + 0.7722vw, 1.875rem);
-        min-width: 30px;
-    }
-
+.pause-btn,
+.sound-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.icon-volume::before {
+    content: "🔊";
+    display: inline-block;
+}
+
+.sound-off .icon-volume::before {
+     content: "🔇"; 
+}
+
+.pause-icon,
+.play-icon {
+    color: #808080;
+    letter-spacing: 0;
+}
+
+.pause-icon {
+    display:inline-block;
+    padding-bottom: 3px;
+}
+
+.play-icon {
+    display: none;
+    padding-left: 3px;
+}
+
+.mobile-game-btn {
+    height: 34px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--color-shadow);
+    display: flex;                
+    align-items: center;       
+    justify-content: center; 
+}
+
+.jump-btn,
+.throw-btn {
+    min-width: 48px;
+    font-size: clamp(1rem, 0.3562rem + 1.5444vw, 1.75rem);
+}
+
+.left-btn,
+.right-btn {
+    font-size: clamp(1.5rem, 1.1781rem + 0.7722vw, 1.875rem);
+    min-width: 30px;
+}
+
+
 

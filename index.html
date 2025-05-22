@@ -17,13 +17,18 @@
 
       <canvas id="canvas" width="720" height="480"></canvas>
 
-      <div class="buttons-mobile">
-        <div class="sound-container">
+      <div class="buttons-start-game">
+        <div id="game_control_left" class="game-control-left">
           <button id="sound_btn" class="sound-btn game-button" title="Sound" onclick="toggleSoundIcon(this)">
             <span class="icon-volume"></span>
           </button>
+          <button class="game-button pause-btn" onclick="togglePlayPause()">
+            <span class="pause-icon">&#x23F8;</span>
+            <span class="play-icon">&#x25B6;</span>
+          </button>
+
         </div>
-        <div class="game-control-container">
+        <div id=game_control_right" class="game-control-right">
           <button id="button_left" class="game-button mobile-game-btn left-btn" title="Left">←</button>
           <button id="button_jump" class="game-button mobile-game-btn jump-btn" title="Jump">Jump</button>
           <button id="button_throw" class="game-button mobile-game-btn throw-btn" title="Throw">Throw</button>

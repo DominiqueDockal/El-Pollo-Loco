@@ -30,6 +30,18 @@ function toggleSoundIcon(btn) {
     btn.classList.toggle('sound-off');
 }
 
+function togglePlayPause() {
+    const pauseIcon = document.querySelector('.pause-icon');
+    const playIcon = document.querySelector('.play-icon');
+    if (pauseIcon.style.display === 'none') {
+      pauseIcon.style.display = 'inline-block';
+      playIcon.style.display = 'none';
+    } else {
+      pauseIcon.style.display = 'none';
+      playIcon.style.display = 'inline-block';
+    }
+}
+  
 function updateCanvasCssVars() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return;
