@@ -117,7 +117,7 @@
     height: 34px;
     border-radius: 8px;
     box-shadow: 0 2px 8px var(--color-shadow);
-    display: flex;                
+    display: none;                
     align-items: center;       
     justify-content: center; 
 }
@@ -132,6 +132,12 @@
 .right-btn {
     font-size: clamp(1.5rem, 1.1781rem + 0.7722vw, 1.875rem);
     min-width: 30px;
+}
+
+@media (pointer: coarse), (hover: none) {
+    .mobile-game-btn {
+        display: flex !important;
+    }
 }
 
 

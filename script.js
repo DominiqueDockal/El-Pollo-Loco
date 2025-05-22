@@ -1,5 +1,17 @@
 function startGame() {
     document.getElementById('start_screen').classList.add('d-none'); 
+    document.getElementById('game_control_left').classList.remove('d-none'); 
+
+    document.getElementById('game_control_right').classList.remove('d-none'); 
+
+    document.getElementById('button_left').classList.remove('d-none'); 
+    document.getElementById('button_right').classList.remove('d-none'); 
+    document.getElementById('button_jump').classList.remove('d-none'); 
+    document.getElementById('button_throw').classList.remove('d-none'); 
+}
+
+function isAnyMobileDevice() {
+    return isTouchDevice() || isMobileUA() || isSurfaceOrIPadPro() || isMobileOrTabletSize();
 }
 
 function startScreen() {

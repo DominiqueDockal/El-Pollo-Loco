@@ -18,7 +18,7 @@
       <canvas id="canvas" width="720" height="480"></canvas>
 
       <div class="buttons-start-game">
-        <div id="game_control_left" class="game-control-left">
+        <div id="game_control_left" class="game-control-left d-none">
           <button id="sound_btn" class="sound-btn game-button" title="Sound" onclick="toggleSoundIcon(this)">
             <span class="icon-volume"></span>
           </button>
@@ -28,11 +28,11 @@
           </button>
 
         </div>
-        <div id=game_control_right" class="game-control-right">
-          <button id="button_left" class="game-button mobile-game-btn left-btn" title="Left">←</button>
-          <button id="button_jump" class="game-button mobile-game-btn jump-btn" title="Jump">Jump</button>
-          <button id="button_throw" class="game-button mobile-game-btn throw-btn" title="Throw">Throw</button>
-          <button id="button_right" class="game-button mobile-game-btn right-btn" title="Right">→</button>
+        <div id="game_control_right" class="game-control-right d-none">
+          <button id="button_left" class="game-button mobile-game-btn left-btn d-none" title="Left">←</button>
+          <button id="button_jump" class="game-button mobile-game-btn jump-btn d-none" title="Jump">Jump</button>
+          <button id="button_throw" class="game-button mobile-game-btn throw-btn d-none" title="Throw">Throw</button>
+          <button id="button_right" class="game-button mobile-game-btn right-btn d-none" title="Right">→</button>
         </div>
       </div>
 
