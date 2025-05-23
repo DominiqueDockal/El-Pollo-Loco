@@ -18,9 +18,15 @@ function restartGame(){
     document.getElementById('button_throw').classList.remove('d-none');
 }
 
-function startScreen() {
+function quit() {
     document.getElementById('start_screen').classList.remove('d-none');
     document.getElementById('end_screen').classList.add('d-none');
+    document.getElementById('game_control_left').classList.add('d-none'); 
+    document.getElementById('game_control_right').classList.add('d-none'); 
+    document.getElementById('button_left').classList.add('d-none'); 
+    document.getElementById('button_right').classList.add('d-none'); 
+    document.getElementById('button_jump').classList.add('d-none'); 
+    document.getElementById('button_throw').classList.add('d-none'); 
 }
 
 function toggleHowToPlayOverlay(show) {
