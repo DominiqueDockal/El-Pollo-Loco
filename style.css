@@ -292,15 +292,15 @@ h2 {
     align-items: flex-end;
     padding-left: 0.625em;          
     justify-content: center;
-    gap: 0.625em;                   
+    gap: 0.3em;                   
 }
 
 .game-control-right {
     display: flex;
-    gap: 0.5em;                
+    gap: 0.3em;                
     border-radius: 1em;        
     padding-right: 0.625em;    
-    max-width: 90vw;        
+    max-width: 85vw;        
 }
 
 @media only screen and (max-width: 1200px) and (orientation: landscape) {

@@ -77,6 +77,7 @@
     border-radius: 16px;
 }
 
+.quit-btn,
 .fullscreen-btn,
 .pause-btn,
 .sound-btn {
@@ -126,14 +127,14 @@
 
 .jump-btn,
 .throw-btn {
-    min-width: 48px;
+    min-width: 44px;
     font-size: clamp(1rem, 0.3562rem + 1.5444vw, 1.75rem);
 }
 
 .left-btn,
 .right-btn {
     font-size: clamp(1.5rem, 1.1781rem + 0.7722vw, 1.875rem);
-    min-width: 30px;
+    min-width: 28px;
 }
 
 @media (pointer: coarse), (hover: none) {

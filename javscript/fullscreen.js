@@ -112,7 +112,8 @@ function handleFullscreenChanges() {
         'right-btn': 'right-btn-fullscreen',
         'sound-btn': 'sound-btn-fullscreen',
         'pause-btn': 'pause-btn-fullscreen',
-        'fullscreen-btn': 'fullscreen-btn-fullscreen'
+        'fullscreen-btn': 'fullscreen-btn-fullscreen',
+        'quit-btn': 'quit-btn-fullscreen'
     };
     Object.entries(elementsToToggle).forEach(([baseClass, fsClass]) => {
         document.querySelectorAll(`.${baseClass}`).forEach(el => {
