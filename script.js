@@ -2,20 +2,12 @@ function startGame() {
     document.getElementById('start_screen').classList.add('d-none'); 
     document.getElementById('game_control_left').classList.remove('d-none'); 
     document.getElementById('game_control_right').classList.remove('d-none'); 
-    document.getElementById('button_left').classList.remove('d-none'); 
-    document.getElementById('button_right').classList.remove('d-none'); 
-    document.getElementById('button_jump').classList.remove('d-none'); 
-    document.getElementById('button_throw').classList.remove('d-none'); 
 }
 
 function restartGame(){
     document.getElementById('end_screen').classList.add('d-none');
     document.getElementById('game_control_left').classList.remove('d-none'); 
     document.getElementById('game_control_right').classList.remove('d-none'); 
-    document.getElementById('button_left').classList.remove('d-none'); 
-    document.getElementById('button_right').classList.remove('d-none'); 
-    document.getElementById('button_jump').classList.remove('d-none'); 
-    document.getElementById('button_throw').classList.remove('d-none');
 }
 
 function quit() {
@@ -23,10 +15,6 @@ function quit() {
     document.getElementById('end_screen').classList.add('d-none');
     document.getElementById('game_control_left').classList.add('d-none'); 
     document.getElementById('game_control_right').classList.add('d-none'); 
-    document.getElementById('button_left').classList.add('d-none'); 
-    document.getElementById('button_right').classList.add('d-none'); 
-    document.getElementById('button_jump').classList.add('d-none'); 
-    document.getElementById('button_throw').classList.add('d-none'); 
 }
 
 function toggleHowToPlayOverlay(show) {
@@ -108,7 +96,6 @@ function updateRotateOverlay() {
       overlay.style.display = 'none';
     }
 }
-  
 window.addEventListener('DOMContentLoaded', updateRotateOverlay);
 window.addEventListener('resize', updateRotateOverlay);
 window.matchMedia("(orientation: portrait)").addEventListener("change", updateRotateOverlay);
