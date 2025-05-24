@@ -148,11 +148,12 @@ canvas {
 }
 
 .keyboard-table {
+    table-layout: fixed;
     width: 100%;
     max-width: 26.25em;
     margin: 0 auto 0 auto; 
     border-collapse: separate;
-    border-spacing: 0 0.75em; 
+    border-spacing: 0 0.55em; 
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     font-size: 1.3rem;
     color: var(--color-brown-text);
@@ -171,7 +172,6 @@ canvas {
     font-weight: bold;
     background: var(--color-key-bg);
     color: var(--color-brown-text);
-    min-width: 7.5em; 
     border-right: none;
     border-radius: 0.75em 0 0 0.75em; 
     box-shadow: none;
@@ -191,9 +191,7 @@ h2 {
 }
 
 .game-rules {
-    margin: 0;
     margin-block-start: 0;
-    padding: 0;
     width: 100%;
     max-width: 37.5em; 
     text-align: left;

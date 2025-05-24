@@ -66,7 +66,6 @@ function resizeGameArea() {
     if (!isFullscreen()) {
         const maxViewportWidth = window.innerWidth;
         const maxViewportHeight = window.innerHeight;
-        const aspect = BASE_CANVAS_WIDTH / BASE_CANVAS_HEIGHT;
         const scale = Math.min(
             maxViewportWidth / BASE_CANVAS_WIDTH,
             maxViewportHeight / BASE_CANVAS_HEIGHT
@@ -83,6 +82,40 @@ function resizeGameArea() {
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
 }
+
+/* function calculateCanvasSize() {
+    let [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
+    
+    if (!isFullscreen()) {
+        const maxViewportWidth = window.innerWidth;
+        const maxViewportHeight = window.innerHeight;
+        const scale = Math.min(
+            maxViewportWidth / BASE_CANVAS_WIDTH,
+            maxViewportHeight / BASE_CANVAS_HEIGHT
+        );
+        if (scale < 1) {
+            width = Math.floor(BASE_CANVAS_WIDTH * scale);
+            height = Math.floor(BASE_CANVAS_HEIGHT * scale);
+        }
+    }
+    return { width, height };
+}
+
+function resizeGameArea() {
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    const canvas = document.getElementById('canvas');
+    if (!canvasWrapper || !canvas) return;
+    
+    const { width, height } = calculateCanvasSize();
+    
+    canvasWrapper.style.width = width + "px";
+    canvasWrapper.style.height = height + "px";
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+} */
+
 
 function setupFullscreenHandlers() {
     if (!setupFullscreenHandlers.isSetup) {
