@@ -58,7 +58,7 @@ function getTargetSize(baseWidth, baseHeight, fullscreen) {
     return [baseWidth, baseHeight];
 }
 
-function resizeGameArea() {
+/* function resizeGameArea() {
     const canvasWrapper = document.querySelector('.canvas-wrapper');
     const canvas = document.getElementById('canvas');
     if (!canvasWrapper || !canvas) return;
@@ -81,9 +81,9 @@ function resizeGameArea() {
     canvas.height = height;
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
-}
+} */
 
-/* function calculateCanvasSize() {
+function calculateCanvasSize() {
     let [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
     
     if (!isFullscreen()) {
@@ -114,7 +114,7 @@ function resizeGameArea() {
     canvas.height = height;
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
-} */
+} 
 
 
 function setupFullscreenHandlers() {

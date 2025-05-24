@@ -24,7 +24,7 @@ class DrawableObject  {
         ctx.drawImage(this.img, this.x , this.y, this.width, this.height);
     }
 
-    /* kommt später weg */
+    /* wir später kleiner und transparent */
 
     drawFrame(ctx){
         if(this instanceof Character || this instanceof SmallChicken || this instanceof BigChicken || this instanceof Endboss){
