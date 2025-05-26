@@ -2,18 +2,17 @@ class DrawableObject  {
     img;
     imageCache ={};
     currentImage = 0;
-    x;
+    x = 0;
     y = 0;
-    height;
-    width;
+    height = 0;
+    width  = 0;
     otherDirection;
     canvasHeight;
     canvas;
 
-    constructor(imagePath, x) {
+    constructor(imagePath) {
         this.canvas = document.getElementById('canvas');
         this.canvasHeight = this.canvas.height;
-        this.x = x;   
         this.loadImage(imagePath);
         this.scaleImageWidth(this.canvasHeight);
     }
