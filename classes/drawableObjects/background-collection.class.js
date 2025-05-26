@@ -1,9 +1,8 @@
 class BackgroundCollection extends Background{
-    
     BACKGROUNDPATH = 'img/5_background/layers';
     backgroundObjects = [];
-    canvasHeight;
     adaptedCanvasWidth;
+    numberOfPictures;
 
     constructor(numberOfPictures, canvasHeight){
        super('img/5_background/layers/air.png', 0);
