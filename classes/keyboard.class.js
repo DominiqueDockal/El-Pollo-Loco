@@ -7,20 +7,20 @@ class Keyboard{
     constructor(){
     document.addEventListener('keydown', (event) => {
         switch (event.code) {
-            case 'ArrowLeft':  keyboard.LEFT = true; break;
-            case 'ArrowRight': keyboard.RIGHT = true; break;
-            case 'Space':      keyboard.SPACE = true; break;
+            case 'ArrowLeft':  this.LEFT = true; break;
+            case 'ArrowRight': this.RIGHT = true; break;
+            case 'Space':      this.SPACE = true; break;
         }
-        if (event.key === 'd') keyboard.D = true;
+        if (event.key === 'd') this.D = true;
     });
     
     document.addEventListener('keyup', (event) => {
         switch (event.code) {
-            case 'ArrowLeft':  keyboard.LEFT = false; break;
-            case 'ArrowRight': keyboard.RIGHT = false; break;
-            case 'Space':      keyboard.SPACE = false; break;
+            case 'ArrowLeft':  this.LEFT = false; break;
+            case 'ArrowRight': this.RIGHT = false; break;
+            case 'Space':      this.SPACE = false; break;
         }
-        if (event.key === 'd') keyboard.D = false;
+        if (event.key === 'd') this.D = false;
     });
     this.registerMobileButtons();
     }

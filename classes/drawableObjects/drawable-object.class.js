@@ -3,9 +3,26 @@ class DrawableObject  {
     imageCache ={};
     currentImage = 0;
     x;
-    y;
+    y = 0;
     height;
     width;
+    otherDirection;
+    canvasHeight;
+    canvas;
+
+    constructor(imagePath, x) {
+        this.canvas = document.getElementById('canvas');
+        this.canvasHeight = this.canvas.height;
+        this.x = x;   
+        this.loadImage(imagePath);
+        this.scaleImageWidth(this.canvasHeight);
+    }
+    
+    scaleImageWidth() {
+        this.aspectRatio = this.img.naturalWidth/this.img.naturalHeight;
+        this.width = Math.floor(this.aspectRatio*this.canvasHeight);
+        return this.width;
+    }
 
     loadImage(path) {
         this.img = new Image(); 
@@ -24,9 +41,8 @@ class DrawableObject  {
         ctx.drawImage(this.img, this.x , this.y, this.width, this.height);
     }
 
-    /* wir später kleiner und transparent */
-
-    drawFrame(ctx){
+    /* wird später kleiner und transparent */
+    /* drawFrame(ctx){
         if(this instanceof Character || this instanceof SmallChicken || this instanceof BigChicken || this instanceof Endboss){
         ctx.beginPath();
         ctx.lineWidth='5';
@@ -34,5 +50,5 @@ class DrawableObject  {
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
         }
-    }
+    } */
 }

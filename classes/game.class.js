@@ -13,7 +13,7 @@ class Game {
 
     // für erweiterbare Logik
     initializeLevel(){
-        this.currentLevel = new level(this.allLevels[this.currentLevelNumber], this.collectedCoins);
+        this.currentLevel = new Level(this.allLevels[this.currentLevelNumber], this.collectedCoins);
     }
     
 }
