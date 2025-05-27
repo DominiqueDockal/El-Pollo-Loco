@@ -9,7 +9,6 @@ class BackgroundCollection extends Background{
        this.numberOfPictures = numberOfPictures;
        this.canvasHeight = canvasHeight;
        this.adaptedCanvasWidth = this.scaleImageWidth(this.canvasHeight);
-       console.log(`this.adaptedCanvasWidth ${this.adaptedCanvasWidth}`);
        this.createBackgroundObjects();
     }
     
