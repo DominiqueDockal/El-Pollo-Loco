@@ -11,9 +11,19 @@ class Game {
         this.initializeLevel();   
     }
 
-    // für erweiterbare Logik
     initializeLevel(){
         this.currentLevel = new Level(this.allLevels[this.currentLevelNumber], this.collectedCoins);
+    }
+
+    nextLevel() {
+        if (this.currentLevelNumber < this.allLevels.length - 1) {
+            this.currentLevelNumber++;
+            this.initializeLevel();
+        }
+    }
+
+    updateCoins(newCoinCount) {
+        this.collectedCoins = newCoinCount;
     }
     
 }
