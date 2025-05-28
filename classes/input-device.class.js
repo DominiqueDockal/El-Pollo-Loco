@@ -14,6 +14,7 @@ class InputDevice {
         throw new Error("cleanup() must be implemented in the subclass");
     }
     
+    // später in Spiellogik
     isPressed(key) {
         return this.inputState.get(key) || false;
     }

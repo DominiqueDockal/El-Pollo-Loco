@@ -43,10 +43,6 @@ class CanvasView extends View {
     resetCameraTranslation() {
         this.context.translate(-this.camera_x, 0);
     }
-    
-    updateCamera(camera_x) {
-        this.camera_x = camera_x;
-    }
 
     flipImage(gameObject) {
         this.context.save();

@@ -5,7 +5,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    background-image: url('img/background.png');
+    background-image: url('images/background.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -63,16 +63,16 @@ canvas {
 }
 
 .start-screen {
-    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
+    background-image: url('images/startscreen/startscreen_1.png');
 } 
 
 .end-screen-won {
-    background-image: url('img/You_won_you_lost/You_Win_A.png');
+    background-image: url('images/endscreen/You_Win.png');
     background-size: 60% auto;
 }
 
 .end-screen-lost {
-    background-image: url('img/You_won_you_lost/Game_over_A.png');
+    background-image: url('images/endscreen/Game_over.png');
     background-size: 40% auto;
 }
 

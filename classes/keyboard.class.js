@@ -43,9 +43,6 @@ class Keyboard extends InputDevice {
             const handlers = {
                 touchstart: (e) => { e.preventDefault(); this.setKeyState(key, true); },
                 touchend: (e) => { e.preventDefault(); this.setKeyState(key, false); },
-                mousedown: (e) => { e.preventDefault(); this.setKeyState(key, true); },
-                mouseup: (e) => { e.preventDefault(); this.setKeyState(key, false); },
-                mouseleave: () => { this.setKeyState(key, false); }
             };
             Object.entries(handlers).forEach(([event, handler]) => {
                 button.addEventListener(event, handler);
