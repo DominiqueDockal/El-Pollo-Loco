@@ -2,19 +2,24 @@ const levelConfigs = {
     level1: {
         id: 1,
         name: "First Level",
-        length: 1200,
-        enemyCount: 3,
+        length: 2000,
         coinCount: 5,
-        bottleCount: 2
+        bottleCount: 2,
+        bossDeathSpeed: 1.0, // Schneller Tod
+        smallChickenCount: 3,
+        chickenCount: 2
     },
     level2: {
         id: 2,
         name: "Second Level", 
-        length: 1600,
-        enemyCount: 5,
+        length: 3000,
         coinCount: 8,
-        bottleCount: 3
+        bottleCount: 3,
+        bossDeathSpeed: 0.5, // Langsamerer Tod (stärker)
+        smallChickenCount: 5,
+        chickenCount: 4
     }
 };
+;
 
 

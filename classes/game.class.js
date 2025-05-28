@@ -6,7 +6,6 @@ class Game {
 
         this.currentLevel = null;
         this.currentLevelId = 1;
-        this.backgroundImage = 'images/background.png';
     }
     
     init() {

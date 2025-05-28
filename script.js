@@ -2,7 +2,7 @@ function startGame() {
     document.getElementById('start_screen').classList.add('d-none'); 
     document.getElementById('game_control_left').classList.remove('d-none'); 
     document.getElementById('game_control_right').classList.remove('d-none'); 
-    let game = new Game();
+    let game = new Game('canvas');
 }
 
 function restartGame(){

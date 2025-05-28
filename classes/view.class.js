@@ -12,9 +12,5 @@ class View {
     clear() {
         throw new Error("clear() must be implemented in the subclass");
     }
-    
-    // noch nicht vewendet
-    notifyObservers(event, data) {
-        console.log(`View event: ${event}`, data);
-    }
 }
+

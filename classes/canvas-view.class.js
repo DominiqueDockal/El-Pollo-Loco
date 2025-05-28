@@ -7,23 +7,21 @@ class CanvasView extends View {
         this.offsetEnd = 100;
     }
     
-     // rendern von statusbar?
     render(gameObjects) {
         this.clear();
         this.translateCamera(); 
         gameObjects.forEach(gameObject => {
             this.renderGameObject(gameObject);
         });
-        
         this.resetCameraTranslation();
+        gameObjects.filter(obj => obj.isFixed).forEach(gameObject => {
+            this.renderGameObject(gameObject);
+        });
     }
     
     renderGameObject(gameObject) {
-        if (!gameObject.img || !gameObject.img.complete) {
+        if (!gameObject.img || !gameObject.img.complete || gameObject.width === 0) {
             return; 
-        }
-        if (!gameObject.img || gameObject.width === 0) {
-            return;
         }
         if (gameObject.otherDirection) {
             this.flipImage(gameObject);

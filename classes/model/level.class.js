@@ -3,10 +3,11 @@ class Level {
         this.id = levelData.id;
         this.name = levelData.name;
         this.length = levelData.length;
-        this.enemyCount = levelData.enemyCount;
         this.coinCount = levelData.coinCount;
         this.bottleCount = levelData.bottleCount;
-        this.endboss = levelData.endboss;
+        this.bossDeathSpeed = levelData.bossDeathSpeed;
+        this.smallChickenCount = levelData.smallChickenCount;
+        this.chickenCount = levelData.chickenCount;
         
         this.gameObjects = [];
         this.isCompleted = false;
@@ -14,67 +15,30 @@ class Level {
     
     initialize(canvasHeight) {
         this.gameObjects = [];
-        const player = new GameObject(50, 200, 'images/character.png', canvasHeight, 'player');
+    
+        const player = new Character(50, 200, canvasHeight);
         this.gameObjects.push(player);
+        const statusbar = new Statusbar(0, 0, canvasHeight);
+        this.gameObjects.push(statusbar);
 
+        this.createBackground(canvasHeight);
         this.createClouds(canvasHeight);
-        this.createEnemies(canvasHeight);
         this.createCoins(canvasHeight);
         this.createBottles(canvasHeight);
+        this.createChickens(canvasHeight);
         this.createBoss(canvasHeight);
+    }
+
+    // anpassen ohne den schätzwert
+
+    createBackground(canvasHeight) {
+        const estimatedBackgroundWidth = 719; // Schätzwert
+        const backgroundCount = Math.ceil(this.length / estimatedBackgroundWidth);
         
-    }
-    
-    // klassen erstellen/ erzeugen random
-    createClouds(canvasHeight) {
-        for (let i = 0; i < Math.floor(this.length / 200); i++) {
-            const cloud = new Cloud(100 + i * 200, 50, canvasHeight);
-            this.gameObjects.push(cloud);
+        for (let i = 0; i < backgroundCount; i++) {
+            const background = new Background(0, 0, canvasHeight, i);
+            this.gameObjects.push(background);
         }
     }
     
-    createEnemies(canvasHeight) {
-        for (let i = 0; i < this.enemyCount; i++) {
-            const enemy = new Enemy(200 + i * 150, 200, canvasHeight);
-            this.gameObjects.push(enemy);
-        }
-    }
-    
-    createCoins(canvasHeight) {
-        for (let i = 0; i < this.coinCount; i++) {
-            const coin = new Coin(150 + i * 100, 180, canvasHeight);
-            this.gameObjects.push(coin);
-        }
-    }
-    
-    createBottles(canvasHeight) {
-        for (let i = 0; i < this.bottleCount; i++) {
-            const bottle = new Bottle(300 + i * 120, 190, canvasHeight);
-            this.gameObjects.push(bottle);
-        }
-    }
-    
-    createBoss(canvasHeight) {
-        const boss = new Endboss(this.length - 100, 200, canvasHeight);
-        this.gameObjects.push(boss);
-    }
-    
-    // Spezifische Getter für die verschiedenen Typen
-    getEnemies() {
-        return this.gameObjects.filter(obj => obj instanceof Enemy);
-    }
-    
-    getBoss() {
-        return this.gameObjects.find(obj => obj instanceof Endboss);
-    }
-    
-    getCoins() {
-        return this.gameObjects.filter(obj => obj instanceof Coin && !obj.collected);
-    }
-    
-    getBottles() {
-        return this.gameObjects.filter(obj => obj instanceof Bottle);
-    }
 }
-
-

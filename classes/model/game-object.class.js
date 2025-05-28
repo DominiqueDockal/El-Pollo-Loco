@@ -11,14 +11,15 @@ class GameObject {
         this.aspectRatio = 1.0;
         this.otherDirection = false;
         this.loadImage(imagePath);
+        this.isFixed = false; // nur für Statusbar true
     }
-
-    // nochmal checken wegen height
     
+    //Skalierung richtig?
     loadImage(path) {
         this.img.onload = () => {
             this.aspectRatio = this.img.naturalWidth / this.img.naturalHeight;
             this.width = Math.floor(this.aspectRatio * this.canvasHeight);
+            this.height = Math.floor(this.width / this.aspectRatio);
         };
         this.img.src = path;
     }
