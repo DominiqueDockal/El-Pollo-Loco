@@ -1,60 +1,86 @@
-class Keyboard{
-    LEFT = false;
-    RIGHT = false;
-    SPACE = false;
-    D = false;
-
-    constructor(){
-    document.addEventListener('keydown', (event) => {
-        switch (event.code) {
-            case 'ArrowLeft':  this.LEFT = true; break;
-            case 'ArrowRight': this.RIGHT = true; break;
-            case 'Space':      this.SPACE = true; break;
-        }
-        if (event.key === 'd') this.D = true;
-    });
+class Keyboard extends InputDevice {
+    constructor() {
+        super();
+        this.keydownHandler = this.keydownHandler.bind(this);
+        this.keyupHandler = this.keyupHandler.bind(this);
+        this.mobileButtons = [];
+        this.initialize();
+    }
     
-    document.addEventListener('keyup', (event) => {
-        switch (event.code) {
-            case 'ArrowLeft':  this.LEFT = false; break;
-            case 'ArrowRight': this.RIGHT = false; break;
-            case 'Space':      this.SPACE = false; break;
+    initialize() {
+        document.addEventListener('keydown', this.keydownHandler);
+        document.addEventListener('keyup', this.keyupHandler);
+        this.setupMobileButtons();
+    }
+    
+    keydownHandler(e) {
+        const key = this.mapKey(e.code);
+        if (key) {
+            e.preventDefault();
+            this.setKeyState(key, true);
         }
-        if (event.key === 'd') this.D = false;
-    });
-    this.registerMobileButtons();
+    }
+    
+    keyupHandler(e) {
+        const key = this.mapKey(e.code);
+        if (key) {
+            e.preventDefault();
+            this.setKeyState(key, false);
+        }
+    }
+    
+    setupMobileButtons() {
+        const buttonMapping = {
+            'button_left': 'LEFT',
+            'button_right': 'RIGHT',
+            'button_jump': 'JUMP',
+            'button_throw': 'ACTION'
+        };
+        
+        Object.entries(buttonMapping).forEach(([buttonId, key]) => {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            const handlers = {
+                touchstart: (e) => { e.preventDefault(); this.setKeyState(key, true); },
+                touchend: (e) => { e.preventDefault(); this.setKeyState(key, false); },
+                mousedown: (e) => { e.preventDefault(); this.setKeyState(key, true); },
+                mouseup: (e) => { e.preventDefault(); this.setKeyState(key, false); },
+                mouseleave: () => { this.setKeyState(key, false); }
+            };
+            Object.entries(handlers).forEach(([event, handler]) => {
+                button.addEventListener(event, handler);
+            });
+            this.mobileButtons.push({ button, handlers });
+        });
+    }
+    
+    mapKey(code) {
+        const keyMap = {
+            'ArrowLeft': 'LEFT',
+            'ArrowRight': 'RIGHT',
+            'Space': 'JUMP',
+            'KeyD': 'ACTION'
+        };
+        return keyMap[code];
     }
 
-registerMobileButtons() {
-    const buttonToKey = {
-        button_left:  'LEFT',
-        button_right: 'RIGHT',
-        button_jump:  'SPACE',
-        button_throw: 'D'
-    };
+    cleanup() {
+        document.removeEventListener('keydown', this.keydownHandler);
+        document.removeEventListener('keyup', this.keyupHandler);
+        this.mobileButtons.forEach(({ button, handlers }) => {
+            Object.entries(handlers).forEach(([event, handler]) => {
+                button.removeEventListener(event, handler);
+            });
+        });
+        
+        this.mobileButtons = [];
+        this.reset();
+    }
 
-    Object.keys(buttonToKey).forEach(id => {
-        const btn = document.getElementById(id);
-        if (!btn) return;
-        btn.addEventListener('touchstart', e => {
-            e.preventDefault();
-            this[buttonToKey[id]] = true;
-        });
-        btn.addEventListener('mousedown', e => {
-            this[buttonToKey[id]] = true;
-        });
-        btn.addEventListener('touchend', e => {
-            e.preventDefault();
-            this[buttonToKey[id]] = false;
-        });
-        btn.addEventListener('mouseup', e => {
-            this[buttonToKey[id]] = false;
-        });
-        btn.addEventListener('mouseleave', e => {
-            this[buttonToKey[id]] = false;
-        });
-    });
 }
-}
+
+// beim spielende
+//keyboard.cleanup();
+
     
 
