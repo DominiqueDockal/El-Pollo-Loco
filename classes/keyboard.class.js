@@ -45,7 +45,7 @@ class Keyboard extends InputDevice {
                 touchend: (e) => { e.preventDefault(); this.setKeyState(key, false); },
             };
             Object.entries(handlers).forEach(([event, handler]) => {
-                button.addEventListener(event, handler);
+                button.addEventListener(event, handler, {passive:false});
             });
             this.mobileButtons.push({ button, handlers });
         });
@@ -66,7 +66,7 @@ class Keyboard extends InputDevice {
         document.removeEventListener('keyup', this.keyupHandler);
         this.mobileButtons.forEach(({ button, handlers }) => {
             Object.entries(handlers).forEach(([event, handler]) => {
-                button.removeEventListener(event, handler);
+                button.removeEventListener(event, handler, {passive:false});
             });
         });
         

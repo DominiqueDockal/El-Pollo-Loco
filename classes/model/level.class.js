@@ -11,9 +11,9 @@ class Level {
 
     }
     
-    initialize(canvasHeight) {
+    async initialize(canvasHeight) {
         this.gameObjects = [];
-        this.createBackground(canvasHeight);
+        await this.createBackground(canvasHeight);
 
     
 /*      const player = new Character(50, 200, canvasHeight);
@@ -28,17 +28,21 @@ class Level {
     }
 
 
-    createBackground(canvasHeight) {
+    async createBackground(canvasHeight) {
         const firstBackground = new Background(0, 0, canvasHeight, 0);
         this.gameObjects.push(firstBackground);
-        firstBackground.img.onload = () => {
-            const backgroundCount = Math.ceil(this.length / firstBackground.width);
-            for (let i = 1; i < backgroundCount; i++) {
-                const background = new Background(i * firstBackground.width, 0, canvasHeight, i);
-                this.gameObjects.push(background);
-            }
-        };
+        await firstBackground.loadPromise;   
+        const backgroundCount = Math.ceil(this.length / firstBackground.width);
+        const backgroundPromises = [];
+        for (let i = 1; i < backgroundCount; i++) {
+            const background = new Background(i * firstBackground.width, 0, canvasHeight, i);
+            this.gameObjects.push(background);
+            backgroundPromises.push(background.loadPromise);
+        }
+        await Promise.all(backgroundPromises);
+        console.log(`${backgroundCount} backgrounds loaded`);
     }
+    
       
     
 }

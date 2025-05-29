@@ -6,22 +6,23 @@ class Game {
         this.isRunning = false;
         this.currentLevel = null;
         this.currentLevelId = 1;
-        this.init()
+        window.game = this;
+        this.init();
     };
     
-    init() {
-        this.loadLevel(this.currentLevelId);
-        console.log('init wurde ereicht')
+    async init() {
+        await this.loadLevel(this.currentLevelId);
+        this.render();
     }
     
-    loadLevel(levelId) {
+    async loadLevel(levelId) {
         const levelConfig = levelConfigs[`level${levelId}`];
         if (!levelConfig) {
             console.error(`Level ${levelId} not found!`);
             return;
         }
         this.currentLevel = new Level(levelConfig);
-        this.currentLevel.initialize(this.canvas.height);
+        await this.currentLevel.initialize(this.canvas.height);
         console.log(`Level ${levelId} loaded: ${this.currentLevel.name}`);
     }
 

@@ -58,31 +58,6 @@ function getTargetSize(baseWidth, baseHeight, fullscreen) {
     return [baseWidth, baseHeight];
 }
 
-/* function resizeGameArea() {
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
-    const canvas = document.getElementById('canvas');
-    if (!canvasWrapper || !canvas) return;
-    let [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
-    if (!isFullscreen()) {
-        const maxViewportWidth = window.innerWidth;
-        const maxViewportHeight = window.innerHeight;
-        const scale = Math.min(
-            maxViewportWidth / BASE_CANVAS_WIDTH,
-            maxViewportHeight / BASE_CANVAS_HEIGHT
-        );
-        if (scale < 1) {
-            width = Math.floor(BASE_CANVAS_WIDTH * scale);
-            height = Math.floor(BASE_CANVAS_HEIGHT * scale);
-        }
-    }
-    canvasWrapper.style.width = width + "px";
-    canvasWrapper.style.height = height + "px";
-    canvas.width = width;
-    canvas.height = height;
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-} */
-
 function calculateCanvasSize() {
     let [width, height] = getTargetSize(BASE_CANVAS_WIDTH, BASE_CANVAS_HEIGHT, isFullscreen());
     
@@ -114,6 +89,10 @@ function resizeGameArea() {
     canvas.height = height;
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
+
+    if (window.game && window.game.currentLevel) {
+        window.game.render();
+    }
 } 
 
 
@@ -155,6 +134,10 @@ function handleFullscreenChanges() {
     });
     const headline = document.getElementById('headline');
     if (headline) headline.classList.toggle('d-none', isFs);
+    
+    if (window.game && window.game.currentLevel) {
+        window.game.render();
+    }
 }
 
  

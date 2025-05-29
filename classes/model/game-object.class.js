@@ -11,10 +11,10 @@ class GameObject {
         this.aspectRatio = 1.0;
         this.otherDirection = false;
         this.isFixed = false; // nur für Statusbar true
-        this.loadImage(imagePath);
+        this.imagePath = imagePath;
     }
     
-    loadImage(path) {
+    loadImage(path =this.imagePath) {
         this.img.onload = () => {
             this.width = this.img.naturalWidth;
             this.height = this.img.naturalHeight;
