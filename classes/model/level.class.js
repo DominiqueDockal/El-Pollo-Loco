@@ -68,7 +68,6 @@ class Level {
             this.gameObjects.push(bottle);
         }
         
-        console.log(`${this.bottleCount} Bottles erstellt`);
     }
     
     

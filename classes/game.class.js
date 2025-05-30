@@ -16,21 +16,16 @@ class Game {
             await this.assetManager.loadAllAssets();
             console.log(`${this.assetManager.imageCache.size} Images loaded`);
             this.loadLevel(this.currentLevelId);
-            console.log('Level loaded');
             this.start();
         } catch (error) {
             console.error('Error', error);
         }
     }
     
-
-    // Spiellogik
     loadLevel(levelId) {
         const levelConfig = levelConfigs[`level${levelId}`];
         if (!levelConfig) return;
-        
         this.currentLevel = new Level(levelConfig);
-        console.log('new Level');
         this.currentLevel.initialize(this.canvas, this.assetManager);
     }
 
