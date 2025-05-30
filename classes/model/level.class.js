@@ -34,9 +34,9 @@ class Level {
         const startX = 0;
         const startY = 0;
         const statusbarSpacing = 35;
-        this.bottleBar = Statusbar.createBottle(startX, startY, canvas, assetManager, 0); 
-        this.healthBar = Statusbar.createHealth(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
-        this.coinBar = Statusbar.createCoin(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
+        this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
+        this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
+        this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
         this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
     }
     
@@ -48,8 +48,7 @@ class Level {
         const bottleAssets = window.ASSETS.bottle_ground || []; 
         const MIN_DISTANCE_FROM_LEFT = 300;
         const MIN_DISTANCE_FROM_RIGHT = 500;
-        const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT;
-        
+        const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT; 
         for (let i = 0; i < this.bottleCount; i++) {
             let bottleX;
             let attempts = 0;
@@ -63,8 +62,7 @@ class Level {
             );
             usedPositions.push(bottleX);
             const randomIndex = Math.floor(Math.random() * bottleAssets.length);
-            const selectedImagePath = bottleAssets[randomIndex].src;
-            
+            const selectedImagePath = bottleAssets[randomIndex].src;  
             const bottle = new Bottle(bottleX, bottleY, canvas, assetManager);
             bottle.currentImagePath = selectedImagePath;      
             this.gameObjects.push(bottle);

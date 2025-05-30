@@ -7,17 +7,15 @@ class GameObject {
         this.y = y;
         this.height = 0;
         this.width = 0;
+        this.aspectRatio = 0;
         this.type = type;
         this.currentImagePath = null;
         this.canvas = canvas;
         this.assetManager = assetManager; 
         this.otherDirection = false;
         this.isFixed = false;
+        this.scale = 0;
         this.setNaturalDimensions();
-    }
-
-    get img() {
-        return this.currentImagePath ? this.getImage(this.currentImagePath) : null;
     }
 
     setNaturalDimensions() {
@@ -27,22 +25,25 @@ class GameObject {
             if (firstAsset && firstAsset.width && firstAsset.height) {
                 this.naturalWidth = firstAsset.width;
                 this.naturalHeight = firstAsset.height;
+                this.aspectRatio = this.naturalWidth / this.naturalHeight;
                 this.width = firstAsset.width;
                 this.height = firstAsset.height;
             }
         }
     }
 
-    getImage(imagePath) {
-        return this.assetManager.getImage(imagePath);
+    setDimensions(scale) {
+        const canvasHeight = this.canvas.clientHeight;
+        this.height = scale * canvasHeight;
+        this.width = this.height * this.aspectRatio;
     }
 
-    getImagesByType(type) {
-        const assets = window.ASSETS[type] || [];
-        return assets.map(imgObj => {
-            const path = imgObj.src || imgObj;
-            return this.getImage(path);
-        }).filter(img => img);
+    get img() {
+        return this.currentImagePath ? this.getImage(this.currentImagePath) : null;
+    }
+
+    getImage(imagePath) {
+        return this.assetManager.getImage(imagePath);
     }
 
     setImage(imagePath) {
@@ -53,8 +54,6 @@ class GameObject {
         const assets = window.ASSETS[this.type] || [];
         if (assets[index] && assets[index].src) { 
             this.setImage(assets[index].src);
-        } else {
-            console.warn(`No asset found at index ${index} for type: ${this.type}`);
         }
     }
     
@@ -64,24 +63,4 @@ class GameObject {
         }
     }
 
-
-    // vllt?
-/*    setDimensions(baseWidth, baseHeight, scaleType = 'proportional') {
-    const scale = Math.max(0.5, this.canvas.clientHeight / 1080);
-    
-    switch(scaleType) {
-        case 'fixed':
-            this.width = Math.ceil(baseWidth * scale);
-            this.height = Math.ceil(baseHeight * scale);
-            break;
-        case 'aspectRatio':
-            const aspectRatio = this.naturalWidth / this.naturalHeight;
-            this.height = this.canvas.clientHeight;
-            this.width = Math.ceil(this.height * aspectRatio);
-            break;
-        default:
-            this.width = Math.ceil(baseWidth * scale);
-            this.height = Math.ceil(baseHeight * scale);
-    }
-   } */
 }

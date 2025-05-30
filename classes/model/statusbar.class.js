@@ -4,37 +4,32 @@ class Statusbar extends GameObject {
         this.subtype = subtype;
         this.value = value;
         this.isFixed = true;
-        this.setDimensions();
+        this.scale= 0.1;
+        super.setDimensions(this.scale);
         this.updateImage();
     }
     
     
-    static createHealth(x, y, canvas, assetManager, value = 100) {
+    static createHealthBar(x, y, canvas, assetManager, value = 100) {
         return new Statusbar(x, y, canvas, assetManager, 'health', value);
     }
     
-    static createCoin(x, y, canvas, assetManager, value = 0) {
+    static createCoinBar(x, y, canvas, assetManager, value = 0) {
         return new Statusbar(x, y, canvas, assetManager, 'coin', value);
     }
     
-    static createBottle(x, y, canvas, assetManager, value = 0) {
+    static createBottleBar(x, y, canvas, assetManager, value = 0) {
         return new Statusbar(x, y, canvas, assetManager, 'bottle', value);
     }
 
     static createEndbossBar(x, y, canvas, assetManager, value = 100) {
         return new Statusbar(x, y, canvas, assetManager, 'endboss', value);
     }
-
-    setDimensions() {
-        const scale = Math.max(0.5, this.canvas.clientHeight / 1080); 
-        this.width = Math.ceil(300 * scale); 
-        this.height = Math.ceil(80 * scale);
-    }
     
     updateImage() {
         const imageIndex = Math.floor(this.value / 20);
         const clampedIndex = Math.max(0, Math.min(5, imageIndex));
-        this.setImageByIndex(clampedIndex);
+        super.setImageByIndex(clampedIndex);
     }
     
     setValue(newValue) {

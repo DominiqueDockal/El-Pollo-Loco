@@ -6,9 +6,8 @@ class Background extends GameObject {
     
     setDimensions() {
         const canvasHeight = this.canvas.clientHeight;
-        const aspectRatio = this.naturalWidth / this.naturalHeight;
         this.height = canvasHeight;
-        this.width = Math.ceil(canvasHeight * aspectRatio);
+        this.width = Math.ceil(canvasHeight * this.aspectRatio);
     }
 
 }
