@@ -8,8 +8,7 @@ class Statusbar extends GameObject {
         super.setDimensions(this.scale);
         this.updateImage();
     }
-    
-    
+     
     static createHealthBar(x, y, canvas, assetManager, value = 100) {
         return new Statusbar(x, y, canvas, assetManager, 'health', value);
     }

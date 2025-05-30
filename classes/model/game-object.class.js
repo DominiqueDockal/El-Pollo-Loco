@@ -33,9 +33,8 @@ class GameObject {
     }
 
     setDimensions(scale) {
-        const canvasHeight = this.canvas.clientHeight;
-        this.height = scale * canvasHeight;
-        this.width = this.height * this.aspectRatio;
+        this.height = scale * this.canvas.clientHeight;
+        this.width =Math.ceil(this.height * this.aspectRatio);
     }
 
     get img() {
