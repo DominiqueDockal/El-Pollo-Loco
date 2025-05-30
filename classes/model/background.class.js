@@ -9,12 +9,8 @@ class Background extends GameObject {
         const aspectRatio = this.naturalWidth / this.naturalHeight;
         this.height = canvasHeight;
         this.width = Math.ceil(canvasHeight * aspectRatio);
-        console.log(`Height: ${this.height}, Width: ${this.width}`);
     }
-    
-    updateDimensions() {
-        this.calculateDimensions();
-    }
+
 }
 
 

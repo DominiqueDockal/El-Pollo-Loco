@@ -44,4 +44,10 @@ class GameObject {
             return this.getImage(path);
         }).filter(img => img);
     }
+
+    updateDimensions() {
+        if (typeof this.setDimensions === 'function') {
+            this.setDimensions();
+        }
+    }
 }

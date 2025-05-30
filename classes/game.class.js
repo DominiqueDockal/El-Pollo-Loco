@@ -57,6 +57,6 @@ class Game {
     }
     
     
-
+  //game.currentLevel.gameObjects.forEach(obj => obj.updateDimensions());
 
 }

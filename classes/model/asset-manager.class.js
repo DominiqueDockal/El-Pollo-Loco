@@ -21,8 +21,7 @@ class AssetManager {
                     this.imageCache.set(imagePath, img);
                 });
             }
-        });
-    
+        });   
         await Promise.all(loadPromises);
         this.isLoaded = true;
     }

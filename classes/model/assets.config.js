@@ -12,6 +12,19 @@ const ASSETS = {
         }
     ],
 
+    bottle_ground: [
+        { 
+            src: 'images/bottle/bottle_ground_1.png',
+            width: 400,
+            height: 400
+        },
+        { 
+            src: 'images/bottle/bottle_ground_2.png',
+            width: 400,
+            height: 400
+        }
+    ],
+
     statusbar_coin: [
         { 
             src: 'images/statusbar/statusbar_coin/0.png',
@@ -110,6 +123,39 @@ const ASSETS = {
             height: 158
         }
         
+    ],
+    statusbar_endboss: [
+        { 
+            src: 'images/statusbar/statusbar_endboss/0.png',
+            width: 595,
+            height: 158
+        },
+        { 
+            src: 'images/statusbar/statusbar_endboss/20.png',
+            width: 595,
+            height: 158
+        },
+        { 
+            src: 'images/statusbar/statusbar_endboss/40.png',
+            width: 595,
+            height: 158
+        },
+        { 
+            src: 'images/statusbar/statusbar_endboss/60.png',
+            width: 595,
+            height: 158
+        },
+        { 
+            src: 'images/statusbar/statusbar_endboss/80.png',
+            width: 595,
+            height: 158
+        },
+        { 
+            src: 'images/statusbar/statusbar_endboss/100.png',
+            width: 595,
+            height: 158
+        }
+        
     ]
 };
 
@@ -117,14 +163,16 @@ const ALL_IMAGES = [
     ...ASSETS.background.map(bg => bg.src), 
     ...ASSETS.statusbar_coin.map(bg => bg.src), 
     ...ASSETS.statusbar_health.map(bg => bg.src), 
-    ...ASSETS.statusbar_bottle.map(bg => bg.src) 
+    ...ASSETS.statusbar_bottle.map(bg => bg.src),
+    ...ASSETS.bottle_ground.map(bg => bg.src)
 ];
 
 const ALL_IMAGE_DATA = [
     ...ASSETS.background, 
     ...ASSETS.statusbar_coin, 
     ...ASSETS.statusbar_health, 
-    ...ASSETS.statusbar_bottle
+    ...ASSETS.statusbar_bottle,
+    ...ASSETS.bottle_ground,
 ];
 
 window.ASSETS = ASSETS;

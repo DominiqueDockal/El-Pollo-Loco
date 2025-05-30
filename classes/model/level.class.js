@@ -3,12 +3,14 @@ class Level {
         this.id = levelData.id;
         this.name = levelData.name;
         this.length = levelData.length;
+        this.bottleCount = levelData.bottleCount;
     }
     
     initialize(canvas, assetManager) {
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
         this.createStatusbars(canvas, assetManager);
+        this.createBottles(canvas, assetManager);
     }
 
     createBackground(canvas, assetManager) {
@@ -38,6 +40,34 @@ class Level {
         this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
     }
     
+    createBottles(canvas, assetManager) {
+        if (this.bottleCount === 0) return;
+        const bottleY = canvas.clientHeight-150;
+        const usedPositions = [];
+        const minDistance = 50; 
+        const bottleAssets = window.ASSETS.bottle_ground || []; 
+        for (let i = 0; i < this.bottleCount; i++) {
+            let bottleX;
+            let attempts = 0;
+            const maxAttempts = 50;
+            do {
+                bottleX = Math.random() * (this.length - 100) + 50; 
+                attempts++;
+            } while (
+                attempts < maxAttempts && 
+                usedPositions.some(pos => Math.abs(pos - bottleX) < minDistance)
+            );
+            usedPositions.push(bottleX);
+            const randomIndex = Math.floor(Math.random() * bottleAssets.length);
+            const selectedImagePath = bottleAssets[randomIndex].src;
+            
+            const bottle = new Bottle(bottleX, bottleY, canvas, assetManager);
+            bottle.currentImagePath = selectedImagePath;      
+            this.gameObjects.push(bottle);
+        }
+        
+        console.log(`${this.bottleCount} Bottles erstellt`);
+    }
     
     
     
