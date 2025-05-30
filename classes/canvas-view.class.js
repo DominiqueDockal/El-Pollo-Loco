@@ -10,7 +10,7 @@ class CanvasView extends View {
     render(gameObjects) {
         this.clear();
         this.translateCamera(); 
-        gameObjects.forEach(gameObject => {
+        gameObjects.filter(obj => !obj.isFixed).forEach(gameObject => {
             this.renderGameObject(gameObject);
         });
         this.resetCameraTranslation();

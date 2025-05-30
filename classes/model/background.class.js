@@ -1,12 +1,21 @@
 class Background extends GameObject {
-    constructor(x, y, canvasHeight, index = 0) {
-        super(x, y, imagePath, canvasHeight, 'background');
- 
+    constructor(x, y, canvas, assetManager) {
+        super(x, y, canvas, assetManager, 'background');
+        this.setDimensions();
     }
-
-
+    
+    setDimensions() {
+        const canvasHeight = this.canvas.clientHeight;
+        const aspectRatio = this.naturalWidth / this.naturalHeight;
+        this.height = canvasHeight;
+        this.width = Math.ceil(canvasHeight * aspectRatio);
+        console.log(`Height: ${this.height}, Width: ${this.width}`);
+    }
+    
+    updateDimensions() {
+        this.calculateDimensions();
+    }
 }
-
 
 
 
