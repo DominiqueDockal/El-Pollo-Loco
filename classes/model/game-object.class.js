@@ -45,9 +45,43 @@ class GameObject {
         }).filter(img => img);
     }
 
+    setImage(imagePath) {
+        this.currentImagePath = imagePath;
+    }
+
+    setImageByIndex(index = 0) {
+        const assets = window.ASSETS[this.type] || [];
+        if (assets[index] && assets[index].src) { 
+            this.setImage(assets[index].src);
+        } else {
+            console.warn(`No asset found at index ${index} for type: ${this.type}`);
+        }
+    }
+    
     updateDimensions() {
         if (typeof this.setDimensions === 'function') {
             this.setDimensions();
         }
     }
+
+
+    // vllt?
+/*    setDimensions(baseWidth, baseHeight, scaleType = 'proportional') {
+    const scale = Math.max(0.5, this.canvas.clientHeight / 1080);
+    
+    switch(scaleType) {
+        case 'fixed':
+            this.width = Math.ceil(baseWidth * scale);
+            this.height = Math.ceil(baseHeight * scale);
+            break;
+        case 'aspectRatio':
+            const aspectRatio = this.naturalWidth / this.naturalHeight;
+            this.height = this.canvas.clientHeight;
+            this.width = Math.ceil(this.height * aspectRatio);
+            break;
+        default:
+            this.width = Math.ceil(baseWidth * scale);
+            this.height = Math.ceil(baseHeight * scale);
+    }
+   } */
 }

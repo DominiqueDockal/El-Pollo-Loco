@@ -21,6 +21,10 @@ class Statusbar extends GameObject {
         return new Statusbar(x, y, canvas, assetManager, 'bottle', value);
     }
 
+    static createEndbossBar(x, y, canvas, assetManager, value = 100) {
+        return new Statusbar(x, y, canvas, assetManager, 'endboss', value);
+    }
+
     setDimensions() {
         const scale = Math.max(0.5, this.canvas.clientHeight / 1080); 
         this.width = Math.ceil(300 * scale); 
@@ -28,12 +32,9 @@ class Statusbar extends GameObject {
     }
     
     updateImage() {
-        const imageIndex = Math.floor(this.value / 20); 
+        const imageIndex = Math.floor(this.value / 20);
         const clampedIndex = Math.max(0, Math.min(5, imageIndex));
-        const assets = window.ASSETS[this.type] || [];
-        if (assets[clampedIndex]) {
-            this.currentImagePath = assets[clampedIndex].src;
-        }
+        this.setImageByIndex(clampedIndex);
     }
     
     setValue(newValue) {

@@ -2,8 +2,8 @@ class Bottle extends GameObject {
     constructor(x, y, canvas, assetManager) {
         super(x, y, canvas, assetManager, 'bottle_ground');
         this.isCollected = false;
-        this.setDefaultImage(); 
         this.setDimensions();
+        this.updateImage();
     }
     
     setDimensions() {
@@ -12,14 +12,15 @@ class Bottle extends GameObject {
         this.height = Math.ceil(200 * scale);
     }
     
-    collect() {
-        this.isCollected = true;
+    setState(newState) {
+        this.isCollected = newState === 'collected';
+        this.updateImage();
     }
-
-    setDefaultImage() {
-        const assets = window.ASSETS[this.type] || [];
-        if (assets[0]) {
-            this.currentImagePath = assets[0].src;
-        }
+    
+    updateImage() {
+        const stateIndex = this.isCollected ? 1 : 0;
+        this.setImageByIndex(stateIndex);
     }
+    
+    
 }

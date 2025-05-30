@@ -46,12 +46,16 @@ class Level {
         const usedPositions = [];
         const minDistance = 50; 
         const bottleAssets = window.ASSETS.bottle_ground || []; 
+        const MIN_DISTANCE_FROM_LEFT = 300;
+        const MIN_DISTANCE_FROM_RIGHT = 500;
+        const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT;
+        
         for (let i = 0; i < this.bottleCount; i++) {
             let bottleX;
             let attempts = 0;
             const maxAttempts = 50;
             do {
-                bottleX = Math.random() * (this.length - 100) + 50; 
+                bottleX = Math.random() * (this.length - TOTAL_MARGIN) + MIN_DISTANCE_FROM_LEFT;
                 attempts++;
             } while (
                 attempts < maxAttempts && 
