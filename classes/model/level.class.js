@@ -33,7 +33,7 @@ class Level {
     createStatusbars(canvas, assetManager) {
         const startX = 0;
         const startY = 0;
-        const statusbarSpacing = 35;
+        const statusbarSpacing = 0.08*canvas.clientHeight;
         this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
         this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
         this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
@@ -42,7 +42,7 @@ class Level {
     
     createBottles(canvas, assetManager) {
         if (this.bottleCount === 0) return;
-        const bottleY = canvas.clientHeight-150;
+        const bottleY = canvas.clientHeight-0.3*canvas.clientHeight;
         const usedPositions = [];
         const minDistance = 50; 
         const bottleAssets = window.ASSETS.bottle_ground || []; 

@@ -3,6 +3,11 @@ class GameObject {
         if (new.target === GameObject) {
             throw new TypeError('Cannot instantiate abstract class GameObject directly');
         } 
+        this.originalX = x;
+        this.originalY = y;
+        this.originalCanvasWidth = canvas.width;
+        this.originalCanvasHeight = canvas.height;
+
         this.x = x;
         this.y = y;
         this.height = 0;
@@ -26,8 +31,6 @@ class GameObject {
                 this.naturalWidth = firstAsset.width;
                 this.naturalHeight = firstAsset.height;
                 this.aspectRatio = this.naturalWidth / this.naturalHeight;
-                this.width = firstAsset.width;
-                this.height = firstAsset.height;
             }
         }
     }
@@ -57,8 +60,12 @@ class GameObject {
     }
     
     updateDimensions() {
-        if (typeof this.setDimensions === 'function') {
-            this.setDimensions();
+        const scaleX = this.canvas.width / this.originalCanvasWidth;
+        const scaleY = this.canvas.height / this.originalCanvasHeight;
+        this.x = this.originalX * scaleX;
+        this.y = this.originalY * scaleY;
+        if (this.scale && typeof this.setDimensions === 'function') {
+            this.setDimensions(this.scale);
         }
     }
 

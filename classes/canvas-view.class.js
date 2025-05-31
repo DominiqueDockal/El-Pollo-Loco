@@ -5,6 +5,7 @@ class CanvasView extends View {
         this.context = canvasElement.getContext('2d');
         this.camera_x = -100;
         this.offsetEnd = 100;
+
     }
     
     render(gameObjects) {
