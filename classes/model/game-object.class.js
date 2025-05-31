@@ -6,7 +6,7 @@ class GameObject {
         this.originalX = x;
         this.originalY = y;
         this.originalCanvasWidth = canvas.width;
-        this.originalCanvasHeight = canvas.height;
+        this.originalCanvasHeight = canvas.height; 
 
         this.x = x;
         this.y = y;
@@ -38,7 +38,7 @@ class GameObject {
     setDimensions(scale) {
         this.height = scale * this.canvas.clientHeight;
         this.width =Math.ceil(this.height * this.aspectRatio);
-    }
+    } 
 
     get img() {
         return this.currentImagePath ? this.getImage(this.currentImagePath) : null;
@@ -67,6 +67,7 @@ class GameObject {
         if (this.scale && typeof this.setDimensions === 'function') {
             this.setDimensions(this.scale);
         }
-    }
+    } 
+
 
 }
