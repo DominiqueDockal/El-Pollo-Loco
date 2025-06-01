@@ -156,7 +156,32 @@ const ASSETS = {
             height: 158
         }
         
-    ]
+    ],
+
+    clouds: [
+        { 
+            src: 'images/clouds/1_level1.png',
+            width: 1920,
+            height: 1080
+        },
+        { 
+            src: 'images/clouds/2_level1.png',
+            width: 1920,
+            height: 1080
+        },
+        { 
+            src: 'images/clouds/1_level2.png',
+            width: 1920,
+            height: 1080
+        },
+        { 
+            src: 'images/clouds/2_level2.png',
+            width: 1920,
+            height: 1080
+        }
+    ],
+
+
 };
 
 const ALL_IMAGES = [
@@ -164,7 +189,8 @@ const ALL_IMAGES = [
     ...ASSETS.statusbar_coin.map(bg => bg.src), 
     ...ASSETS.statusbar_health.map(bg => bg.src), 
     ...ASSETS.statusbar_bottle.map(bg => bg.src),
-    ...ASSETS.bottle_ground.map(bg => bg.src)
+    ...ASSETS.bottle_ground.map(bg => bg.src),
+    ...ASSETS.clouds.map(bg => bg.src)
 ];
 
 const ALL_IMAGE_DATA = [
@@ -173,6 +199,7 @@ const ALL_IMAGE_DATA = [
     ...ASSETS.statusbar_health, 
     ...ASSETS.statusbar_bottle,
     ...ASSETS.bottle_ground,
+    ...ASSETS.clouds
 ];
 
 window.ASSETS = ASSETS;

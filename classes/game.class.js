@@ -42,7 +42,13 @@ class Game {
     }
 
     update() {
-        // Input handling, Kollisionen, etc. Kommt noch
+        if (this.currentLevel) {
+            this.currentLevel.gameObjects.forEach(gameObject => {
+                if (gameObject.animate && typeof gameObject.animate === 'function') {
+                    gameObject.animate();
+                }
+            });
+        }
     }
 
     render() {

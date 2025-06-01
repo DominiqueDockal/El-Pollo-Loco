@@ -40,6 +40,16 @@ class GameObject {
         this.width =Math.ceil(this.height * this.aspectRatio);
     } 
 
+    updateDimensions() {
+        const scaleX = this.canvas.width / this.originalCanvasWidth;
+        const scaleY = this.canvas.height / this.originalCanvasHeight;
+        this.x = this.originalX * scaleX;
+        this.y = this.originalY * scaleY;
+        if (this.scale && typeof this.setDimensions === 'function') {
+            this.setDimensions(this.scale);
+        }
+    } 
+
     get img() {
         return this.currentImagePath ? this.getImage(this.currentImagePath) : null;
     }
@@ -59,15 +69,7 @@ class GameObject {
         }
     }
     
-    updateDimensions() {
-        const scaleX = this.canvas.width / this.originalCanvasWidth;
-        const scaleY = this.canvas.height / this.originalCanvasHeight;
-        this.x = this.originalX * scaleX;
-        this.y = this.originalY * scaleY;
-        if (this.scale && typeof this.setDimensions === 'function') {
-            this.setDimensions(this.scale);
-        }
-    } 
+
 
 
 }

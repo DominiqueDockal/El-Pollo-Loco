@@ -9,6 +9,7 @@ class Level {
     initialize(canvas, assetManager) {
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
+        this.createClouds(canvas, assetManager);
         this.createStatusbars(canvas, assetManager);
         this.createBottles(canvas, assetManager);
     }
@@ -69,8 +70,24 @@ class Level {
         }
         
     }
+
+    createClouds(canvas, assetManager) {
+        const levelValue = this.getLevelValue();
+        const canvasWidth = canvas.clientWidth;
+        const cloud_1 = new Cloud(0, 0, canvas, assetManager, levelValue, 1, 0.15);
+        const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.2);
+        this.gameObjects.push(cloud_1, cloud_2);
+    }
     
     
+    getLevelValue() {
+        if (this.id === 1 || this.name.includes('1')) {
+            return 1;
+        } else if (this.id === 2 || this.name.includes('2')) {
+            return 2;
+        }
+        return 1; 
+    }
     
     
     

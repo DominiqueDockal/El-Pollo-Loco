@@ -29,7 +29,7 @@ function resizeGameArea() {
     canvasWrapper.style.width = width + "px";
     canvasWrapper.style.height = height + "px";
     canvas.width = width;
-    canvas.height = height;
+    canvas.height = height; 
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
     updateCanvasCssVars();
@@ -55,7 +55,7 @@ function updateCanvasCssVars() {
 }
 
 function updateGameObjectScales() {
-    debugCanvasResizeSystem();
+    //debugCanvasResizeSystem(); //später weg 
     const gameObjects = window.game?.currentLevel?.gameObjects;
     if (gameObjects && Array.isArray(gameObjects)) {
         gameObjects.forEach(obj => {
@@ -64,10 +64,10 @@ function updateGameObjectScales() {
             }
         });
     
-        console.log('\n=== DEBUG AFTER RESIZE ===');
+        /* console.log('\n=== DEBUG AFTER RESIZE ==='); //später weg
         gameObjects
             .filter(obj => obj instanceof Background)
-            .forEach(obj => debugGameObjectDimensions(obj));
+            .forEach(obj => debugGameObjectDimensions(obj)); */
     } else {
         console.log('No gameObjects found or game not initialized yet');
     }
