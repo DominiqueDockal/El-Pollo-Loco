@@ -3,13 +3,15 @@ const levelConfigs = {
         id: 1,
         name: "First Level",
         length: 4000,
-        bottleCount: 10
+        bottleCount: 10,
+        coinCount: 50
     },
     level2: {
         id: 2,
         name: "Second Level", 
         length: 8000,
-        bottleCount: 20
+        bottleCount: 20,
+        coinCount: 20
     }
 };
 

@@ -4,6 +4,7 @@ class Level {
         this.name = levelData.name;
         this.length = levelData.length;
         this.bottleCount = levelData.bottleCount;
+        this.coinCount = levelData.coinCount; 
     }
     
     initialize(canvas, assetManager) {
@@ -12,6 +13,7 @@ class Level {
         this.createClouds(canvas, assetManager);
         this.createStatusbars(canvas, assetManager);
         this.createBottles(canvas, assetManager);
+        this.createCoins(canvas, assetManager);
     }
 
     createBackground(canvas, assetManager) {
@@ -31,6 +33,15 @@ class Level {
         }
     }
 
+    getLevelValue() {
+        if (this.id === 1 || this.name.includes('1')) {
+            return 1;
+        } else if (this.id === 2 || this.name.includes('2')) {
+            return 2;
+        }
+        return 1; 
+    }
+
     createStatusbars(canvas, assetManager) {
         const startX = 0;
         const startY = 0;
@@ -39,6 +50,14 @@ class Level {
         this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
         this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
         this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
+    }
+
+    createClouds(canvas, assetManager) {
+        const levelValue = this.getLevelValue();
+        const canvasWidth = canvas.clientWidth;
+        const cloud_1 = new Cloud(0, 0, canvas, assetManager, levelValue, 1, 0.15);
+        const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.15);
+        this.gameObjects.push(cloud_1, cloud_2);
     }
     
     createBottles(canvas, assetManager) {
@@ -70,25 +89,37 @@ class Level {
         }
         
     }
-
-    createClouds(canvas, assetManager) {
-        const levelValue = this.getLevelValue();
-        const canvasWidth = canvas.clientWidth;
-        const cloud_1 = new Cloud(0, 0, canvas, assetManager, levelValue, 1, 0.15);
-        const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.2);
-        this.gameObjects.push(cloud_1, cloud_2);
-    }
     
-    
-    getLevelValue() {
-        if (this.id === 1 || this.name.includes('1')) {
-            return 1;
-        } else if (this.id === 2 || this.name.includes('2')) {
-            return 2;
+createCoins(canvas, assetManager) {
+        if (this.coinCount === 0) return;
+        const usedPositions = [];
+        const minDistance = 50;
+        const MIN_DISTANCE_FROM_LEFT = 300;
+        const MIN_DISTANCE_FROM_RIGHT = 500;
+        const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT;
+        const animationSpeed = 400; 
+        const minHeight = 0.5 * canvas.clientHeight;
+        const maxHeight = 0.8 * canvas.clientHeight;
+        
+        for (let i = 0; i < this.coinCount; i++) {
+            let coinX;
+            let attempts = 0;
+            const maxAttempts = 50; 
+            do {
+                coinX = Math.random() * (this.length - TOTAL_MARGIN) + MIN_DISTANCE_FROM_LEFT;
+                attempts++;
+            } while (
+                attempts < maxAttempts && 
+                usedPositions.some(pos => Math.abs(pos - coinX) < minDistance)
+            );
+            usedPositions.push(coinX);
+            const coinY = canvas.clientHeight - (minHeight + Math.random() * (maxHeight - minHeight));
+            const coin = new Coin(coinX, coinY, canvas, assetManager, animationSpeed);
+            this.gameObjects.push(coin);
         }
-        return 1; 
-    }
-    
+    } 
+
+        
     
     
 }

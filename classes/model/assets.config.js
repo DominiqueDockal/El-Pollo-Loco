@@ -181,6 +181,19 @@ const ASSETS = {
         }
     ],
 
+    coin: [
+        { 
+            src: 'images/coin/coin_1.png',
+            width: 300,
+            height: 301
+        },
+        { 
+            src: 'images/coin/coin_2.png',
+            width: 300,
+            height: 301
+        }
+    ],
+
 
 };
 
@@ -190,7 +203,8 @@ const ALL_IMAGES = [
     ...ASSETS.statusbar_health.map(bg => bg.src), 
     ...ASSETS.statusbar_bottle.map(bg => bg.src),
     ...ASSETS.bottle_ground.map(bg => bg.src),
-    ...ASSETS.clouds.map(bg => bg.src)
+    ...ASSETS.clouds.map(bg => bg.src),
+    ...ASSETS.coin.map(bg => bg.src)
 ];
 
 const ALL_IMAGE_DATA = [
@@ -199,7 +213,8 @@ const ALL_IMAGE_DATA = [
     ...ASSETS.statusbar_health, 
     ...ASSETS.statusbar_bottle,
     ...ASSETS.bottle_ground,
-    ...ASSETS.clouds
+    ...ASSETS.clouds,
+    ...ASSETS.coin
 ];
 
 window.ASSETS = ASSETS;
