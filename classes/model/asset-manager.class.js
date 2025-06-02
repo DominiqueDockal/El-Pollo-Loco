@@ -10,45 +10,13 @@ class AssetManager {
     async loadAllAssets() {
         const assets = window.ASSETS || {};
         const loadPromises = [];
-        
         Object.entries(assets).forEach(([key, assetArray]) => {
             if (Array.isArray(assetArray)) {
                 assetArray.forEach(assetObj => {
                     if (key.startsWith('sounds_')) {
-                        const audio = new Audio();
-                        const soundPath = assetObj.src;
-                        const loadPromise = new Promise((resolve, reject) => {
-                            audio.oncanplaythrough = resolve;
-                            audio.onerror = reject;
-                            audio.src = soundPath;
-                            audio.preload = 'auto';
-                        }).catch(error => {
-                            console.warn(`Failed to load sound: ${soundPath}`, error);
-                            return null;
-                        });
-                        
-                        loadPromises.push(loadPromise);
-                        
-                        if (assetObj.name) {
-                            this.soundCache.set(assetObj.name, {
-                                audio: audio,
-                                volume: assetObj.volume || 1.0,
-                                loop: assetObj.loop || false
-                            });
-                        }
+                        loadPromises.push(this.loadSound(assetObj));
                     } else {
-                        const img = new Image();
-                        const imagePath = assetObj.src || assetObj;
-                        const loadPromise = new Promise((resolve, reject) => {
-                            img.onload = resolve;
-                            img.onerror = reject;
-                            img.src = imagePath;
-                        }).catch(error => {
-                            console.warn(`Failed to load image: ${imagePath}`, error);
-                            return null;
-                        });
-                        loadPromises.push(loadPromise);
-                        this.imageCache.set(imagePath, img);
+                        loadPromises.push(this.loadImage(assetObj));
                     }
                 });
             }
@@ -56,6 +24,40 @@ class AssetManager {
         await Promise.allSettled(loadPromises);
         this.isLoaded = true;
     }
+    
+    async loadSound(assetObj) {
+        const audio = new Audio();
+        const soundPath = assetObj.src;
+        try {
+            await new Promise((resolve, reject) => {
+                audio.oncanplaythrough = resolve;
+                audio.onerror = reject;
+                audio.src = soundPath;
+                audio.preload = 'auto';
+            });
+            if (assetObj.name) {
+                this.soundCache.set(assetObj.name, {audio: audio, volume: assetObj.volume || 1.0,loop: assetObj.loop || false});
+            }
+        } catch (error) {
+            console.warn(`Failed to load sound: ${soundPath}`, error);
+        }
+    }
+    
+    async loadImage(assetObj) {
+        const img = new Image();
+        const imagePath = assetObj.src || assetObj;
+        try {
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+                img.src = imagePath;
+            });
+            this.imageCache.set(imagePath, img);
+        } catch (error) {
+            console.warn(`Failed to load image: ${imagePath}`, error);
+        }
+    }
+    
 
 
     getImage(imagePath) {
@@ -92,7 +94,6 @@ class AssetManager {
             if (soundData && !this.backgroundMusic) {
                 this.backgroundMusic = soundData.audio.cloneNode(true);
                 this.backgroundMusic.volume = soundData.volume;
-                console.log('Background Music Volume:', soundData.volume);
                 this.backgroundMusic.loop = soundData.loop;
                 this.backgroundMusic.play().catch(error => {
                     console.log('Background music play failed:', error);

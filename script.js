@@ -38,8 +38,7 @@ function closeHowToPlayOverlay() {
 }
 
 function toggleSoundIcon(btn) {
-    if (btn.disabled) return; // Zusätzliche Sicherheit
-    
+    if (btn.disabled) return; 
     btn.classList.toggle('sound-on');
     toggleGameSound();
 }
@@ -54,7 +53,6 @@ function toggleGameSound() {
     }
     return false;
 }
-
 
 function togglePlayPause() {
     const pauseIcon = document.querySelector('.pause-icon');
@@ -74,11 +72,10 @@ function toggleGamePause() {
         window.game.isPaused = !window.game.isPaused;
         const soundBtn = document.getElementById('sound_btn');
         if (soundBtn) {
+            soundBtn.classList.toggle('disabled', window.game.isPaused);
             soundBtn.disabled = window.game.isPaused;
-            soundBtn.style.opacity = window.game.isPaused ? '0.5' : '1';
-            soundBtn.style.cursor = window.game.isPaused ? 'not-allowed' : 'pointer';
         }
-    }
+    } 
     if (window.game.assetManager) {
         if (window.game.isPaused) {
             window.game.assetManager.stopBackgroundMusic();
@@ -87,6 +84,13 @@ function toggleGamePause() {
         }
     }
 }
+
+function testSound() {
+    if (window.game && window.game.assetManager) {
+        window.game.assetManager.playSound('bottle_collect');
+    }
+}
+
 
   
 

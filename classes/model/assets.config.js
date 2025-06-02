@@ -247,67 +247,67 @@ const ASSETS = {
         { 
             name: 'coin_collect',
             src: 'audio/coin.mp3',
-            volume: 0.7,
+            volume: 1,
             loop: false
         },
         { 
             name: 'chicken_dead',
             src: 'audio/chicken_dead.mp3',
-            volume: 0.8,
+            volume: 1,
             loop: false
         },
         { 
             name: 'bottle_collect',
             src: 'audio/bottle.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'bottle_smash',
             src: 'audio/bottle_smash.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'character_hurt',
             src: 'audio/character_hurt.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'character_sleeping',
             src: 'audio/character_sleeping.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'endboss_hurt',
             src: 'audio/endboss_hurt.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'endboss_dead',
             src: 'audio/endboss_dead.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'jumping',
             src: 'audio/jumping.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'game_over',
             src: 'audio/game_over.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         },
         { 
             name: 'game_won',
             src: 'audio/game_won.mp3',
-            volume: 0.6,
+            volume: 1,
             loop: false
         }
     ],
@@ -316,7 +316,7 @@ const ASSETS = {
         { 
             name: 'background_music',
             src: 'audio/background.mp3',
-            volume: 0.3,
+            volume: 0.1,
             loop: true
         }
     ]
