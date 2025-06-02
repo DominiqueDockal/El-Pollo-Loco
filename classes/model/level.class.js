@@ -7,9 +7,17 @@ class Level {
         this.coinCount = levelData.coinCount; 
         this.chickenCount = levelData.chickenCount;
         this.chickenSmallCount = levelData.chickenSmallCount;
+        this.spawning = {
+            enabled: true,
+            lastSpawn: 0,
+            interval: 5000, 
+            maxChickens: 10
+        };
     }
     
     initialize(canvas, assetManager) {
+        this.canvas = canvas;        
+        this.assetManager = assetManager; 
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
         this.createClouds(canvas, assetManager);
@@ -125,6 +133,7 @@ class Level {
             const chickenX = this.generateRandomPosition(usedPositions, minDistance, chickenRange, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(chickenX);
             const chicken = new Chicken(chickenX, chickenY, canvas, assetManager, animationSpeed);
+            chicken.isSpawned = false;
             this.gameObjects.push(chicken);
         }
     }
@@ -132,8 +141,8 @@ class Level {
     createChickenSmall(canvas, assetManager) {
         if (this.chickenSmallCount === 0) return; 
         const usedPositions = [];
-        const minDistance = 80; 
-        const MIN_DISTANCE_FROM_LEFT = 300;
+        const minDistance = 100; 
+        const MIN_DISTANCE_FROM_LEFT = 500;
         const chickenRange = this.length - MIN_DISTANCE_FROM_LEFT;
         const animationSpeed = 300;
         const chickenSmallY = canvas.clientHeight - 0.28 * canvas.clientHeight;
@@ -141,9 +150,40 @@ class Level {
             const chickenX = this.generateRandomPosition(usedPositions, minDistance, chickenRange, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(chickenX);
             const chickenSmall = new ChickenSmall(chickenX, chickenSmallY, canvas, assetManager, animationSpeed);
+            chickenSmall.isSpawned = false; 
             this.gameObjects.push(chickenSmall);
         }
     }
+
+    update(currentTime) {
+        if (!this.spawning.enabled) return;
+        if (currentTime - this.spawning.lastSpawn >= this.spawning.interval) {
+            this.spawnChicken();
+            this.spawning.lastSpawn = currentTime;
+        }
+    }
+
+    spawnChicken() {
+        const spawnedChickens = this.gameObjects.filter(obj => 
+            (obj instanceof Chicken || obj instanceof ChickenSmall) && obj.isSpawned === true
+        ).length;
+        if (spawnedChickens >= this.spawning.maxChickens) return;
+        const spawnX = this.length + 150;
+        if (Math.random() < 0.6) {
+            const chickenY = this.canvas.clientHeight - 0.32 * this.canvas.clientHeight;
+            const chicken = new Chicken(spawnX, chickenY, this.canvas, this.assetManager, 300);
+            chicken.isSpawned = true; 
+            this.gameObjects.push(chicken);
+            console.log(`Normales Chicken gespawnt bei X:${spawnX}, Y:${chickenY} `);
+        } else {
+            const chickenSmallY = this.canvas.clientHeight - 0.28 * this.canvas.clientHeight;
+            const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, this.canvas, this.assetManager, 300);
+            chickenSmall.isSpawned = true; 
+            this.gameObjects.push(chickenSmall);
+            console.log(`Kleines Chicken gespawnt bei X:${spawnX}, Y:${chickenSmallY} `);
+        }
+    }
+    
 
     
 }

@@ -46,7 +46,9 @@ class Game {
         if (this.isPaused) {
             return;
         }
+        const currentTime = Date.now();
         if (this.currentLevel) {
+            this.currentLevel.update(currentTime); 
             this.currentLevel.gameObjects.forEach(gameObject => {
                 if (gameObject.animate && typeof gameObject.animate === 'function') {
                     gameObject.animate();
