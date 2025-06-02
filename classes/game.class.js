@@ -7,6 +7,7 @@ class Game {
         this.isRunning = false;
         this.currentLevel = null;
         this.currentLevelId = 1;
+        this.isPaused = false;
         window.game = this;
         this.init();
     };
@@ -42,6 +43,9 @@ class Game {
     }
 
     update() {
+        if (this.isPaused) {
+            return;
+        }
         if (this.currentLevel) {
             this.currentLevel.gameObjects.forEach(gameObject => {
                 if (gameObject.animate && typeof gameObject.animate === 'function') {
@@ -50,7 +54,7 @@ class Game {
             });
         }
     }
-
+    
     render() {
         if (this.currentLevel && this.assetManager.isLoaded) {
             this.view.render(this.currentLevel.gameObjects);

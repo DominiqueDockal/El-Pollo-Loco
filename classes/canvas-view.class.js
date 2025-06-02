@@ -21,6 +21,9 @@ class CanvasView extends View {
     }
     
     renderGameObject(gameObject) {
+        if (!gameObject.visible) {
+            return; 
+        }
         if (!gameObject.img || !gameObject.img.complete || gameObject.width === 0) {
             return; 
         }
@@ -32,6 +35,7 @@ class CanvasView extends View {
             this.flipImageBack(gameObject);
         }
     }
+    
     
     clear() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);

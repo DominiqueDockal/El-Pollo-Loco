@@ -5,7 +5,6 @@ class Coin extends AnimatedGameObject {
         this.animationSpeed = animationSpeed; 
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
-        this.isCollected = false;
         this.setCurrentImage();
         super.setDimensions(this.scale);
     }
@@ -18,20 +17,11 @@ class Coin extends AnimatedGameObject {
     }
 
     animate() {
-        if (this.isCollected) return; 
         const currentTime = Date.now();
         if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
             this.currentImageIndex = (this.currentImageIndex + 1) % 2;
             this.setCurrentImage();
             this.lastAnimationTime = currentTime;
         }
-    }
-
-    setState(isCollected) {
-        this.isCollected = isCollected;
-    }
-    
-    collect() {
-        this.setState(true);
     }
 }

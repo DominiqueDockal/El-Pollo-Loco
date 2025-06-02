@@ -51,6 +51,13 @@ function togglePlayPause() {
       pauseIcon.style.display = 'none';
       playIcon.style.display = 'inline-block';
     }
+    toggleGamePause();
+}
+
+function toggleGamePause() {
+    if (window.game) {
+        window.game.isPaused = !window.game.isPaused;
+    }
 }
   
 

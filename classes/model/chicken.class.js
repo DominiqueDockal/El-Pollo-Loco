@@ -6,6 +6,8 @@ class Chicken extends AnimatedGameObject {
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
         this.isDead = false;
+        this.deathTime = 0;
+        this.deathDuration = 1000;
         this.setCurrentImage();
         super.setDimensions(this.scale);
     }
@@ -26,6 +28,10 @@ class Chicken extends AnimatedGameObject {
 
     animate() {
         if (this.isDead) {
+            const currentTime = Date.now();
+            if (currentTime - this.deathTime >= this.deathDuration) {
+                this.visible = false;
+            }
             return; 
         }
         const currentTime = Date.now();
@@ -33,15 +39,15 @@ class Chicken extends AnimatedGameObject {
             this.currentImageIndex = (this.currentImageIndex + 1) % 3;
             this.setCurrentImage();
             this.lastAnimationTime = currentTime;
-        }
-        
+        } 
         this.moveLeft();
     }
-    
+
     kill() {
-        if (!this.isDead) { 
+        if (!this.isDead) {
             this.isDead = true;
-            this.setCurrentImage();
+            this.deathTime = Date.now(); 
+            this.setCurrentImage(); 
         }
     }
 }

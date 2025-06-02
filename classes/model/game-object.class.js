@@ -19,7 +19,8 @@ class GameObject {
         this.assetManager = assetManager; 
         this.otherDirection = false;
         this.isFixed = false;
-        this.scale = 0;
+        this.scale = 1;
+        this.visible = true;
         this.setNaturalDimensions();
     }
 
