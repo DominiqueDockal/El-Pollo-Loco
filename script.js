@@ -87,7 +87,7 @@ function toggleGamePause() {
 
 function testSound() {
     if (window.game && window.game.assetManager) {
-        window.game.assetManager.playSound('bottle_collect');
+        window.game.assetManager.playSound('chicken_dead');
     }
 }
 

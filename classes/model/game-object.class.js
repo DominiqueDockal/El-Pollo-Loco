@@ -63,12 +63,13 @@ class GameObject {
         this.currentImagePath = imagePath;
     }
 
-    setImageByIndex(index = 0) {
-        const assets = window.ASSETS[this.type] || [];
+   setImageByIndex(index = this.currentImageIndex, assetType = this.type) {
+        const assets = window.ASSETS[assetType] || [];
         if (assets[index] && assets[index].src) { 
             this.setImage(assets[index].src);
-        }
     }
+}
+
     
 
 

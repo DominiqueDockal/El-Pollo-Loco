@@ -10,19 +10,12 @@ class Coin extends AnimatedGameObject {
     }
 
     setCurrentImage() {
-        const coinAssets = window.ASSETS.coin || [];
-        if (coinAssets.length > 0) {
-            this.currentImagePath = coinAssets[this.currentImageIndex].src;
-        }
+        super.setImageByIndex(); 
     }
-
+    
+    // animate nur wenn this.visible = true
     animate() {
-        const currentTime = Date.now();
-        if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
-            this.currentImageIndex = (this.currentImageIndex + 1) % 2;
-            this.setCurrentImage();
-            this.lastAnimationTime = currentTime;
-        }
+        super.animateFrames(2);
     }
 
 }

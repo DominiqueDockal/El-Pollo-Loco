@@ -58,8 +58,6 @@ class AssetManager {
         }
     }
     
-
-
     getImage(imagePath) {
         return this.imageCache.get(imagePath);
     }

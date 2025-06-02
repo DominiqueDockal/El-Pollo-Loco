@@ -1,4 +1,8 @@
 class AnimatedGameObject extends GameObject {
+    static randomSpeed(min = 1, max = 1) {
+        return Math.random() * (max - min) + min;
+    }
+
     constructor(x, y, canvas, assetManager, assetType, speed = 1) {
         super(x, y, canvas, assetManager, assetType);
         this.speed = speed;
@@ -19,4 +23,16 @@ class AnimatedGameObject extends GameObject {
     moveDown() {
         this.y += this.speed;
     }
+
+    animateFrames(maxFrames) {
+        const currentTime = Date.now();
+        if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
+            this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
+            this.setCurrentImage();
+            this.lastAnimationTime = currentTime;
+        }
+    }
+
 }
+
+

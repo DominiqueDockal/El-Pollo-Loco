@@ -1,6 +1,6 @@
 class Chicken extends AnimatedGameObject {
     constructor(x, y, canvas, assetManager, animationSpeed = 300) {
-        super(x, y, canvas, assetManager, 'chicken_walk', 1); 
+        super(x, y, canvas, assetManager, 'chicken_walk', AnimatedGameObject.randomSpeed(0.8, 1.5)); 
         this.scale = 0.2; 
         this.animationSpeed = animationSpeed; 
         this.currentImageIndex = 0;
@@ -14,18 +14,13 @@ class Chicken extends AnimatedGameObject {
 
     setCurrentImage() {
         if (this.isDead) {
-            const deadAssets = window.ASSETS.chicken_dead || [];
-            if (deadAssets.length > 0) {
-                this.currentImagePath = deadAssets[0].src;
-            }
+            super.setImageByIndex(0, 'chicken_dead');
         } else {
-            const chickenAssets = window.ASSETS.chicken_walk || [];
-            if (chickenAssets.length > 0) {
-                this.currentImagePath = chickenAssets[this.currentImageIndex].src;
-            }
+            super.setImageByIndex(); 
         }
     }
-
+    
+    // animate nur wenn this.visible = true
     animate() {
         if (this.isDead) {
             const currentTime = Date.now();
@@ -33,13 +28,8 @@ class Chicken extends AnimatedGameObject {
                 this.visible = false;
             }
             return; 
-        }
-        const currentTime = Date.now();
-        if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
-            this.currentImageIndex = (this.currentImageIndex + 1) % 3;
-            this.setCurrentImage();
-            this.lastAnimationTime = currentTime;
-        } 
+        }  
+        super.animateFrames(3); 
         this.moveLeft();
     }
 
