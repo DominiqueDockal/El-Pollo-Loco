@@ -20,8 +20,8 @@ class Chicken extends AnimatedGameObject {
         }
     }
     
-    // animate nur wenn this.visible = true
     animate() {
+        if (!this.visible) return; 
         if (this.isDead) {
             const currentTime = Date.now();
             if (currentTime - this.deathTime >= this.deathDuration) {

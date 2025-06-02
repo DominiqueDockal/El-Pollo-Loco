@@ -20,8 +20,8 @@ class ChickenSmall extends AnimatedGameObject {
         }
     }
 
-    // animate nur wenn this.visible = true
     animate() {
+        if (!this.visible) return; 
         if (this.isDead) {
             const currentTime = Date.now();
             if (currentTime - this.deathTime >= this.deathDuration) {
@@ -32,6 +32,7 @@ class ChickenSmall extends AnimatedGameObject {
         super.animateFrames(3); 
         this.moveLeft();
     }
+    
 
     kill() {
         if (!this.isDead) {

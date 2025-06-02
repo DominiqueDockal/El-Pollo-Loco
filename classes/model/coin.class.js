@@ -13,9 +13,10 @@ class Coin extends AnimatedGameObject {
         super.setImageByIndex(); 
     }
     
-    // animate nur wenn this.visible = true
     animate() {
+        if (!this.visible) return; 
         super.animateFrames(2);
     }
+    
 
 }
