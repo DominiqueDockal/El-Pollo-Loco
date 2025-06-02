@@ -16,8 +16,6 @@ class Level {
     }
     
     initialize(canvas, assetManager) {
-        this.canvas = canvas;        
-        this.assetManager = assetManager; 
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
         this.createClouds(canvas, assetManager);
@@ -155,32 +153,31 @@ class Level {
         }
     }
 
-    update(currentTime) {
+    update(currentTime, canvas, assetManager) {
         if (!this.spawning.enabled) return;
         if (currentTime - this.spawning.lastSpawn >= this.spawning.interval) {
-            this.spawnChicken();
+            this.spawnChicken(canvas, assetManager);
             this.spawning.lastSpawn = currentTime;
         }
     }
 
-    spawnChicken() {
+    spawnChicken(canvas, assetManager) {
         const spawnedChickens = this.gameObjects.filter(obj => 
             (obj instanceof Chicken || obj instanceof ChickenSmall) && obj.isSpawned === true
         ).length;
         if (spawnedChickens >= this.spawning.maxChickens) return;
+        
         const spawnX = this.length + 150;
         if (Math.random() < 0.6) {
-            const chickenY = this.canvas.clientHeight - 0.32 * this.canvas.clientHeight;
-            const chicken = new Chicken(spawnX, chickenY, this.canvas, this.assetManager, 300);
+            const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
+            const chicken = new Chicken(spawnX, chickenY, canvas, assetManager, 300);
             chicken.isSpawned = true; 
             this.gameObjects.push(chicken);
-            console.log(`Normales Chicken gespawnt bei X:${spawnX}, Y:${chickenY} `);
         } else {
-            const chickenSmallY = this.canvas.clientHeight - 0.28 * this.canvas.clientHeight;
-            const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, this.canvas, this.assetManager, 300);
+            const chickenSmallY = canvas.clientHeight - 0.28 * canvas.clientHeight;
+            const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, canvas, assetManager, 300);
             chickenSmall.isSpawned = true; 
             this.gameObjects.push(chickenSmall);
-            console.log(`Kleines Chicken gespawnt bei X:${spawnX}, Y:${chickenSmallY} `);
         }
     }
     

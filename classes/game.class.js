@@ -48,7 +48,7 @@ class Game {
         }
         const currentTime = Date.now();
         if (this.currentLevel) {
-            this.currentLevel.update(currentTime); 
+            this.currentLevel.update(currentTime, this.canvas, this.assetManager); 
             this.currentLevel.gameObjects.forEach(gameObject => {
                 if (gameObject.animate && typeof gameObject.animate === 'function') {
                     gameObject.animate();
