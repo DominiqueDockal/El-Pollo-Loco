@@ -27,7 +27,11 @@ class Coin extends AnimatedGameObject {
         }
     }
 
+    setState(isCollected) {
+        this.isCollected = isCollected;
+    }
+    
     collect() {
-        this.isCollected = true;
+        this.setState(true);
     }
 }

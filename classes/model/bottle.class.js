@@ -7,15 +7,16 @@ class Bottle extends GameObject {
         this.updateImage();
     }
     
-    setState(newState) {
-        this.isCollected = newState === 'collected';
-        this.updateImage();
+    setState(isCollected) {
+        this.isCollected = isCollected; 
+
     }
     
-    updateImage() {
-        const stateIndex = this.isCollected ? 1 : 0;
-        super.setImageByIndex(stateIndex);
+    collect() {
+        this.setState(true);
     }
+    
+
     
     
 }
