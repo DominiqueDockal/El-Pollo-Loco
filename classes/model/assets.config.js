@@ -193,6 +193,54 @@ const ASSETS = {
             height: 301
         }
     ],
+    chicken_walk: [
+        { 
+            src: 'images/chicken/walk_1.png',
+            width: 248,
+            height: 243
+        },
+        { 
+            src: 'images/chicken/walk_2.png',
+            width: 248,
+            height: 243
+        },
+        { 
+            src: 'images/chicken/walk_3.png',
+            width: 248,
+            height: 243
+        }
+    ],
+    chicken_dead: [
+        { 
+            src: 'images/chicken/dead.png',
+            width: 248,
+            height: 243
+        }
+    ],
+    chicken_small_walk: [
+        { 
+            src: 'images/chickensmall/walk_1.png',
+            width: 248,
+            height: 243
+        },
+        { 
+            src: 'images/chickensmall/walk_2.png',
+            width: 248,
+            height: 243
+        },
+        { 
+            src: 'images/chickensmall/walk_3.png',
+            width: 248,
+            height: 243
+        }
+    ],
+    chicken_small_dead: [
+        { 
+            src: 'images/chickensmall/dead.png',
+            width: 248,
+            height: 243
+        }
+    ],
 
 
 };
@@ -204,7 +252,11 @@ const ALL_IMAGES = [
     ...ASSETS.statusbar_bottle.map(bg => bg.src),
     ...ASSETS.bottle_ground.map(bg => bg.src),
     ...ASSETS.clouds.map(bg => bg.src),
-    ...ASSETS.coin.map(bg => bg.src)
+    ...ASSETS.coin.map(bg => bg.src),
+    ...ASSETS.chicken_walk.map(bg => bg.src),
+    ...ASSETS.chicken_dead.map(bg => bg.src),
+    ...ASSETS.chicken_small_walk.map(bg => bg.src),
+    ...ASSETS.chicken_small_dead.map(bg => bg.src)
 ];
 
 const ALL_IMAGE_DATA = [
@@ -214,7 +266,11 @@ const ALL_IMAGE_DATA = [
     ...ASSETS.statusbar_bottle,
     ...ASSETS.bottle_ground,
     ...ASSETS.clouds,
-    ...ASSETS.coin
+    ...ASSETS.coin,
+    ...ASSETS.chicken_walk,
+    ...ASSETS.chicken_dead,
+    ...ASSETS.chicken_small_walk,
+    ...ASSETS.chicken_small_dead
 ];
 
 window.ASSETS = ASSETS;

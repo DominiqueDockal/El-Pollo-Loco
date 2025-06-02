@@ -4,11 +4,11 @@ class Cloud extends AnimatedGameObject {
         this.level = level;
         this.cloudIndex = cloudIndex; 
         this.scale = 1; 
-        this.setCloudImage();
+        this.setCurrentImage();
         super.setDimensions(this.scale);
     }
 
-    setCloudImage() {
+    setCurrentImage() {
         const cloudAsset = window.ASSETS.clouds.find(cloud => 
             cloud.src.includes(`${this.cloudIndex}_level${this.level}`)
         ); 
