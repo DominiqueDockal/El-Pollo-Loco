@@ -20,6 +20,24 @@ class Level {
         this.createChickenSmall(canvas, assetManager);
     }
 
+    getLevelValue() {
+        return this.id || 1; 
+    }
+    
+    generateRandomPosition(usedPositions, minDistance, range, minOffset) {
+        let position;
+        let attempts = 0;
+        const maxAttempts = 50;
+        do {
+            position = Math.random() * range + minOffset;
+            attempts++;
+        } while (
+            attempts < maxAttempts && 
+            usedPositions.some(pos => Math.abs(pos - position) < minDistance)
+        );
+        return position;
+    }
+
     createBackground(canvas, assetManager) {
         const backgroundAsset = window.ASSETS.background[0];
         const canvasHeight = canvas.clientHeight;
@@ -35,29 +53,6 @@ class Level {
             background.currentImagePath = selectedImagePath; 
             this.gameObjects.push(background);
         }
-    }
-
-    getLevelValue() {
-        if (this.id === 1 || this.name.includes('1')) {
-            return 1;
-        } else if (this.id === 2 || this.name.includes('2')) {
-            return 2;
-        }
-        return 1; 
-    }
-
-    generateRandomPosition(usedPositions, minDistance, range, minOffset) {
-        let position;
-        let attempts = 0;
-        const maxAttempts = 50;
-        do {
-            position = Math.random() * range + minOffset;
-            attempts++;
-        } while (
-            attempts < maxAttempts && 
-            usedPositions.some(pos => Math.abs(pos - position) < minDistance)
-        );
-        return position;
     }
 
     createStatusbars(canvas, assetManager) {

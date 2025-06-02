@@ -1,31 +1,62 @@
 class AssetManager {
     constructor() {
         this.imageCache = new Map();
+        this.soundCache = new Map();
         this.isLoaded = false;
+        this.backgroundMusic = null;
+        this.isSoundEnabled = false;
     }
 
     async loadAllAssets() {
         const assets = window.ASSETS || {};
         const loadPromises = [];
-        Object.values(assets).forEach(assetArray => {
+        
+        Object.entries(assets).forEach(([key, assetArray]) => {
             if (Array.isArray(assetArray)) {
-                assetArray.forEach(imgObj => {
-                    const img = new Image();
-                    const imagePath = imgObj.src || imgObj;
-                    const loadPromise = new Promise((resolve, reject) => {
-                        img.onload = resolve;
-                        img.onerror = reject;
-                        img.src = imagePath;
-                    });
-                    loadPromises.push(loadPromise);
-                    this.imageCache.set(imagePath, img);
+                assetArray.forEach(assetObj => {
+                    if (key.startsWith('sounds_')) {
+                        const audio = new Audio();
+                        const soundPath = assetObj.src;
+                        const loadPromise = new Promise((resolve, reject) => {
+                            audio.oncanplaythrough = resolve;
+                            audio.onerror = reject;
+                            audio.src = soundPath;
+                            audio.preload = 'auto';
+                        }).catch(error => {
+                            console.warn(`Failed to load sound: ${soundPath}`, error);
+                            return null;
+                        });
+                        
+                        loadPromises.push(loadPromise);
+                        
+                        if (assetObj.name) {
+                            this.soundCache.set(assetObj.name, {
+                                audio: audio,
+                                volume: assetObj.volume || 1.0,
+                                loop: assetObj.loop || false
+                            });
+                        }
+                    } else {
+                        const img = new Image();
+                        const imagePath = assetObj.src || assetObj;
+                        const loadPromise = new Promise((resolve, reject) => {
+                            img.onload = resolve;
+                            img.onerror = reject;
+                            img.src = imagePath;
+                        }).catch(error => {
+                            console.warn(`Failed to load image: ${imagePath}`, error);
+                            return null;
+                        });
+                        loadPromises.push(loadPromise);
+                        this.imageCache.set(imagePath, img);
+                    }
                 });
             }
         });   
-        await Promise.all(loadPromises);
+        await Promise.allSettled(loadPromises);
         this.isLoaded = true;
     }
-    
+
 
     getImage(imagePath) {
         return this.imageCache.get(imagePath);
@@ -37,5 +68,54 @@ class AssetManager {
             const path = imgObj.src || imgObj;
             return this.getImage(path);
         }).filter(img => img);
+    }
+
+    playSound(soundName) {
+        if (!this.isSoundEnabled) return;
+        const soundData = this.soundCache.get(soundName);
+        if (soundData) {
+            const audio = soundData.audio.cloneNode(true);
+            audio.volume = soundData.volume;
+            audio.loop = soundData.loop;
+            audio.play().catch(error => {
+                console.log('Sound play failed:', error);
+            });
+            return audio;
+        } else {
+            console.warn(`Sound '${soundName}' not found`);
+        }
+    }
+
+    playBackgroundMusic() {
+        if (this.isSoundEnabled) {
+            const soundData = this.soundCache.get('background_music');
+            if (soundData && !this.backgroundMusic) {
+                this.backgroundMusic = soundData.audio.cloneNode(true);
+                this.backgroundMusic.volume = soundData.volume;
+                console.log('Background Music Volume:', soundData.volume);
+                this.backgroundMusic.loop = soundData.loop;
+                this.backgroundMusic.play().catch(error => {
+                    console.log('Background music play failed:', error);
+                });
+            } else if (this.backgroundMusic && this.backgroundMusic.paused) {
+                this.backgroundMusic.play();
+            }
+        }
+    }
+
+    stopBackgroundMusic() {
+        if (this.backgroundMusic) {
+            this.backgroundMusic.pause();
+        }
+    }
+
+    toggleSound() {
+        this.isSoundEnabled = !this.isSoundEnabled;
+        if (this.isSoundEnabled) {
+            this.playBackgroundMusic();
+        } else {
+            this.stopBackgroundMusic();
+        }
+        return this.isSoundEnabled;
     }
 }

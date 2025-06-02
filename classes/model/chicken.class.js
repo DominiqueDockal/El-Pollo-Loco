@@ -48,6 +48,7 @@ class Chicken extends AnimatedGameObject {
             this.isDead = true;
             this.deathTime = Date.now(); 
             this.setCurrentImage(); 
+            this.assetManager.playSound('chicken_death');
         }
     }
 }

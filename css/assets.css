@@ -92,12 +92,12 @@
 }
 
 .icon-volume::before {
-    content: "🔊";
+    content: "🔇"; 
     display: inline-block;
 }
 
-.sound-off .icon-volume::before {
-     content: "🔇"; 
+.sound-on .icon-volume::before {
+    content: "🔊"; 
 }
 
 .pause-icon,

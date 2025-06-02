@@ -24,4 +24,5 @@ class Coin extends AnimatedGameObject {
             this.lastAnimationTime = currentTime;
         }
     }
+
 }
