@@ -272,7 +272,7 @@ h2 {
 .buttons-game-started {
     position: absolute;
     left: 50%;
-    bottom: 0.5%;
+    bottom: 1.5%;
     transform: translateX(-50%);
     width: 100%;
     max-width: 62.5em;             
@@ -281,8 +281,8 @@ h2 {
     align-items: center;
     justify-content: space-between;
     z-index: 20;
-    height: 10%;
-    min-height: 10%;
+    height: 7%;
+    min-height: 7%;
 }
 
 .game-control-left {

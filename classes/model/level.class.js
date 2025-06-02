@@ -58,25 +58,25 @@ class Level {
             usedPositions.some(pos => Math.abs(pos - position) < minDistance)
         );
         return position;
-        }
+    }
 
-        createStatusbars(canvas, assetManager) {
-            const startX = 0;
-            const startY = 0;
-            const statusbarSpacing = 0.08*canvas.clientHeight;
-            this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
-            this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
-            this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
-            this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
-        }
+    createStatusbars(canvas, assetManager) {
+        const startX = 0;
+        const startY = 0;
+        const statusbarSpacing = 0.08*canvas.clientHeight;
+        this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
+        this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
+        this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
+        this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
+    }
 
-        createClouds(canvas, assetManager) {
-            const levelValue = this.getLevelValue();
-            const canvasWidth = canvas.clientWidth;
-            const cloud_1 = new Cloud(0, 0, canvas, assetManager, levelValue, 1, 0.15);
-            const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.15);
-            this.gameObjects.push(cloud_1, cloud_2);
-        }
+    createClouds(canvas, assetManager) {
+        const levelValue = this.getLevelValue();
+        const canvasWidth = canvas.clientWidth;
+        const cloud_1 = new Cloud(0, 0, canvas, assetManager, levelValue, 1, 0.15);
+        const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.15);
+        this.gameObjects.push(cloud_1, cloud_2);
+    }
     
     createBottles(canvas, assetManager) {
         if (this.bottleCount === 0) return;
@@ -122,7 +122,7 @@ class Level {
         if (this.chickenCount === 0) return;
         const usedPositions = [];
         const minDistance = 80; 
-        const MIN_DISTANCE_FROM_LEFT = 300;
+        const MIN_DISTANCE_FROM_LEFT = 500;
         const chickenRange = this.length - MIN_DISTANCE_FROM_LEFT;
         const animationSpeed = 300;
         const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
