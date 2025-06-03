@@ -109,39 +109,27 @@ class Game {
             obj.collected();
             this.remove(obj);
             character.collectedCoins += 1;
-            console.log('Coin collected! Total coins:', character.collectedCoins);
         }
         
         if (obj instanceof Bottle) {
             obj.collected();
             this.remove(obj);
             character.collectedBottles += 1;
-            console.log('Bottle collected! Total bottles:', character.collectedBottles);
         }
     
-        if (obj instanceof Chicken) {
-            if (this.isJumpingOn(character, obj)) {
-              obj.kill();
-              character.speedY = -15;
-              character.y = obj.y - character.height; 
-            } else if (!obj.isDead) {
+        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
               character.hurt();
-            }
+            
         }
     }
     
-
     remove(obj) {
         this.currentLevel.gameObjects = this.currentLevel.gameObjects.filter(
             item => item !== obj
         );
     }
 
-    isJumpingOn(character, object) {
-        return (
-            character.speedY > 0 
-        );
-    }
+   
     
 }
 
