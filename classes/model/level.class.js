@@ -15,7 +15,7 @@ class Level {
         };
     }
     
-    initialize(canvas, assetManager) {
+    initialize(canvas, assetManager,inputDevice) {
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
         this.createClouds(canvas, assetManager);
@@ -24,6 +24,7 @@ class Level {
         this.createCoins(canvas, assetManager);
         this.createChickens(canvas, assetManager);
         this.createChickenSmall(canvas, assetManager);
+        this.createCharacter(canvas, assetManager, inputDevice);
     }
 
     getLevelValue() {
@@ -48,12 +49,12 @@ class Level {
         const backgroundAsset = window.ASSETS.background[0];
         const canvasHeight = canvas.clientHeight;
         const aspectRatio = backgroundAsset.width / backgroundAsset.height;
-        const backgroundWidth = canvasHeight * aspectRatio;
+        const backgroundWidth = Math.round(canvasHeight * aspectRatio);
         const backgroundCount = Math.ceil(this.length / backgroundWidth);
         const backgroundImagePaths = window.ASSETS.background.map(imgObj => imgObj.src || imgObj);    
-        for (let i = 0; i < backgroundCount; i++) {
+        for (let i = -1; i < backgroundCount; i++) {
             const currentX = Math.floor(i * backgroundWidth) - (i > 0 ? 1 : 0);
-            const imageIndex = i % backgroundImagePaths.length;
+            const imageIndex = (i + 1) % backgroundImagePaths.length;
             const selectedImagePath = backgroundImagePaths[imageIndex];
             const background = new Background(currentX, 0, canvas, assetManager);
             background.currentImagePath = selectedImagePath; 
@@ -85,8 +86,8 @@ class Level {
         const usedPositions = [];
         const minDistance = 50; 
         const bottleAssets = window.ASSETS.bottle_ground || []; 
-        const MIN_DISTANCE_FROM_LEFT = 300;
-        const MIN_DISTANCE_FROM_RIGHT = 500;
+        const MIN_DISTANCE_FROM_LEFT = 400;
+        const MIN_DISTANCE_FROM_RIGHT = 700;
         const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT; 
         for (let i = 0; i < this.bottleCount; i++) {
             const bottleX = this.generateRandomPosition(usedPositions,minDistance,this.length - TOTAL_MARGIN,MIN_DISTANCE_FROM_LEFT);
@@ -104,8 +105,8 @@ class Level {
         if (this.coinCount === 0) return;
         const usedPositions = [];
         const minDistance = 50;
-        const MIN_DISTANCE_FROM_LEFT = 300;
-        const MIN_DISTANCE_FROM_RIGHT = 500;
+        const MIN_DISTANCE_FROM_LEFT = 400;
+        const MIN_DISTANCE_FROM_RIGHT = 700;
         const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT;
         const animationSpeed = 400; 
         const minHeight = 0.5 * canvas.clientHeight;
@@ -159,7 +160,7 @@ class Level {
             this.spawnChicken(canvas, assetManager);
             this.spawning.lastSpawn = currentTime;
         }
-    }
+    } 
 
     spawnChicken(canvas, assetManager) {
         const spawnedChickens = this.gameObjects.filter(obj => 
@@ -180,6 +181,14 @@ class Level {
             this.gameObjects.push(chickenSmall);
         }
     }
+
+    createCharacter(canvas, assetManager, inputDevice) {
+        const startX = 0; 
+        const startY = canvas.clientHeight - 0.8 * canvas.clientHeight; 
+        const character = new Character(startX, startY, canvas, assetManager, inputDevice);
+        this.gameObjects.push(character);
+    }
+    
     
 
     

@@ -16,7 +16,7 @@ class ChickenSmall extends AnimatedGameObject {
         if (this.isDead) {
             super.setImageByIndex(0, 'chicken_small_dead');
         } else {
-            super.setImageByIndex(undefined, 'chicken_small_walk');
+            super.setImageByIndex(this.currentImageIndex, 'chicken_small_walk');
         }
     }
 
@@ -29,7 +29,7 @@ class ChickenSmall extends AnimatedGameObject {
             }
             return; 
         }  
-        super.animateFrames(3); 
+        super.animateFrames(window.ASSETS.chicken_small_walk.length); 
         this.moveLeft();
     }
     
@@ -39,6 +39,7 @@ class ChickenSmall extends AnimatedGameObject {
             this.isDead = true;
             this.deathTime = Date.now(); 
             this.setCurrentImage(); 
+            this.assetManager.playSound('chicken_dead');
         }
     }
 }

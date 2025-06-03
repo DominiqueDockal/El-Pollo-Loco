@@ -3,9 +3,7 @@ class CanvasView extends View {
         super();
         this.canvas = canvasElement;
         this.context = canvasElement.getContext('2d');
-        this.camera_x = -100;
-        this.offsetEnd = 100;
-
+        this.camera_x = -50;
     }
     
     render(gameObjects) {
@@ -42,12 +40,14 @@ class CanvasView extends View {
     }
 
     translateCamera() {
+        this.context.save();
         this.context.translate(this.camera_x, 0);
     }
-
+    
     resetCameraTranslation() {
-        this.context.translate(-this.camera_x, 0);
+        this.context.restore(); 
     }
+    
 
     flipImage(gameObject) {
         this.context.save();

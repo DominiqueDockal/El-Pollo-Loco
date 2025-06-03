@@ -6,32 +6,65 @@ class AnimatedGameObject extends GameObject {
     constructor(x, y, canvas, assetManager, assetType, speed = 1) {
         super(x, y, canvas, assetManager, assetType);
         this.speed = speed;
+        this.speedY = 0;         
+        this.gravity = 0.5;   
+        this.isGrounded = true;
+        this.jumpForce = -15; 
+        this.groundY = y;    
     }
 
     moveLeft() {
         this.x -= this.speed;
     }
-
+    
     moveRight() {
         this.x += this.speed;
     }
 
-    moveUp() {
-        this.y -= this.speed;
+    jump() {
+        if (this.isGrounded) {
+            this.speedY = this.jumpForce;
+            this.isGrounded = false;
+        }
     }
 
-    moveDown() {
-        this.y += this.speed;
+    updatePhysics() {
+        if (!this.isGrounded) {
+            this.speedY  += this.gravity; 
+            this.y += this.speedY ;
+
+            if (this.y >= this.groundY) {
+                this.y = this.groundY;
+                this.speedY  = 0;
+                this.isGrounded = true;
+            }
+        }
     }
 
-    animateFrames(maxFrames) {
+/*     animateFrames(maxFrames) {
         const currentTime = Date.now();
         if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
             this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
             this.setCurrentImage();
             this.lastAnimationTime = currentTime;
         }
+    } */
+
+    animateFrames(maxFrames, shouldLoop = true) {
+        const currentTime = Date.now();
+        if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
+            if (shouldLoop) {
+                this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
+            } else {
+                if (this.currentImageIndex < maxFrames - 1) {
+                    this.currentImageIndex++;
+                }
+            }
+            this.setCurrentImage();
+            this.lastAnimationTime = currentTime;
+        }
     }
+        
 
 }
 

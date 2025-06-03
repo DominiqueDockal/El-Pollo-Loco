@@ -242,7 +242,249 @@ const ASSETS = {
         }
     ],
 
+    character_standing: [
+        { 
+            src: 'images/character/standing/standing_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_3.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_4.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_5.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_6.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_7.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_8.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_9.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/standing/standing_10.png',
+            width: 610,
+            height: 1200
+        }
+    ],
 
+    character_sleeping: [
+        { 
+            src: 'images/character/sleeping/sleeping_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_3.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_4.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_5.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_6.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_7.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_8.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_9.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/sleeping/sleeping_10.png',
+            width: 610,
+            height: 1200
+        },
+    ],
+
+    character_walking: [
+        { 
+            src: 'images/character/walking/walking_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/walking/walking_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/walking/walking_3.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/walking/walking_4.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/walking/walking_5.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/walking/walking_6.png',
+            width: 610,
+            height: 1200
+        }
+    ],
+
+    character_jumping: [
+        { 
+            src: 'images/character/jumping/jumping_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_3.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_4.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_5.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_6.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_7.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_8.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/jumping/jumping_9.png',
+            width: 610,
+            height: 1200
+        }
+    ],
+
+    character_hurt: [
+        { 
+            src: 'images/character/hurt/hurt_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/hurt/hurt_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/hurt/hurt_2.png',
+            width: 610,
+            height: 1200
+        }
+    ],
+
+    character_dead: [
+        { 
+            src: 'images/character/dead/dead_1.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_2.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_3.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_4.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_5.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_6.png',
+            width: 610,
+            height: 1200
+        },
+        { 
+            src: 'images/character/dead/dead_7.png',
+            width: 610,
+            height: 1200
+        }
+    ],
+        
     sounds_effects: [
         { 
             name: 'coin_collect',
@@ -334,7 +576,13 @@ const ALL_IMAGES = [
     ...ASSETS.chicken_walk.map(bg => bg.src),
     ...ASSETS.chicken_dead.map(bg => bg.src),
     ...ASSETS.chicken_small_walk.map(bg => bg.src),
-    ...ASSETS.chicken_small_dead.map(bg => bg.src)
+    ...ASSETS.chicken_small_dead.map(bg => bg.src),
+    ...ASSETS.character_standing.map(bg => bg.src),
+    ...ASSETS.character_sleeping.map(bg => bg.src),
+    ...ASSETS.character_walking.map(bg => bg.src),
+    ...ASSETS.character_jumping.map(bg => bg.src),
+    ...ASSETS.character_hurt.map(bg => bg.src),
+    ...ASSETS.character_dead.map(bg => bg.src)
 ];
 
 const ALL_IMAGE_DATA = [
@@ -348,7 +596,13 @@ const ALL_IMAGE_DATA = [
     ...ASSETS.chicken_walk,
     ...ASSETS.chicken_dead,
     ...ASSETS.chicken_small_walk,
-    ...ASSETS.chicken_small_dead
+    ...ASSETS.chicken_small_dead,
+    ...ASSETS.character_standing,
+    ...ASSETS.character_sleeping,
+    ...ASSETS.character_walking,
+    ...ASSETS.character_jumping,
+    ...ASSETS.character_hurt,
+    ...ASSETS.character_dead
 ];
 
 const ALL_SOUNDS = [

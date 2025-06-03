@@ -16,7 +16,7 @@ class Chicken extends AnimatedGameObject {
         if (this.isDead) {
             super.setImageByIndex(0, 'chicken_dead');
         } else {
-            super.setImageByIndex(); 
+            super.setImageByIndex(this.currentImageIndex, 'chicken_walk'); 
         }
     }
     
@@ -29,16 +29,18 @@ class Chicken extends AnimatedGameObject {
             }
             return; 
         }  
-        super.animateFrames(3); 
+        super.animateFrames(window.ASSETS.chicken_walk.length); 
         this.moveLeft();
     }
+    
 
+    
     kill() {
         if (!this.isDead) {
             this.isDead = true;
             this.deathTime = Date.now(); 
             this.setCurrentImage(); 
-            this.assetManager.playSound('chicken_death');
+            this.assetManager.playSound('chicken_dead');
         }
     }
 }
