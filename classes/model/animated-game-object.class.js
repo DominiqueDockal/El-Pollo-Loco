@@ -25,6 +25,7 @@ class AnimatedGameObject extends GameObject {
         if (this.isGrounded) {
             this.speedY = this.jumpForce;
             this.isGrounded = false;
+            this.assetManager.playSound('jumping');
         }
     }
 
@@ -40,16 +41,7 @@ class AnimatedGameObject extends GameObject {
             }
         }
     }
-
-/*     animateFrames(maxFrames) {
-        const currentTime = Date.now();
-        if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
-            this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
-            this.setCurrentImage();
-            this.lastAnimationTime = currentTime;
-        }
-    } */
-
+    
     animateFrames(maxFrames, shouldLoop = true) {
         const currentTime = Date.now();
         if (currentTime - this.lastAnimationTime >= this.animationSpeed) {

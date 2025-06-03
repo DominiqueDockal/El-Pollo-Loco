@@ -85,11 +85,7 @@ function toggleGamePause() {
     }
 }
 
-function testSound() {
-    if (window.game && window.game.assetManager) {
-        window.game.assetManager.playSound('chicken_dead');
-    }
-}
+
 
 
   

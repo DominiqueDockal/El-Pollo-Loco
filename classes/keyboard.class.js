@@ -11,6 +11,7 @@ class Keyboard extends InputDevice {
         document.addEventListener('keydown', this.keydownHandler);
         document.addEventListener('keyup', this.keyupHandler);
         this.setupMobileButtons();
+        document.getElementById('canvas').focus();
     }
     
     keydownHandler(e) {
@@ -18,6 +19,7 @@ class Keyboard extends InputDevice {
         if (key) {
             e.preventDefault();
             this.setKeyState(key, true);
+            document.querySelectorAll('button').forEach(btn => btn.blur());
         }
     }
     
