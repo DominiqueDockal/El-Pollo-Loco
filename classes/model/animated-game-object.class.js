@@ -9,7 +9,7 @@ class AnimatedGameObject extends GameObject {
         this.speedY = 0;         
         this.gravity = 0.5;   
         this.isGrounded = true;
-        this.jumpForce = -15; 
+        this.jumpForce = -12; 
         this.groundY = y;    
     }
 

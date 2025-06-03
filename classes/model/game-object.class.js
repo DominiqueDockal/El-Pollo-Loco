@@ -68,9 +68,4 @@ class GameObject {
     }
     }
 
-    markForRemoval() {
-        this.markedForRemoval = true;
-    }
-
-
 }

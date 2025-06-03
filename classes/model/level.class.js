@@ -49,7 +49,7 @@ class Level {
         const backgroundAsset = window.ASSETS.background[0];
         const canvasHeight = canvas.clientHeight;
         const aspectRatio = backgroundAsset.width / backgroundAsset.height;
-        const backgroundWidth = Math.round(canvasHeight * aspectRatio);
+        const backgroundWidth = Math.floor(canvasHeight * aspectRatio);
         const backgroundCount = Math.ceil(this.length / backgroundWidth);
         const backgroundImagePaths = window.ASSETS.background.map(imgObj => imgObj.src || imgObj);    
         for (let i = -1; i < backgroundCount; i++) {
