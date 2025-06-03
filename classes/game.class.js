@@ -49,10 +49,7 @@ class Game {
             if (character) {
                 const offset = 100;
                 const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
-                this.view.camera_x = Math.max(
-                    -character.x + offset,
-                    maxCameraX
-                );
+                this.view.camera_x = Math.max(-character.x + offset, maxCameraX);
             }
             const currentTime = Date.now();
             this.currentLevel.update(currentTime, this.canvas, this.assetManager); 
@@ -78,11 +75,15 @@ class Game {
     checkCollisions(character) {
         this.currentLevel.gameObjects.forEach(obj => {
             if (obj === character) return;
-            if (this.isColliding(character, obj)) {
-                this.handleCollision(character, obj);
+            const isGeneralCollision = this.isColliding(character, obj);
+            const isTopCollision = (obj instanceof Chicken || obj instanceof ChickenSmall) 
+                && this.isJumpingOn(character, obj);
+            if (isGeneralCollision || isTopCollision) {
+                this.handleCollision(character, obj, isTopCollision ? 'top' : 'side');
             }
         });
     }
+    
     
     isColliding(character, object,characterShrink = 0.5, objectShrink = 0.55) {
         const characterX = character.x + character.width * characterShrink / 2;
@@ -104,7 +105,16 @@ class Game {
     }
     
 
-    handleCollision(character, obj) {
+    handleCollision(character, obj, collisionType) {
+        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
+            if (collisionType === 'top') {
+                obj.kill();
+                character.speedY = -5;
+                character.y = canvas.clientHeight - 0.7 * canvas.clientHeight; 
+            } else {
+                character.hurt();
+            }
+        }
         if (obj instanceof Coin) {
             obj.collected();
             this.remove(obj);
@@ -116,11 +126,6 @@ class Game {
             this.remove(obj);
             character.collectedBottles += 1;
         }
-    
-        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
-              character.hurt();
-            
-        }
     }
     
     remove(obj) {
@@ -128,6 +133,22 @@ class Game {
             item => item !== obj
         );
     }
+
+    isJumpingOn(character, object) {
+        if (character.speedY <= 0) return false;
+        const characterFeetY = character.y + character.height;
+        const chickenHeadY = object.y;
+        const horizontalOverlap = (
+            character.x < object.x + object.width &&
+            character.x + character.width > object.x
+        );
+        const isVerticalHit = (
+            characterFeetY >= chickenHeadY - 8 && 
+            characterFeetY <= chickenHeadY + 18   
+        ); 
+        return horizontalOverlap && isVerticalHit;
+    }
+    
 
    
     

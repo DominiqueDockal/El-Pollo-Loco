@@ -5,7 +5,6 @@ class Character extends AnimatedGameObject {
         this.animationSpeed = animationSpeed;
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
-        this.groundY = y; 
         this.startX = x;  
         this.leftEnd = 150;
         this.isHurt = false;

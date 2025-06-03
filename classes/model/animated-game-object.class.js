@@ -33,7 +33,6 @@ class AnimatedGameObject extends GameObject {
         if (!this.isGrounded) {
             this.speedY  += this.gravity; 
             this.y += this.speedY ;
-
             if (this.y >= this.groundY) {
                 this.y = this.groundY;
                 this.speedY  = 0;
