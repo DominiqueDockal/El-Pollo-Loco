@@ -10,6 +10,8 @@ class Character extends AnimatedGameObject {
         this.leftEnd = 150;
         this.isHurt = false;
         this.isDead = false;
+        this.isSleeping = false;
+        this.lastActiveTime = Date.now();  
         this.inputDevice = inputDevice;
         this.currentAssetType = 'character_standing';
         super.setDimensions(this.scale);
@@ -17,9 +19,10 @@ class Character extends AnimatedGameObject {
 
     animate() {
         if (this.isDead) {
-            super.animateFrames(7, false); 
+            super.animateFrames(window.ASSETS.character_dead.length, false); 
             return;
         }
+        this.checkSleepState();
         this.move();
         const isMoving = this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT');
         const isJumping = !this.isGrounded;
@@ -27,16 +30,19 @@ class Character extends AnimatedGameObject {
         let assetType;
         if (this.isHurt) {
             assetType = 'character_hurt';
-            frameCount = 3;
+            frameCount = window.ASSETS.character_hurt.length;
+        } else if (this.isSleeping) {
+            assetType = 'character_sleeping';
+            frameCount = window.ASSETS.character_sleeping.length;
         } else if (isJumping) {
             assetType = 'character_jumping';
-            frameCount = 9;
+            frameCount = window.ASSETS.character_jumping.length;
         } else if (isMoving) {
             assetType = 'character_walking';
-            frameCount = 6;
+            frameCount = window.ASSETS.character_walking.length;
         } else {
             assetType = 'character_standing';
-            frameCount = 5;
+            frameCount = window.ASSETS.character_standing.length;
         }
         if (assetType !== this.currentAssetType) {
             this.currentImageIndex = 0;
@@ -65,6 +71,24 @@ class Character extends AnimatedGameObject {
         }
         if (this.inputDevice.isPressed('JUMP')) {
             this.jump();
+        }
+    }
+
+    checkSleepState() {
+        const now = Date.now();
+        const inactivityDuration = 10000;
+        if (this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded) {
+            this.lastActiveTime = now;
+            if (this.isSleeping) {
+                this.isSleeping = false;
+                this.currentAssetType = 'character_standing';
+                this.currentImageIndex = 0;
+            }
+        }
+        else if (!this.isSleeping && now - this.lastActiveTime >= inactivityDuration) {
+            this.isSleeping = true;
+            this.currentAssetType = 'character_sleeping';
+            this.currentImageIndex = 0;
         }
     }
     
