@@ -7,7 +7,6 @@ class GameObject {
         this.originalY = y;
         this.originalCanvasWidth = canvas.width;
         this.originalCanvasHeight = canvas.height; 
-
         this.x = x;
         this.y = y;
         this.height = 0;
@@ -72,9 +71,6 @@ class GameObject {
     markForRemoval() {
         this.markedForRemoval = true;
     }
-
-    
-
 
 
 }

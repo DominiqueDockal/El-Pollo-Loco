@@ -32,7 +32,6 @@ class ChickenSmall extends AnimatedGameObject {
         super.animateFrames(window.ASSETS.chicken_small_walk.length); 
         this.moveLeft();
     }
-    
 
     kill() {
         if (!this.isDead) {

@@ -33,8 +33,6 @@ class Chicken extends AnimatedGameObject {
         this.moveLeft();
     }
     
-
-    
     kill() {
         if (!this.isDead) {
             this.isDead = true;

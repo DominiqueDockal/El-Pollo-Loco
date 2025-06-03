@@ -84,18 +84,15 @@ class Game {
         });
     }
     
-    
     isColliding(character, object,characterShrink = 0.5, objectShrink = 0.55) {
         const characterX = character.x + character.width * characterShrink / 2;
         const characterY = character.y + character.height * characterShrink / 2;
         const characterW = character.width * (1 - characterShrink);
         const characterH = character.height * (1 - characterShrink);
-
         const objectX = object.x + object.width * objectShrink / 2;
         const objectY = object.y + object.height * objectShrink / 2;
         const objectW = object.width * (1 - objectShrink);
         const objectH = object.height * (1 - objectShrink);
-    
         return (
             characterX < objectX + objectW &&
             characterX + characterW > objectX &&
@@ -104,7 +101,6 @@ class Game {
         );
     }
     
-
     handleCollision(character, obj, collisionType) {
         if (obj instanceof Chicken || obj instanceof ChickenSmall) {
             if (collisionType === 'top') {
