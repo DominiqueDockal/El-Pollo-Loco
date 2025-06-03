@@ -19,9 +19,6 @@ class CanvasView extends View {
     }
     
     renderGameObject(gameObject) {
-        if (!gameObject.visible) {
-            return; 
-        }
         if (!gameObject.img || !gameObject.img.complete || gameObject.width === 0) {
             return; 
         }

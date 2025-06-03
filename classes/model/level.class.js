@@ -53,7 +53,7 @@ class Level {
         const backgroundCount = Math.ceil(this.length / backgroundWidth);
         const backgroundImagePaths = window.ASSETS.background.map(imgObj => imgObj.src || imgObj);    
         for (let i = -1; i < backgroundCount; i++) {
-            const currentX = Math.floor(i * backgroundWidth) - (i > 0 ? 1 : 0);
+            const currentX = i * backgroundWidth;
             const imageIndex = (i + 1) % backgroundImagePaths.length;
             const selectedImagePath = backgroundImagePaths[imageIndex];
             const background = new Background(currentX, 0, canvas, assetManager);
@@ -85,17 +85,13 @@ class Level {
         const bottleY = canvas.clientHeight - 0.31 * canvas.clientHeight;
         const usedPositions = [];
         const minDistance = 50; 
-        const bottleAssets = window.ASSETS.bottle_ground || []; 
         const MIN_DISTANCE_FROM_LEFT = 400;
         const MIN_DISTANCE_FROM_RIGHT = 700;
         const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT; 
         for (let i = 0; i < this.bottleCount; i++) {
-            const bottleX = this.generateRandomPosition(usedPositions,minDistance,this.length - TOTAL_MARGIN,MIN_DISTANCE_FROM_LEFT);
+            const bottleX = this.generateRandomPosition(usedPositions, minDistance, this.length - TOTAL_MARGIN, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(bottleX);
-            const randomIndex = Math.floor(Math.random() * bottleAssets.length);
-            const selectedImagePath = bottleAssets[randomIndex].src;  
-            const bottle = new Bottle(bottleX, bottleY, canvas, assetManager);
-            bottle.currentImagePath = selectedImagePath;      
+            const bottle = new Bottle(bottleX, bottleY, canvas, assetManager); 
             this.gameObjects.push(bottle);
         }
     }
@@ -144,7 +140,7 @@ class Level {
         const MIN_DISTANCE_FROM_LEFT = 500;
         const chickenRange = this.length - MIN_DISTANCE_FROM_LEFT;
         const animationSpeed = 300;
-        const chickenSmallY = canvas.clientHeight - 0.28 * canvas.clientHeight;
+        const chickenSmallY = canvas.clientHeight - 0.32 * canvas.clientHeight;
         for (let i = 0; i < this.chickenSmallCount; i++) {
             const chickenX = this.generateRandomPosition(usedPositions, minDistance, chickenRange, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(chickenX);
@@ -175,7 +171,7 @@ class Level {
             chicken.isSpawned = true; 
             this.gameObjects.push(chicken);
         } else {
-            const chickenSmallY = canvas.clientHeight - 0.28 * canvas.clientHeight;
+            const chickenSmallY = canvas.clientHeight - 0.32 * canvas.clientHeight;
             const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, canvas, assetManager, 300);
             chickenSmall.isSpawned = true; 
             this.gameObjects.push(chickenSmall);
@@ -184,7 +180,7 @@ class Level {
 
     createCharacter(canvas, assetManager, inputDevice) {
         const startX = 0; 
-        const startY = canvas.clientHeight - 0.8 * canvas.clientHeight; 
+        const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
         const character = new Character(startX, startY, canvas, assetManager, inputDevice);
         this.gameObjects.push(character);
     }

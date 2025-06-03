@@ -1,7 +1,7 @@
 class Character extends AnimatedGameObject {
     constructor(x, y, canvas, assetManager, inputDevice, animationSpeed = 100) {
         super(x, y, canvas, assetManager, 'character_standing', 5);
-        this.scale = 0.7;
+        this.scale = 0.6;
         this.animationSpeed = animationSpeed;
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
@@ -14,6 +14,11 @@ class Character extends AnimatedGameObject {
         this.lastActiveTime = Date.now();  
         this.inputDevice = inputDevice;
         this.currentAssetType = 'character_standing';
+        this.collectedCoins = 0;
+        this.collectedBottles = 0;
+        this.health = 100;
+        this.lastHitTime = 0;
+        this.hitCooldown = 1000;
         super.setDimensions(this.scale);
     }
 
@@ -71,6 +76,7 @@ class Character extends AnimatedGameObject {
         }
         if (this.inputDevice.isPressed('JUMP')) {
             this.jump();
+            
         }
     }
 
@@ -90,6 +96,15 @@ class Character extends AnimatedGameObject {
             this.currentAssetType = 'character_sleeping';
             this.currentImageIndex = 0;
         }
+    }
+
+    hurt() {
+        const now = Date.now();
+        if (now - this.lastHitTime < this.hitCooldown) return;
+        this.isHurt = true;
+        this.health -= 10;
+        this.lastHitTime = now;
+        this.assetManager.playSound('character_hurt');
     }
     
     

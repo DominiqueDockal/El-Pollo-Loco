@@ -1,5 +1,5 @@
 class GameObject {
-    constructor(x, y, canvas, assetManager, type = 'default') {
+    constructor(x, y, canvas, assetManager, assetType = 'default') {
         if (new.target === GameObject) {
             throw new TypeError('Cannot instantiate abstract class GameObject directly');
         } 
@@ -13,14 +13,13 @@ class GameObject {
         this.height = 0;
         this.width = 0;
         this.aspectRatio = 0;
-        this.type = type;
+        this.type = assetType;
         this.currentImagePath = null;
         this.canvas = canvas;
         this.assetManager = assetManager; 
         this.otherDirection = false;
         this.isFixed = false;
         this.scale = 1;
-        this.visible = true;
         this.setNaturalDimensions();
     }
 
@@ -68,7 +67,11 @@ class GameObject {
         if (assets[index] && assets[index].src) { 
             this.setImage(assets[index].src);
     }
-}
+    }
+
+    markForRemoval() {
+        this.markedForRemoval = true;
+    }
 
     
 

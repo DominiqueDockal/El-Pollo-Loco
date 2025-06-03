@@ -220,18 +220,18 @@ const ASSETS = {
     chicken_small_walk: [
         { 
             src: 'images/chickensmall/walk_1.png',
-            width: 248,
-            height: 243
+            width: 336,
+            height: 260
         },
         { 
             src: 'images/chickensmall/walk_2.png',
-            width: 248,
-            height: 243
+            width: 336,
+            height: 260
         },
         { 
             src: 'images/chickensmall/walk_3.png',
-            width: 248,
-            height: 243
+            width: 336,
+            height: 260
         }
     ],
     chicken_small_dead: [
@@ -246,52 +246,52 @@ const ASSETS = {
         { 
             src: 'images/character/standing/standing_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_3.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_4.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_5.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_6.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_7.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_8.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_9.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/standing/standing_10.png',
             width: 610,
-            height: 1200
+            height: 880
         }
     ],
 
@@ -299,52 +299,52 @@ const ASSETS = {
         { 
             src: 'images/character/sleeping/sleeping_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_3.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_4.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_5.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_6.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_7.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_8.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_9.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/sleeping/sleeping_10.png',
             width: 610,
-            height: 1200
+            height: 880
         },
     ],
 
@@ -352,32 +352,32 @@ const ASSETS = {
         { 
             src: 'images/character/walking/walking_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/walking/walking_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/walking/walking_3.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/walking/walking_4.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/walking/walking_5.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/walking/walking_6.png',
             width: 610,
-            height: 1200
+            height: 880
         }
     ],
 
@@ -385,47 +385,47 @@ const ASSETS = {
         { 
             src: 'images/character/jumping/jumping_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_3.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_4.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_5.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_6.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_7.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_8.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/jumping/jumping_9.png',
             width: 610,
-            height: 1200
+            height: 880
         }
     ],
 
@@ -433,17 +433,17 @@ const ASSETS = {
         { 
             src: 'images/character/hurt/hurt_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/hurt/hurt_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/hurt/hurt_2.png',
             width: 610,
-            height: 1200
+            height: 880
         }
     ],
 
@@ -451,37 +451,37 @@ const ASSETS = {
         { 
             src: 'images/character/dead/dead_1.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_2.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_3.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_4.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_5.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_6.png',
             width: 610,
-            height: 1200
+            height: 880
         },
         { 
             src: 'images/character/dead/dead_7.png',
             width: 610,
-            height: 1200
+            height: 880
         }
     ],
         

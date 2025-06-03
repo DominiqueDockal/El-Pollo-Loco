@@ -41,7 +41,7 @@ class AnimatedGameObject extends GameObject {
             }
         }
     }
-    
+
     animateFrames(maxFrames, shouldLoop = true) {
         const currentTime = Date.now();
         if (currentTime - this.lastAnimationTime >= this.animationSpeed) {

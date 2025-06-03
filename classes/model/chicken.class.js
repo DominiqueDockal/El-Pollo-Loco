@@ -8,6 +8,7 @@ class Chicken extends AnimatedGameObject {
         this.isDead = false;
         this.deathTime = 0;
         this.deathDuration = 1000;
+        this.markForRemoval = false;
         this.setCurrentImage();
         super.setDimensions(this.scale);
     }
@@ -21,11 +22,10 @@ class Chicken extends AnimatedGameObject {
     }
     
     animate() {
-        if (!this.visible) return; 
         if (this.isDead) {
             const currentTime = Date.now();
             if (currentTime - this.deathTime >= this.deathDuration) {
-                this.visible = false;
+                this.markForRemoval = true;
             }
             return; 
         }  

@@ -1,13 +1,14 @@
 class ChickenSmall extends AnimatedGameObject {
     constructor(x, y, canvas, assetManager, animationSpeed = 300) {
         super(x, y, canvas, assetManager, 'chicken_small_walk', AnimatedGameObject.randomSpeed(1,2)); 
-        this.scale = 0.15; 
+        this.scale = 0.2; 
         this.animationSpeed = animationSpeed; 
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
         this.isDead = false;
         this.deathTime = 0;
         this.deathDuration = 1000;
+        this.markForRemoval = false;
         this.setCurrentImage();
         super.setDimensions(this.scale);
     }
@@ -21,14 +22,13 @@ class ChickenSmall extends AnimatedGameObject {
     }
 
     animate() {
-        if (!this.visible) return; 
         if (this.isDead) {
             const currentTime = Date.now();
             if (currentTime - this.deathTime >= this.deathDuration) {
-                this.visible = false;
+                this.markForRemoval = true;
             }
             return; 
-        }  
+        } 
         super.animateFrames(window.ASSETS.chicken_small_walk.length); 
         this.moveLeft();
     }

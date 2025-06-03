@@ -14,8 +14,11 @@ class Coin extends AnimatedGameObject {
     }
     
     animate() {
-        if (!this.visible) return; 
-        super.animateFrames(2);
+        super.animateFrames(window.ASSETS.coin.length);
+    }
+
+    collected() {
+        this.assetManager.playSound('coin_collect');
     }
     
 

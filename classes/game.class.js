@@ -44,7 +44,6 @@ class Game {
 
     update() {
         if (this.isPaused) return;
-        
         if (this.currentLevel) {
             const character = this.currentLevel.gameObjects.find(obj => obj instanceof Character);
             if (character) {
@@ -55,19 +54,18 @@ class Game {
                     maxCameraX
                 );
             }
-        }
-
-        const currentTime = Date.now();
-        if (this.currentLevel) {
+            const currentTime = Date.now();
             this.currentLevel.update(currentTime, this.canvas, this.assetManager); 
+            this.currentLevel.gameObjects = this.currentLevel.gameObjects.filter(obj => !obj.markedForRemoval);
             this.currentLevel.gameObjects.forEach(obj => { 
-                if (obj.updatePhysics && typeof obj.updatePhysics === 'function') {
-                    obj.updatePhysics();
-                }
-                if (obj.animate && typeof obj.animate === 'function') {
-                    obj.animate();
-                }
+                if (obj.updatePhysics) obj.updatePhysics();
             });
+            if (character) {
+                this.checkCollisions(character);
+            }
+            this.currentLevel.gameObjects.forEach(obj => { 
+                if (obj.animate) obj.animate();
+            })
         }
     }
     
@@ -76,6 +74,80 @@ class Game {
             this.view.render(this.currentLevel.gameObjects);
         }
     }
+
+    checkCollisions(character) {
+        this.currentLevel.gameObjects.forEach(obj => {
+            if (obj === character) return;
+            if (this.isColliding(character, obj)) {
+                this.handleCollision(character, obj);
+            }
+        });
+    }
+    
+    isColliding(character, object,characterShrink = 0.5, objectShrink = 0.55) {
+        const characterX = character.x + character.width * characterShrink / 2;
+        const characterY = character.y + character.height * characterShrink / 2;
+        const characterW = character.width * (1 - characterShrink);
+        const characterH = character.height * (1 - characterShrink);
+
+        const objectX = object.x + object.width * objectShrink / 2;
+        const objectY = object.y + object.height * objectShrink / 2;
+        const objectW = object.width * (1 - objectShrink);
+        const objectH = object.height * (1 - objectShrink);
+    
+        return (
+            characterX < objectX + objectW &&
+            characterX + characterW > objectX &&
+            characterY < objectY + objectH &&
+            characterY + characterH > objectY
+        );
+    }
     
 
+    handleCollision(character, obj) {
+        if (obj instanceof Coin) {
+            obj.collected();
+            this.remove(obj);
+            character.collectedCoins += 1;
+            console.log('Coin collected! Total coins:', character.collectedCoins);
+        }
+        
+        if (obj instanceof Bottle) {
+            obj.collected();
+            this.remove(obj);
+            character.collectedBottles += 1;
+            console.log('Bottle collected! Total bottles:', character.collectedBottles);
+        }
+    
+        if (obj instanceof Chicken) {
+            if (this.isJumpingOn(character, obj)) {
+              obj.kill();
+              character.speedY = -15;
+              character.y = obj.y - character.height; 
+            } else if (!obj.isDead) {
+              character.hurt();
+            }
+        }
+    }
+    
+
+    remove(obj) {
+        this.currentLevel.gameObjects = this.currentLevel.gameObjects.filter(
+            item => item !== obj
+        );
+    }
+
+    isJumpingOn(character, object) {
+        return (
+            character.speedY > 0 
+        );
+    }
+    
 }
+
+
+
+    
+    
+
+
