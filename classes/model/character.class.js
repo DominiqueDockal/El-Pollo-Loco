@@ -1,5 +1,5 @@
 class Character extends AnimatedGameObject {
-    constructor(x, y, canvas, assetManager, inputDevice, level, animationSpeed = 100) {
+    constructor(x, y, canvas, assetManager, inputDevice, level, animationSpeed = 50) {
         super(x, y, canvas, assetManager, 'character_standing', 5);
         this.scale = 0.6;
         this.animationSpeed = animationSpeed;
@@ -27,6 +27,7 @@ class Character extends AnimatedGameObject {
         this.collectedCoins = 0;
         this.maxHealth = 100; 
         this.health = this.maxHealth; 
+        this.deathTime = null;
     }
 
     setStatusBars(bottleBar, healthBar, coinBar) {
@@ -56,17 +57,16 @@ class Character extends AnimatedGameObject {
     }
 
     animate() {
-        if (this.isDead) {
-            super.animateFrames(window.ASSETS.character_dead.length, false); 
-            return;
-        }
         this.checkSleepState();
         this.move();
         const isMoving = this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT');
         const isJumping = !this.isGrounded;
         let frameCount;
         let assetType;
-        if (this.isHurt) {
+        if (this.isDead){
+            assetType = 'character_dead';
+            frameCount = window.ASSETS.character_dead.length;
+        } else if (this.isHurt) {
             assetType = 'character_hurt';
             frameCount = window.ASSETS.character_hurt.length;
         } else if (this.isSleeping) {
@@ -97,6 +97,7 @@ class Character extends AnimatedGameObject {
     }
 
     move() {
+        if (this.isDead) return; 
         if (this.inputDevice.isPressed('LEFT')) {
             this.otherDirection = true;
             if(this.x > this.startX-this.leftEnd) this.moveLeft();
@@ -115,8 +116,8 @@ class Character extends AnimatedGameObject {
 
     checkSleepState() {
         const now = Date.now();
-        const inactivityDuration = 10000;
-        if (this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded) {
+        const inactivityDuration = 5000;
+        if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded) {
             this.lastActiveTime = now;
             if (this.isSleeping) {
                 this.isSleeping = false;
@@ -137,13 +138,21 @@ class Character extends AnimatedGameObject {
         this.isHurt = true;
         this.health = Math.max(0, this.health - damage);
         this.lastHitTime = now;
-        this.assetManager.playSound('character_hurt');
+        if (!this.isDead) {
+            this.assetManager.playSound('character_hurt');
+        }
         if (this.healthBar) {
             const percent = (this.health / this.maxHealth) * 100;
             const step = Math.floor(percent / 20) * 20;
             this.healthBar.setValue(step);
+            if (step === 0) {
+                this.isDead = true;
+                this.deathTime = now;
+                this.assetManager.stopSound('character_hurt');
+                this.assetManager.playSound('character_dead')
+            }
         }
+             
     }
-    
-    
+      
 }

@@ -9,6 +9,7 @@ class Game {
         this.currentLevelId = 1;
         this.isPaused = false;
         window.game = this;
+        this.gameOverTriggered = false;
         this.init();
     };
     
@@ -46,6 +47,14 @@ class Game {
         if (this.isPaused) return;
         if (this.currentLevel) {
             const character = this.currentLevel.gameObjects.find(obj => obj instanceof Character);
+            if (character) {
+                if (character.isDead && character.deathTime) {
+                  const now = Date.now();
+                  if (now - character.deathTime >= 1500) { 
+                    this.gameOver();
+                  }
+                }
+            }
             if (character) {
                 const offset = 100;
                 const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
@@ -151,6 +160,30 @@ class Game {
             characterFeetY <= chickenHeadY + 18   
         ); 
         return horizontalOverlap && isVerticalHit;
+    }
+
+
+    gameOver() {
+        this.gameOverTriggered = true;
+        this.isRunning = false;
+        this.assetManager.playSound('game_over');
+        this.showGameOverScreen();
+        this.assetManager.stopBackgroundMusic();
+    }
+
+    showGameOverScreen(){
+        const endScreen = document.getElementById('end_screen');
+        endScreen.classList.remove('d-none');
+        endScreen.classList.add('end-screen-lost');
+        document.getElementById('game_control_left').classList.add('d-none'); 
+        document.getElementById('game_control_right').classList.add('d-none');
+    }
+
+    quit() {
+        document.getElementById('game_control_left').classList.add('d-none'); 
+        document.getElementById('game_control_right').classList.add('d-none'); 
+        document.getElementById('end_screen').classList.add('d-none');
+        document.getElementById('start_screen').classList.remove('d-none');
     }
     
 

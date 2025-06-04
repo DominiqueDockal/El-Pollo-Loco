@@ -5,6 +5,7 @@ class AssetManager {
         this.isLoaded = false;
         this.backgroundMusic = null;
         this.isSoundEnabled = false;
+        this.activeSounds = new Map(); 
     }
 
     async loadAllAssets() {
@@ -78,11 +79,22 @@ class AssetManager {
             audio.volume = soundData.volume;
             audio.loop = soundData.loop;
             audio.play().catch(error => {
-                console.log('Sound play failed:', error);
+                if (error.name !== 'AbortError') { 
+                    console.error('Sound play failed:', error);
+                }
+            });
+            if (!this.activeSounds.has(soundName)) {
+                this.activeSounds.set(soundName, []);
+            }
+            this.activeSounds.get(soundName).push(audio);
+            audio.addEventListener('ended', () => {
+                const sounds = this.activeSounds.get(soundName);
+                if (sounds) {
+                    const index = sounds.indexOf(audio);
+                    if (index > -1) sounds.splice(index, 1);
+                }
             });
             return audio;
-        } else {
-            console.warn(`Sound '${soundName}' not found`);
         }
     }
 
@@ -97,7 +109,11 @@ class AssetManager {
                     console.log('Background music play failed:', error);
                 });
             } else if (this.backgroundMusic && this.backgroundMusic.paused) {
-                this.backgroundMusic.play();
+                this.backgroundMusic.play().catch(error => {
+                    if (error.name !== 'AbortError') {
+                        console.log('Background music play failed:', error);
+                    }
+                });
             }
         }
     }
@@ -116,5 +132,24 @@ class AssetManager {
             this.stopBackgroundMusic();
         }
         return this.isSoundEnabled;
+    }
+
+    stopSound(soundName) {
+        const sounds = this.activeSounds.get(soundName) || [];
+        sounds.forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+        this.activeSounds.set(soundName, []);
+    }
+    
+    stopAllSounds() {
+        for (const [name, sounds] of this.activeSounds) {
+            sounds.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+        this.activeSounds.clear();
     }
 }

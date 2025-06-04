@@ -78,8 +78,7 @@ class Keyboard extends InputDevice {
 
 }
 
-// beim spielende
-//keyboard.cleanup();
+
 
     
 

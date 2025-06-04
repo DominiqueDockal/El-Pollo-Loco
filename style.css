@@ -60,6 +60,7 @@ canvas {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    backdrop-filter: blur(3px);
 }
 
 .start-screen {

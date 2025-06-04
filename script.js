@@ -1,22 +1,27 @@
+let gameInstance= null;
+
 function startGame() {
     document.getElementById('start_screen').classList.add('d-none'); 
+    document.getElementById('end_screen').classList.add('d-none'); 
     document.getElementById('game_control_left').classList.remove('d-none'); 
     document.getElementById('game_control_right').classList.remove('d-none'); 
-    let game = new Game('canvas');
+    document.getElementById('sound_btn').classList.remove('sound-on');
+    if (gameInstance) {
+        gameInstance = null;
+    }
+    gameInstance = new Game('canvas');
+}
+
+function quit(){
+    game.quit();
+
 }
 
 function restartGame(){
-    document.getElementById('end_screen').classList.add('d-none');
-    document.getElementById('game_control_left').classList.remove('d-none'); 
-    document.getElementById('game_control_right').classList.remove('d-none'); 
+    startGame();
+
 }
 
-function quit() {
-    document.getElementById('start_screen').classList.remove('d-none');
-    document.getElementById('end_screen').classList.add('d-none');
-    document.getElementById('game_control_left').classList.add('d-none'); 
-    document.getElementById('game_control_right').classList.add('d-none'); 
-}
 
 function toggleHowToPlayOverlay(show) {
     const overlay = document.getElementById('how_to_play');
@@ -79,8 +84,12 @@ function toggleGamePause() {
     if (window.game.assetManager) {
         if (window.game.isPaused) {
             window.game.assetManager.stopBackgroundMusic();
+            window.game.assetManager.stopAllSounds();
         } else {
-            window.game.assetManager.playBackgroundMusic();
+            setTimeout(() => {
+                window.game.assetManager.playBackgroundMusic();
+            }, 100);
+            
         }
     }
 }

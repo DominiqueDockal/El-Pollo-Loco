@@ -517,8 +517,8 @@ const ASSETS = {
             loop: false
         },
         { 
-            name: 'character_sleeping',
-            src: 'audio/character_sleeping.mp3',
+            name: 'character_dead',
+            src: 'audio/character_dead.mp3',
             volume: 1,
             loop: false
         },
