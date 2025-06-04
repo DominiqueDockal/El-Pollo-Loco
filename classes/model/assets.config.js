@@ -513,7 +513,7 @@ const ASSETS = {
         { 
             name: 'character_hurt',
             src: 'audio/character_hurt.mp3',
-            volume: 1,
+            volume: 0.8,
             loop: false
         },
         { 

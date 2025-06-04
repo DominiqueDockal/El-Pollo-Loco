@@ -106,7 +106,6 @@ class Level {
         }
     }
     
-
     createCoins(canvas, assetManager) {
         if (this.coinCount === 0) return;
         const usedPositions = [];
@@ -187,9 +186,5 @@ class Level {
             this.gameObjects.push(chickenSmall);
         }
     }
-
-
-    
-
     
 }

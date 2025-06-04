@@ -9,7 +9,6 @@ class Game {
         this.currentLevelId = 1;
         this.isPaused = false;
         window.game = this;
-        this.gameOverTriggered = false;
         this.init();
     };
     
@@ -162,9 +161,7 @@ class Game {
         return horizontalOverlap && isVerticalHit;
     }
 
-
     gameOver() {
-        this.gameOverTriggered = true;
         this.isRunning = false;
         this.assetManager.playSound('game_over');
         this.showGameOverScreen();
@@ -185,14 +182,12 @@ class Game {
         endScreen.classList.add('end-screen-won');
         document.getElementById('game_control_left').classList.add('d-none'); 
         document.getElementById('game_control_right').classList.add('d-none');
-
     }
 
     quit(){
         this.isRunning = false;
         this.assetManager.stopBackgroundMusic();
         this.assetManager.stopAllSounds();
-
     }
 
 

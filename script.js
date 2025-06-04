@@ -18,7 +18,6 @@ function quit(){
     document.getElementById('game_control_right').classList.add('d-none'); 
     document.getElementById('end_screen').classList.add('d-none');
     document.getElementById('start_screen').classList.remove('d-none');
-
 }
 
 function restartGame(){
