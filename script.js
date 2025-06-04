@@ -82,7 +82,11 @@ function toggleGamePause() {
             soundBtn.classList.toggle('disabled', window.game.isPaused);
             soundBtn.disabled = window.game.isPaused;
         }
-    } 
+        const character = window.game.currentLevel.gameObjects.find(obj => obj instanceof Character);
+        if (character) {
+            character.lastActiveTime = Date.now(); 
+        } 
+    }
     if (window.game.assetManager) {
         if (window.game.isPaused) {
             window.game.assetManager.stopBackgroundMusic();
