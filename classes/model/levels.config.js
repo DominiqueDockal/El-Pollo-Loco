@@ -4,17 +4,17 @@ const levelConfigs = {
         name: "First Level",
         length: 4000,
         bottleCount: 10,
-        coinCount: 40,
-        chickenCount: 4,
-        chickenSmallCount: 4
+        coinCount: 20,
+        chickenCount: 5,
+        chickenSmallCount: 5
     },
     level2: {
         id: 2,
         name: "Second Level", 
         length: 8000,
-        bottleCount: 20,
+        bottleCount: 10,
         coinCount: 20,
-        chickenCount: 15,
+        chickenCount: 10,
         chickenSmallCount: 10
     }
 };

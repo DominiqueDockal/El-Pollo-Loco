@@ -19,12 +19,12 @@ class Level {
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
         this.createClouds(canvas, assetManager);
+        this.createCharacter(canvas, assetManager, inputDevice);
         this.createStatusbars(canvas, assetManager);
         this.createBottles(canvas, assetManager);
         this.createCoins(canvas, assetManager);
         this.createChickens(canvas, assetManager);
         this.createChickenSmall(canvas, assetManager);
-        this.createCharacter(canvas, assetManager, inputDevice);
     }
 
     getLevelValue() {
@@ -62,6 +62,13 @@ class Level {
         }
     }
 
+    createCharacter(canvas, assetManager, inputDevice) {
+        const startX = 0; 
+        const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
+        this.character = new Character(startX, startY, canvas, assetManager, inputDevice, this);
+        this.gameObjects.push(this.character);
+    }
+    
     createStatusbars(canvas, assetManager) {
         const startX = 0;
         const startY = 0;
@@ -70,6 +77,9 @@ class Level {
         this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
         this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
         this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
+        if (this.character) {
+            this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
+        }
     }
 
     createClouds(canvas, assetManager) {
@@ -164,7 +174,7 @@ class Level {
         ).length;
         if (spawnedChickens >= this.spawning.maxChickens) return;
         
-        const spawnX = this.length + 150;
+        const spawnX = this.length - 150;
         if (Math.random() < 0.6) {
             const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
             const chicken = new Chicken(spawnX, chickenY, canvas, assetManager, 300);
@@ -178,13 +188,7 @@ class Level {
         }
     }
 
-    createCharacter(canvas, assetManager, inputDevice) {
-        const startX = 0; 
-        const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
-        const character = new Character(startX, startY, canvas, assetManager, inputDevice);
-        this.gameObjects.push(character);
-    }
-    
+
     
 
     

@@ -11,6 +11,9 @@ class Chicken extends AnimatedGameObject {
         this.markedForRemoval = false;
         this.setCurrentImage();
         super.setDimensions(this.scale);
+        this.canHit = true;
+        this.lastHitTime = 0;
+        this.hitCooldown = 1000; 
     }
 
     setCurrentImage() {

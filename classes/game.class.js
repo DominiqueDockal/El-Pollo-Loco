@@ -105,22 +105,30 @@ class Game {
         if (obj instanceof Chicken || obj instanceof ChickenSmall) {
             if (collisionType === 'top') {
                 obj.kill();
-                character.speedY = -5;
+                character.speedY = -8;
                 character.y = canvas.clientHeight - 0.7 * canvas.clientHeight; 
-            } else {
-                character.hurt();
+            } else if (!obj.isDead) { 
+                const now = Date.now();
+                if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
+                    character.hurt(5); 
+                    obj.canHit = false;
+                    obj.lastHitTime = now;
+                    setTimeout(() => {
+                        obj.canHit = true;
+                    }, obj.hitCooldown);
+                }
             }
         }
         if (obj instanceof Coin) {
             obj.collected();
             this.remove(obj);
-            character.collectedCoins += 1;
+            character.collectCoin();
         }
         
         if (obj instanceof Bottle) {
             obj.collected();
             this.remove(obj);
-            character.collectedBottles += 1;
+            character.collectBottle();
         }
     }
     
