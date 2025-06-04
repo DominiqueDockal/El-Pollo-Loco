@@ -179,12 +179,23 @@ class Game {
         document.getElementById('game_control_right').classList.add('d-none');
     }
 
-    quit() {
+    showYouWinScreen(){
+        const endScreen = document.getElementById('end_screen');
+        endScreen.classList.remove('d-none');
+        endScreen.classList.add('end-screen-won');
         document.getElementById('game_control_left').classList.add('d-none'); 
-        document.getElementById('game_control_right').classList.add('d-none'); 
-        document.getElementById('end_screen').classList.add('d-none');
-        document.getElementById('start_screen').classList.remove('d-none');
+        document.getElementById('game_control_right').classList.add('d-none');
+
     }
+
+    quit(){
+        this.isRunning = false;
+        this.assetManager.stopBackgroundMusic();
+        this.assetManager.stopAllSounds();
+
+    }
+
+
     
 
    

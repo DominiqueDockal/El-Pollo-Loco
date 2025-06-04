@@ -14,6 +14,10 @@ function startGame() {
 
 function quit(){
     game.quit();
+    document.getElementById('game_control_left').classList.add('d-none'); 
+    document.getElementById('game_control_right').classList.add('d-none'); 
+    document.getElementById('end_screen').classList.add('d-none');
+    document.getElementById('start_screen').classList.remove('d-none');
 
 }
 
@@ -21,7 +25,6 @@ function restartGame(){
     startGame();
 
 }
-
 
 function toggleHowToPlayOverlay(show) {
     const overlay = document.getElementById('how_to_play');
