@@ -20,6 +20,7 @@ class Level {
         this.createBackground(canvas, assetManager);
         this.createClouds(canvas, assetManager);
         this.createCharacter(canvas, assetManager, inputDevice);
+        this.createEndboss(canvas, assetManager);
         this.createStatusbars(canvas, assetManager);
         this.createBottles(canvas, assetManager);
         this.createCoins(canvas, assetManager);
@@ -62,26 +63,6 @@ class Level {
         }
     }
 
-    createCharacter(canvas, assetManager, inputDevice) {
-        const startX = 0; 
-        const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
-        this.character = new Character(startX, startY, canvas, assetManager, inputDevice, this);
-        this.gameObjects.push(this.character);
-    }
-    
-    createStatusbars(canvas, assetManager) {
-        const startX = 0;
-        const startY = 0;
-        const statusbarSpacing = 0.08*canvas.clientHeight;
-        this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
-        this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
-        this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
-        this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar);
-        if (this.character) {
-            this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
-        }
-    }
-
     createClouds(canvas, assetManager) {
         const levelValue = this.getLevelValue();
         const canvasWidth = canvas.clientWidth;
@@ -89,7 +70,40 @@ class Level {
         const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.15);
         this.gameObjects.push(cloud_1, cloud_2);
     }
-    
+
+    createCharacter(canvas, assetManager, inputDevice) {
+        const startX = 0; 
+        const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
+        this.character = new Character(startX, startY, canvas, assetManager, inputDevice, this);
+        this.gameObjects.push(this.character);
+    }
+
+    createEndboss(canvas, assetManager) {
+        const startX = this.length - 500; 
+        const startY = canvas.clientHeight - 0.85 * canvas.clientHeight; 
+        this.endboss = new Endboss(startX, startY, canvas, assetManager);
+        this.gameObjects.push(this.endboss);
+    }
+  
+    createStatusbars(canvas, assetManager) {
+        const startX = 0;
+        const startY = 0;
+        const endbossY= 5;
+        const endbossX = 0.74* canvas.clientWidth;
+        const statusbarSpacing = 0.08*canvas.clientHeight;
+        this.bottleBar = Statusbar.createBottleBar(startX, startY, canvas, assetManager, 0); 
+        this.healthBar = Statusbar.createHealthBar(startX, startY  + statusbarSpacing , canvas, assetManager, 100);
+        this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
+        this.endbossBar = Statusbar.createEndbossBar(endbossX, endbossY, canvas, assetManager, 100);
+        this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar, this.endbossBar);
+        if (this.character) {
+            this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
+        }
+        if (this.endboss) {
+            this.endboss.setEndbossBar(this.endbossBar);
+        }
+    }
+ 
     createBottles(canvas, assetManager) {
         if (this.bottleCount === 0) return;
         const bottleY = canvas.clientHeight - 0.31 * canvas.clientHeight;
@@ -173,7 +187,7 @@ class Level {
         ).length;
         if (spawnedChickens >= this.spawning.maxChickens) return;
         
-        const spawnX = this.length - 150;
+        const spawnX = this.length;
         if (Math.random() < 0.6) {
             const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
             const chicken = new Chicken(spawnX, chickenY, canvas, assetManager, 300);

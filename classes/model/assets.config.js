@@ -484,7 +484,149 @@ const ASSETS = {
             height: 880
         }
     ],
+    endboss_dead: [
+        { 
+            src: 'images/endboss/dead/dead_1.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/dead/dead_2.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/dead/dead_3.png',
+            width: 1045,
+            height: 1217
+        }
+    ],
+    endboss_hurt: [
+        { 
+            src: 'images/endboss/hurt/hurt_1.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/hurt/hurt_2.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/hurt/hurt_3.png',
+            width: 1045,
+            height: 1217
+        }
+    ],
+    endboss_walk: [
+        { 
+            src: 'images/endboss/walk/walk_1.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/walk/walk_2.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/walk/walk_3.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/walk/walk_4.png',
+            width: 1045,
+            height: 1217
+        }
+    ],
+    endboss_attack: [
+        { 
+            src: 'images/endboss/attack/attack_1.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_2.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_3.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_4.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_5.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_6.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_7.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/attack/attack_8.png',
+            width: 1045,
+            height: 1217
+        },
         
+    ],
+    endboss_attack: [
+        { 
+            src: 'images/endboss/alert/alert_1.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_2.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_3.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_4.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_5.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_6.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_7.png',
+            width: 1045,
+            height: 1217
+        },
+        { 
+            src: 'images/endboss/alert/alert_8.png',
+            width: 1045,
+            height: 1217
+        }
+    
+    ],
+    
     sounds_effects: [
         { 
             name: 'coin_collect',

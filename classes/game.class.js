@@ -115,7 +115,7 @@ class Game {
                 obj.kill();
                 character.speedY = -8;
                 character.y = canvas.clientHeight - 0.7 * canvas.clientHeight; 
-            } else if (!obj.isDead) { 
+            } else if (!character.isDead &&!obj.isDead) { 
                 const now = Date.now();
                 if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
                     character.hurt(5); 
@@ -126,6 +126,19 @@ class Game {
                     }, obj.hitCooldown);
                 }
             }
+        }
+        if (obj instanceof Endboss) {
+            if (!character.isDead && !obj.isDead) { 
+                const now = Date.now();
+                if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
+                    character.hurt(10); 
+                    obj.canHit = false;
+                    obj.lastHitTime = now;
+                    setTimeout(() => {
+                        obj.canHit = true;
+                    }, obj.hitCooldown);
+                }
+        }    
         }
         if (obj instanceof Coin) {
             obj.collected();

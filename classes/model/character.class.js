@@ -114,10 +114,10 @@ class Character extends AnimatedGameObject {
         }
     }
 
-    checkSleepState() {
+   checkSleepState() {
         const now = Date.now();
-        const inactivityDuration = 5000;
-        if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded) {
+        const inactivityDuration = 8000;
+        if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded || window.game.isPaused) {
             this.lastActiveTime = now;
             if (this.isSleeping) {
                 this.isSleeping = false;
@@ -130,7 +130,7 @@ class Character extends AnimatedGameObject {
             this.currentAssetType = 'character_sleeping';
             this.currentImageIndex = 0;
         }
-    }
+    } 
 
     hurt(damage) {
         const now = Date.now();
