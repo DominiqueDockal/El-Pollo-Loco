@@ -29,6 +29,7 @@ class Character extends AnimatedGameObject {
         this.maxHealth = 100; 
         this.health = this.maxHealth; 
         this.deathTime = null;
+        this.remainingBottles = level.bottleCount;
     }
 
     setStatusBars(bottleBar, healthBar, coinBar) {
@@ -176,6 +177,7 @@ class Character extends AnimatedGameObject {
             const bottle = new AnimatedBottle(this.x + (direction === 1 ? 50 : -50), this.y, this.canvas,this.assetManager, this.groundY+0.43*this.canvas.clientHeight, speedX) ;
             this.level.gameObjects.push(bottle);
             this.collectedBottles--;
+            this.remainingBottles--;
             this.updateBottleBar();
 
         }

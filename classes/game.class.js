@@ -64,6 +64,12 @@ class Game {
                     }
                 }
             }
+            if (character && this.currentLevel.endbossBar) {
+                const canKillBoss = this.hasEnoughBottlesToKillBoss(character, this.currentLevel);
+                if (!canKillBoss) {
+                    this.gameOver();
+                }
+            }
             if (character) {
                 const offset = 100;
                 const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
@@ -87,6 +93,22 @@ class Game {
             })
         }
     }
+    hasEnoughBottlesToKillBoss(character, level) {
+        if (!level.endbossBar || typeof level.endbossBar.value !== 'number') {
+            return false; 
+        }
+        const bossHealthPercent = level.endbossBar.value;
+        const bottlesNeeded = Math.ceil(bossHealthPercent / 20); 
+        const hasEnough = character.remainingBottles >= bottlesNeeded;
+        console.log(
+            `Boss-Gesundheit: ${bossHealthPercent}%`,
+            `Benötigte Flaschen: ${bottlesNeeded}`,
+            `Verfügbare Flaschen: ${character.remainingBottles}`,
+            `Genug Flaschen?: ${hasEnough ? 'Ja' : 'Nein'}`
+        );
+        return hasEnough;
+    }
+    
 
     checkCollisions(character) {
         this.currentLevel.gameObjects.forEach(obj => {
@@ -244,11 +266,6 @@ class Game {
         this.assetManager.stopAllSounds();
     }
 
-
-    
-
-   
-    
 }
 
 
