@@ -583,7 +583,7 @@ const ASSETS = {
         },
         
     ],
-    endboss_attack: [
+    endboss_alert: [
         { 
             src: 'images/endboss/alert/alert_1.png',
             width: 1045,
@@ -626,11 +626,77 @@ const ASSETS = {
         }
     
     ],
+    bottle_rotation: [
+        { 
+            src: 'images/bottle_rotation/rotation_1.png',
+            width: 400,
+            height: 400
+        },
+        { 
+            src: 'images/bottle_rotation/rotation_2.png',
+            width: 400,
+            height: 400
+        },
+        { 
+            src: 'images/bottle_rotation/rotation_3.png',
+            width: 400,
+            height: 400
+        },
+        { 
+            src: 'images/bottle_rotation/rotation_4.png',
+            width: 400,
+            height: 400
+        }
+        
+    ],
+    splash: [
+        { 
+            src: 'images/splash/splash_1.png',
+            width: 524,
+            height: 400
+        },
+        { 
+            src: 'images/splash/splash_2.png',
+            width: 524,
+            height: 400
+        },
+        
+        { 
+            src: 'images/splash/splash_3.png',
+            width: 524,
+            height: 400
+        },
+        
+        { 
+            src: 'images/splash/splash_4.png',
+            width: 524,
+            height: 400
+        },
+        
+        { 
+            src: 'images/splash/splash_5.png',
+            width: 524,
+            height: 400
+        },
+        
+        { 
+            src: 'images/splash/splash_6.png',
+            width: 524,
+            height: 400
+        }
+           
+    ],
     
     sounds_effects: [
         { 
             name: 'coin_collect',
             src: 'audio/coin.mp3',
+            volume: 1,
+            loop: false
+        },
+        { 
+            name: 'attack',
+            src: 'audio/attack.mp3',
             volume: 1,
             loop: false
         },
@@ -724,7 +790,15 @@ const ALL_IMAGES = [
     ...ASSETS.character_walking.map(bg => bg.src),
     ...ASSETS.character_jumping.map(bg => bg.src),
     ...ASSETS.character_hurt.map(bg => bg.src),
-    ...ASSETS.character_dead.map(bg => bg.src)
+    ...ASSETS.character_dead.map(bg => bg.src),
+    ...ASSETS.endboss_dead.map(bg => bg.src),
+    ...ASSETS.endboss_hurt.map(bg => bg.src),
+    ...ASSETS.endboss_alert.map(bg => bg.src),
+    ...ASSETS.endboss_walk.map(bg => bg.src),
+    ...ASSETS.endboss_attack.map(bg => bg.src),
+    ...ASSETS.bottle_rotation.map(bg => bg.src),
+    ...ASSETS.splash.map(bg => bg.src),
+
 ];
 
 const ALL_IMAGE_DATA = [
@@ -744,7 +818,14 @@ const ALL_IMAGE_DATA = [
     ...ASSETS.character_walking,
     ...ASSETS.character_jumping,
     ...ASSETS.character_hurt,
-    ...ASSETS.character_dead
+    ...ASSETS.character_dead,
+    ...ASSETS.endboss_alert,
+    ...ASSETS.endboss_attack,
+    ...ASSETS.endboss_dead,
+    ...ASSETS.endboss_hurt,
+    ...ASSETS.endboss_walk,
+    ...ASSETS.bottle_rotation,
+    ...ASSETS.splash
 ];
 
 const ALL_SOUNDS = [

@@ -18,7 +18,7 @@ class Keyboard extends InputDevice {
         const key = this.mapKey(e.code);
         if (key) {
             e.preventDefault();
-            this.setKeyState(key, true);
+            super.setKeyState(key, true);
             document.querySelectorAll('button').forEach(btn => btn.blur());
         }
     }
@@ -27,7 +27,7 @@ class Keyboard extends InputDevice {
         const key = this.mapKey(e.code);
         if (key) {
             e.preventDefault();
-            this.setKeyState(key, false);
+            super.setKeyState(key, false);
         }
     }
     

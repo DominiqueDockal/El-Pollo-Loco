@@ -38,6 +38,7 @@ class Game {
     gameLoop() {
         if (!this.isRunning) return;
         this.update();
+        this.inputDevice.update();
         this.render();
         requestAnimationFrame(() => this.gameLoop());
     }
@@ -177,6 +178,13 @@ class Game {
     gameOver() {
         this.isRunning = false;
         this.assetManager.playSound('game_over');
+        this.showGameOverScreen();
+        this.assetManager.stopBackgroundMusic();
+    }
+
+    youWin() {
+        this.isRunning = false;
+        this.assetManager.playSound('you_win');
         this.showGameOverScreen();
         this.assetManager.stopBackgroundMusic();
     }

@@ -11,7 +11,7 @@ class Level {
             enabled: true,
             lastSpawn: 0,
             interval: 5000, 
-            maxChickens: 10
+            maxChickens: 0
         };
     }
     
@@ -83,6 +83,9 @@ class Level {
         const startY = canvas.clientHeight - 0.85 * canvas.clientHeight; 
         this.endboss = new Endboss(startX, startY, canvas, assetManager);
         this.gameObjects.push(this.endboss);
+        if (this.endboss) {
+            this.endboss.setCharacter(this.character);
+        }
     }
   
     createStatusbars(canvas, assetManager) {

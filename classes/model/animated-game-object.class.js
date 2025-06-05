@@ -55,7 +55,7 @@ class AnimatedGameObject extends GameObject {
             this.lastAnimationTime = currentTime;
         }
     }
-        
+      
 
 }
 

@@ -1,11 +1,12 @@
 class Character extends AnimatedGameObject {
-    constructor(x, y, canvas, assetManager, inputDevice, level, animationSpeed = 50) {
+    constructor(x, y, canvas, assetManager, inputDevice, level, animationSpeed = 100) {
         super(x, y, canvas, assetManager, 'character_standing', 5);
         this.scale = 0.6;
         this.animationSpeed = animationSpeed;
         this.currentImageIndex = 0;
         this.lastAnimationTime = 0;
         this.startX = x; 
+        this.level = level;
         this.levelLength = level.length; 
         this.bottleCount = level.bottleCount;
         this.coinCount = level.coinCount;
@@ -36,29 +37,39 @@ class Character extends AnimatedGameObject {
         this.coinBar = coinBar;
     }
 
+    getProgressPercent(collected, totalCount) {
+        if (totalCount <= 0) return 0; 
+        const stepSize = totalCount / 5;
+        const currentStep = Math.floor(collected / stepSize);
+        return currentStep * 20;
+    }
+
     collectBottle() {
-        this.collectedBottles += 1;
+        this.collectedBottles++;
         if (this.bottleBar && this.bottleCount > 0) {
-            const stepSize = this.bottleCount / 5; 
-            const currentStep = Math.floor(this.collectedBottles / stepSize);
-            const percent = currentStep * 20;
+            const percent = this.getProgressPercent(this.collectedBottles, this.bottleCount);
+            this.bottleBar.setValue(percent);
+        }
+    }
+
+    updateBottleBar() {
+        if (this.bottleBar) {
+            const percent = this.getProgressPercent(this.collectedBottles, this.bottleCount);
             this.bottleBar.setValue(percent);
         }
     }
 
     collectCoin() {
-        this.collectedCoins += 1;
+        this.collectedCoins++;
         if (this.coinBar && this.coinCount > 0) {
-            const stepSize = this.coinCount / 5; 
-            const currentStep = Math.floor(this.collectedCoins / stepSize);
-            const percent = currentStep * 20;
+            const percent = this.getProgressPercent(this.collectedCoins, this.coinCount);
             this.coinBar.setValue(percent);
         }
     }
 
     animate() {
         this.checkSleepState();
-        this.move();
+        this.action();
         const isMoving = this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT');
         const isJumping = !this.isGrounded;
         let frameCount;
@@ -96,7 +107,7 @@ class Character extends AnimatedGameObject {
         super.setImageByIndex(this.currentImageIndex, this.currentAssetType);
     }
 
-    move() {
+    action() {
         if (this.isDead) return; 
         if (this.inputDevice.isPressed('LEFT')) {
             this.otherDirection = true;
@@ -112,12 +123,15 @@ class Character extends AnimatedGameObject {
             this.jump();
             
         }
+        if (this.inputDevice.wasPressed('ACTION')) { 
+            this.throw();
+        }
     }
 
    checkSleepState() {
         const now = Date.now();
-        const inactivityDuration = 3000;
-        if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded ) {
+        const inactivityDuration = 10000;
+        if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded ||this.inputDevice.wasPressed('ACTION') ){
             this.lastActiveTime = now;
             if (this.isSleeping) {
                 this.isSleeping = false;
@@ -153,6 +167,18 @@ class Character extends AnimatedGameObject {
             }
         }
              
+    }
+
+    throw() {
+        if (this.collectedBottles > 0) {
+            const direction = this.otherDirection ? -1 : 1; 
+            const speedX = 8 * direction; 
+            const bottle = new AnimatedBottle(this.x + (direction === 1 ? 50 : -50), this.y, this.canvas,this.assetManager, this.groundY+0.43*this.canvas.clientHeight, speedX) ;
+            this.level.gameObjects.push(bottle);
+            this.collectedBottles--;
+            this.updateBottleBar();
+
+        }
     }
       
 }

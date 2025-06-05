@@ -3,7 +3,8 @@ class InputDevice {
         if (new.target === InputDevice) {
             throw new Error("InputDevice is an abstract class and cannot be instantiated directly");
         }       
-        this.inputState = new Map();
+        this.currentInput = new Map(); 
+        this.previousInput = new Map();
     }
     
     initialize() {
@@ -13,17 +14,26 @@ class InputDevice {
     cleanup() {
         throw new Error("cleanup() must be implemented in the subclass");
     }
-    
-    // später in Spiellogik
+
     isPressed(key) {
-        return this.inputState.get(key) || false;
+        return this.currentInput.get(key) || false;
     }
     
     setKeyState(key, pressed) {
-        this.inputState.set(key, pressed);
+        this.currentInput.set(key, pressed);
     }
     
     reset() {
-        this.inputState.clear();
+        this.currentInput.clear();
+    }
+
+    wasPressed(key) {
+        const current = this.currentInput.get(key) || false;
+        const previous = this.previousInput.get(key) || false;
+        return current && !previous;
+    }
+
+    update() {
+        this.previousInput = new Map(this.currentInput); 
     }
 }
