@@ -55,6 +55,15 @@ class Game {
                   }
                 }
             }
+            const endboss = this.currentLevel.gameObjects.find(obj => obj instanceof Endboss);
+            if (endboss) {
+                if (endboss.isDead && endboss.deathTime) {
+                    const now = Date.now();
+                    if (now - endboss.deathTime >= 1000) {
+                    this.victory();
+                    }
+                }
+            }
             if (character) {
                 const offset = 100;
                 const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
@@ -69,15 +78,13 @@ class Game {
             if (character) {
                 this.checkCollisions(character);
             }
+            const animatedBottle = this.currentLevel.gameObjects.find(obj => obj instanceof AnimatedBottle);
+            if (animatedBottle) {
+                this.checkBottleCollisions(animatedBottle);
+            }
             this.currentLevel.gameObjects.forEach(obj => { 
                 if (obj.animate) obj.animate();
             })
-        }
-    }
-    
-    render() {
-        if (this.currentLevel && this.assetManager.isLoaded) {
-            this.view.render(this.currentLevel.gameObjects);
         }
     }
 
@@ -92,22 +99,42 @@ class Game {
             }
         });
     }
+
+    checkBottleCollisions(animatedBottle) {
+        this.currentLevel.gameObjects.forEach(obj => {
+            if (obj === animatedBottle || obj instanceof Character) return;
+            
+            if (this.isColliding(animatedBottle, obj)) {
+                this.handleBottleCollision(animatedBottle, obj);
+            }
+        });
+    }
     
-    isColliding(character, object,characterShrink = 0.5, objectShrink = 0.55) {
-        const characterX = character.x + character.width * characterShrink / 2;
-        const characterY = character.y + character.height * characterShrink / 2;
-        const characterW = character.width * (1 - characterShrink);
-        const characterH = character.height * (1 - characterShrink);
+    isColliding(a, object, aShrink = 0.5, objectShrink = 0.55) {
+        const aX = a.x + a.width * aShrink / 2;
+        const aY = a.y + a.height * aShrink / 2;
+        const aW = a.width * (1 - aShrink);
+        const aH = a.height * (1 - aShrink);
         const objectX = object.x + object.width * objectShrink / 2;
         const objectY = object.y + object.height * objectShrink / 2;
         const objectW = object.width * (1 - objectShrink);
         const objectH = object.height * (1 - objectShrink);
         return (
-            characterX < objectX + objectW &&
-            characterX + characterW > objectX &&
-            characterY < objectY + objectH &&
-            characterY + characterH > objectY
+            aX < objectX + objectW &&
+            aX + aW > objectX &&
+            aY < objectY + objectH &&
+            aY + aH > objectY
         );
+    }
+
+    handleBottleCollision(animatedBottle, obj) {
+        if (obj instanceof Endboss) {
+            if (!obj.isDead) obj.hurt(20); 
+        }
+        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
+            if (!obj.isDead) obj.kill();
+        }
+
     }
     
     handleCollision(character, obj, collisionType) {
@@ -175,6 +202,12 @@ class Game {
         return horizontalOverlap && isVerticalHit;
     }
 
+    render() {
+        if (this.currentLevel && this.assetManager.isLoaded) {
+            this.view.render(this.currentLevel.gameObjects);
+        }
+    }
+
     gameOver() {
         this.isRunning = false;
         this.assetManager.playSound('game_over');
@@ -182,10 +215,10 @@ class Game {
         this.assetManager.stopBackgroundMusic();
     }
 
-    youWin() {
+    victory() {
         this.isRunning = false;
-        this.assetManager.playSound('you_win');
-        this.showGameOverScreen();
+        this.assetManager.playSound('game_won');
+        this.showYouWinScreen();
         this.assetManager.stopBackgroundMusic();
     }
 
