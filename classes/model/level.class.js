@@ -11,7 +11,7 @@ class Level {
             enabled: true,
             lastSpawn: 0,
             interval: 5000, 
-            maxChickens: 0
+            maxChickens: 20
         };
     }
     
