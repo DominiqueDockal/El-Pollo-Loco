@@ -5,8 +5,8 @@ const levelConfigs = {
         length: 4000,
         bottleCount: 10,
         coinCount: 20,
-        chickenCount: 8,
-        chickenSmallCount: 8
+        chickenCount: 0,
+        chickenSmallCount: 0
     },
     level2: {
         id: 2,

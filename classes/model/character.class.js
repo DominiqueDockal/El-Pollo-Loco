@@ -1,6 +1,6 @@
 class Character extends AnimatedGameObject {
     constructor(x, y, canvas, assetManager, inputDevice, level, animationSpeed = 100) {
-        super(x, y, canvas, assetManager, 'character_standing', 5);
+        super(x, y, canvas, assetManager, 'character_standing', 3);
         this.scale = 0.6;
         this.animationSpeed = animationSpeed;
         this.currentImageIndex = 0;

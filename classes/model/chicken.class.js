@@ -1,6 +1,6 @@
 class Chicken extends AnimatedGameObject {
     constructor(x, y, canvas, assetManager, animationSpeed = 300) {
-        super(x, y, canvas, assetManager, 'chicken_walk', AnimatedGameObject.randomSpeed(0.8, 1.5)); 
+        super(x, y, canvas, assetManager, 'chicken_walk', AnimatedGameObject.randomSpeed(0.5, 1)); 
         this.scale = 0.2; 
         this.animationSpeed = animationSpeed; 
         this.currentImageIndex = 0;

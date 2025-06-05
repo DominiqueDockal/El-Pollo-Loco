@@ -163,7 +163,6 @@ class Game {
         if (obj instanceof Chicken || obj instanceof ChickenSmall) {
             if (collisionType === 'top') {
                 obj.kill();
-                character.speedY = -8;
                 character.y = canvas.clientHeight - 0.7 * canvas.clientHeight; 
             } else if (!character.isDead &&!obj.isDead) { 
                 const now = Date.now();
@@ -181,7 +180,7 @@ class Game {
             if (!character.isDead && !obj.isDead) { 
                 const now = Date.now();
                 if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
-                    character.hurt(10); 
+                    character.hurt(20); 
                     obj.canHit = false;
                     obj.lastHitTime = now;
                     setTimeout(() => {
