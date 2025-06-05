@@ -100,12 +100,12 @@ class Game {
         const bossHealthPercent = level.endbossBar.value;
         const bottlesNeeded = Math.ceil(bossHealthPercent / 20); 
         const hasEnough = character.remainingBottles >= bottlesNeeded;
-        console.log(
+        /* console.log(
             `Boss-Gesundheit: ${bossHealthPercent}%`,
             `Benötigte Flaschen: ${bottlesNeeded}`,
             `Verfügbare Flaschen: ${character.remainingBottles}`,
             `Genug Flaschen?: ${hasEnough ? 'Ja' : 'Nein'}`
-        );
+        ); */
         return hasEnough;
     }
     

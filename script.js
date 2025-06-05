@@ -1,16 +1,27 @@
 let gameInstance= null;
 
-function startGame() {
-    document.getElementById('start_screen').classList.add('d-none'); 
-    document.getElementById('end_screen').classList.add('d-none'); 
-    document.getElementById('game_control_left').classList.remove('d-none'); 
-    document.getElementById('game_control_right').classList.remove('d-none'); 
-    document.getElementById('sound_btn').classList.remove('sound-on');
+async function startGame() {
+    document.getElementById('start_screen').classList.add('d-none');
+    document.getElementById('loading_screen').classList.remove('d-none');
+    document.getElementById('end_screen').classList.add('d-none');
+    document.getElementById('game_control_left').classList.add('d-none'); 
+    document.getElementById('game_control_right').classList.add('d-none');
     if (gameInstance) {
         gameInstance = null;
     }
     gameInstance = new Game('canvas');
+    try {
+        await gameInstance.init(); 
+    } catch (error) {
+        console.error("Could initalize Game", error);
+
+    } finally {
+        document.getElementById('loading_screen').classList.add('d-none');
+        document.getElementById('game_control_left').classList.remove('d-none');
+        document.getElementById('game_control_right').classList.remove('d-none');
+    }
 }
+    
 
 function quit(){
     game.quit();
