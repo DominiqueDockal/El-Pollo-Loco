@@ -23,7 +23,7 @@ class Endboss extends AnimatedGameObject {
         this.hasEngaged = false; 
         this.isReturning = false;
         this.nextAttackSoundTime = 0;
-        this.returnCooldown = 5000;
+        this.returnCooldown = 4000;
         this.initialEngageTime = null;
     }
 
