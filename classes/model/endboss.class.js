@@ -79,8 +79,7 @@ class Endboss extends AnimatedGameObject {
     }
     
     handleState() {
-        if (!this.character) return;
-        if (this.isDead) return;
+        if (!this.character || this.isDead) return;
         const distance = Math.abs(this.x - this.character.x);
         const maxLeft = this.startX - 500;
         if (distance <= 500 && !this.hasEngaged) {

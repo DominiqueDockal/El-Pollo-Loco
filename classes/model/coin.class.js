@@ -1,5 +1,5 @@
 class Coin extends AnimatedGameObject {
-    constructor(x, y, canvas, assetManager, animationSpeed = 500) {
+    constructor(x, y, canvas, assetManager, animationSpeed = 400) {
         super(x, y, canvas, assetManager, 'coin', 0); 
         this.scale = 0.25;
         this.animationSpeed = animationSpeed; 

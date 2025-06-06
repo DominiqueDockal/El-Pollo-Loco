@@ -126,14 +126,13 @@ class Level {
         const MIN_DISTANCE_FROM_LEFT = 400;
         const MIN_DISTANCE_FROM_RIGHT = 700;
         const TOTAL_MARGIN = MIN_DISTANCE_FROM_LEFT + MIN_DISTANCE_FROM_RIGHT;
-        const animationSpeed = 400; 
         const minHeight = 0.5 * canvas.clientHeight;
         const maxHeight = 0.9 * canvas.clientHeight;
         for (let i = 0; i < this.coinCount; i++) {
             const coinX = this.generateRandomPosition(usedPositions, minDistance,this.length - TOTAL_MARGIN,MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(coinX);
             const coinY = canvas.clientHeight - (minHeight + Math.random() * (maxHeight - minHeight));
-            const coin = new Coin(coinX, coinY, canvas, assetManager, animationSpeed);
+            const coin = new Coin(coinX, coinY, canvas, assetManager);
             this.gameObjects.push(coin);
         }
     }
@@ -144,12 +143,11 @@ class Level {
         const minDistance = 80; 
         const MIN_DISTANCE_FROM_LEFT = 500;
         const chickenRange = this.length - MIN_DISTANCE_FROM_LEFT;
-        const animationSpeed = 300;
         const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
         for (let i = 0; i < this.chickenCount; i++) {
             const chickenX = this.generateRandomPosition(usedPositions, minDistance, chickenRange, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(chickenX);
-            const chicken = new Chicken(chickenX, chickenY, canvas, assetManager, animationSpeed);
+            const chicken = new Chicken(chickenX, chickenY, canvas, assetManager);
             chicken.isSpawned = false;
             this.gameObjects.push(chicken);
         }
@@ -161,12 +159,11 @@ class Level {
         const minDistance = 100; 
         const MIN_DISTANCE_FROM_LEFT = 500;
         const chickenRange = this.length - MIN_DISTANCE_FROM_LEFT;
-        const animationSpeed = 300;
         const chickenSmallY = canvas.clientHeight - 0.32 * canvas.clientHeight;
         for (let i = 0; i < this.chickenSmallCount; i++) {
             const chickenX = this.generateRandomPosition(usedPositions, minDistance, chickenRange, MIN_DISTANCE_FROM_LEFT);
             usedPositions.push(chickenX);
-            const chickenSmall = new ChickenSmall(chickenX, chickenSmallY, canvas, assetManager, animationSpeed);
+            const chickenSmall = new ChickenSmall(chickenX, chickenSmallY, canvas, assetManager);
             chickenSmall.isSpawned = false; 
             this.gameObjects.push(chickenSmall);
         }
@@ -186,12 +183,12 @@ class Level {
         const spawnX = this.length;
         if (Math.random() < 0.6) {
             const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;
-            const chicken = new Chicken(spawnX, chickenY, canvas, assetManager, 300);
+            const chicken = new Chicken(spawnX, chickenY, canvas, assetManager);
             chicken.isSpawned = true; 
             this.gameObjects.push(chicken);
         } else {
             const chickenSmallY = canvas.clientHeight - 0.32 * canvas.clientHeight;
-            const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, canvas, assetManager, 300);
+            const chickenSmall = new ChickenSmall(spawnX, chickenSmallY, canvas, assetManager);
             chickenSmall.isSpawned = true; 
             this.gameObjects.push(chickenSmall);
         }
