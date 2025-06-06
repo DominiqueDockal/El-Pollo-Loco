@@ -46,53 +46,27 @@ class Game {
     update() {
         if (this.isPaused) return;
         if (this.currentLevel) {
+            const currentTime = Date.now();
             const character = this.currentLevel.gameObjects.find(obj => obj instanceof Character);
-            if (character) {
-                if (character.isDead && character.deathTime) {
-                  const now = Date.now();
-                  if (now - character.deathTime >= 1500) { 
-                    this.gameOver();
-                  }
-                }
-            }
             const endboss = this.currentLevel.gameObjects.find(obj => obj instanceof Endboss);
-            if (endboss) {
-                if (endboss.isDead && endboss.deathTime) {
-                    const now = Date.now();
-                    if (now - endboss.deathTime >= 1000) {
-                    this.victory();
-                    }
-                }
-            }
-            if (character && this.currentLevel.endbossBar) {
-                const canKillBoss = this.hasEnoughBottlesToKillBoss(character, this.currentLevel);
-                if (!canKillBoss) {
-                    this.gameOver();
-                }
-            }
+            const animatedBottle = this.currentLevel.gameObjects.find(obj => obj instanceof AnimatedBottle);
             if (character) {
+                if (character.isDead && character.deathTime && (currentTime - character.deathTime >= 1500)) this.gameOver();
                 const offset = 100;
                 const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
                 this.view.camera_x = Math.max(-character.x + offset, maxCameraX);
+                if (this.currentLevel.endbossBar && !this.hasEnoughBottlesToKillBoss(character, this.currentLevel)) this.gameOver();
             }
-            const currentTime = Date.now();
+            if (endboss?.isDead && endboss.deathTime && (currentTime - endboss.deathTime >= 1000)) this.victory();
             this.currentLevel.update(currentTime, this.canvas, this.assetManager); 
             this.currentLevel.gameObjects = this.currentLevel.gameObjects.filter(obj => !obj.markedForRemoval);
-            this.currentLevel.gameObjects.forEach(obj => { 
-                if (obj.updatePhysics) obj.updatePhysics();
-            });
-            if (character) {
-                this.checkCollisions(character);
-            }
-            const animatedBottle = this.currentLevel.gameObjects.find(obj => obj instanceof AnimatedBottle);
-            if (animatedBottle) {
-                this.checkBottleCollisions(animatedBottle);
-            }
-            this.currentLevel.gameObjects.forEach(obj => { 
-                if (obj.animate) obj.animate();
-            })
+            this.currentLevel.gameObjects.forEach(obj => obj.updatePhysics?.());
+            if (character) this.checkCollisions(character);
+            if (animatedBottle) this.checkBottleCollisions(animatedBottle);
+            this.currentLevel.gameObjects.forEach(obj => obj.animate?.());
         }
     }
+
     hasEnoughBottlesToKillBoss(character, level) {
         if (!level.endbossBar || typeof level.endbossBar.value !== 'number') {
             return false; 
@@ -100,12 +74,6 @@ class Game {
         const bossHealthPercent = level.endbossBar.value;
         const bottlesNeeded = Math.ceil(bossHealthPercent / 20); 
         const hasEnough = character.remainingBottles >= bottlesNeeded;
-        /* console.log(
-            `Boss-Gesundheit: ${bossHealthPercent}%`,
-            `Benötigte Flaschen: ${bottlesNeeded}`,
-            `Verfügbare Flaschen: ${character.remainingBottles}`,
-            `Genug Flaschen?: ${hasEnough ? 'Ja' : 'Nein'}`
-        ); */
         return hasEnough;
     }
     
@@ -158,50 +126,69 @@ class Game {
         }
 
     }
-    
-    handleCollision(character, obj, collisionType) {
-        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
-            if (collisionType === 'top') {
-                obj.kill();
-                character.y = canvas.clientHeight - 0.7 * canvas.clientHeight; 
-            } else if (!character.isDead &&!obj.isDead) { 
-                const now = Date.now();
-                if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
-                    character.hurt(5); 
-                    obj.canHit = false;
-                    obj.lastHitTime = now;
-                    setTimeout(() => {
-                        obj.canHit = true;
-                    }, obj.hitCooldown);
-                }
+
+    handleChickenCollision(character, chicken, collisionType) {
+        if (collisionType === 'top') {
+            chicken.kill();
+            character.y = this.canvas.clientHeight - 0.7 * this.canvas.clientHeight;
+        } else if (!character.isDead && !chicken.isDead) { 
+            const now = Date.now();
+            if (chicken.canHit || now - chicken.lastHitTime > chicken.hitCooldown) {
+                character.hurt(10);
+                chicken.canHit = false;
+                chicken.lastHitTime = now;
+                setTimeout(() => chicken.canHit = true, chicken.hitCooldown);
             }
         }
-        if (obj instanceof Endboss) {
-            if (!character.isDead && !obj.isDead) { 
-                const now = Date.now();
-                if (obj.canHit || now - obj.lastHitTime > obj.hitCooldown) {
-                    character.hurt(20); 
-                    obj.canHit = false;
-                    obj.lastHitTime = now;
-                    setTimeout(() => {
-                        obj.canHit = true;
-                    }, obj.hitCooldown);
-                }
-        }    
-        }
-        if (obj instanceof Coin) {
-            obj.collected();
-            this.remove(obj);
-            character.collectCoin();
-        }
-        
-        if (obj instanceof Bottle) {
-            obj.collected();
-            this.remove(obj);
-            character.collectBottle();
+    }
+
+    handleChickenSmallCollision(character, chickenSmall, collisionType) {
+        if (collisionType === 'top') {
+            chickenSmall.kill();
+            character.y = this.canvas.clientHeight - 0.7 * this.canvas.clientHeight;
+        } else if (!character.isDead && !chickenSmall.isDead) { 
+            const now = Date.now();
+            if (chickenSmall.canHit || now - chickenSmall.lastHitTime > chickenSmall.hitCooldown) {
+                character.hurt(5);
+                chickenSmall.canHit = false;
+                chickenSmall.lastHitTime = now;
+                setTimeout(() => chickenSmall.canHit = true, chickenSmall.hitCooldown);
+            }
         }
     }
-    
+
+    handleEndbossCollision(character, endboss) {
+        if (!character.isDead && !endboss.isDead) { 
+            const now = Date.now();
+            if (endboss.canHit || now - endboss.lastHitTime > endboss.hitCooldown) {
+                character.hurt(20);
+                endboss.canHit = false;
+                endboss.lastHitTime = now;
+                setTimeout(() => endboss.canHit = true, endboss.hitCooldown);
+            }
+        }
+    }
+
+    handleCoinCollection(character, coin) {
+        coin.collected();
+        this.remove(coin);
+        character.collectCoin();
+    }
+
+    handleBottleCollection(character, bottle) {
+        bottle.collected();
+        this.remove(bottle);
+        character.collectBottle();
+    }
+
+    handleCollision(character, obj, collisionType) {
+        if (obj instanceof Chicken) this.handleChickenCollision(character, obj, collisionType);
+        else if (obj instanceof ChickenSmall) this.handleChickenSmallCollision(character, obj, collisionType);
+        else if (obj instanceof Endboss) this.handleEndbossCollision(character, obj);
+        else if (obj instanceof Coin) this.handleCoinCollection(character, obj);
+        else if (obj instanceof Bottle) this.handleBottleCollection(character, obj);
+    }
+
     remove(obj) {
         this.currentLevel.gameObjects = this.currentLevel.gameObjects.filter(
             item => item !== obj

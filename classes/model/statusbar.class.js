@@ -26,8 +26,8 @@ class Statusbar extends GameObject {
     }
     
     updateImage() {
-        const imageIndex = Math.floor(this.value / 20);
-        const clampedIndex = Math.max(0, Math.min(5, imageIndex));
+        const imageIndex = Math.floor(this.value / Statusbar.VALUE_STEP);
+        const clampedIndex = Math.max(0, Math.min(Statusbar.MAX_INDEX, imageIndex));
         super.setImageByIndex(clampedIndex);
     }
     
@@ -35,4 +35,8 @@ class Statusbar extends GameObject {
         this.value = Math.max(0, Math.min(100, newValue));
         this.updateImage();
     }
+
+    static get VALUE_STEP() { return 20; } 
+
+    static get MAX_INDEX() { return 5; }
 }

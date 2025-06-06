@@ -7,10 +7,10 @@ class Bottle extends GameObject {
     }
 
     setCurrentImage() {
-        const bottleAssets = window.ASSETS.bottle_ground || [];
+        const bottleAssets = this.assetManager.getAssetsMetadata('bottle_ground');
         if (bottleAssets.length > 0) {
             const randomIndex = Math.floor(Math.random() * bottleAssets.length);
-            super.setImageByIndex(randomIndex, 'bottle_ground'); 
+            super.setImageByIndex(randomIndex, 'bottle_ground');
         }
     }
 

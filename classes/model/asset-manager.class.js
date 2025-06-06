@@ -59,16 +59,32 @@ class AssetManager {
         }
     }
     
+
+    getAssetsMetadata(type) {
+        return window.ASSETS[type] || [];
+    }
+
+    getAssetCount(type) {
+        return this.getAssetsMetadata(type).length;
+    }
+
+    getAssetByIndex(type, index) {
+        const assets = this.getAssetsMetadata(type);
+        return assets[index] || null;
+    }
+
+    getImagePathsByType(type) {
+        const assets = this.getAssetsMetadata(type);
+        return assets.map(imgObj => imgObj.src);
+    }
+    
     getImage(imagePath) {
         return this.imageCache.get(imagePath);
     }
 
     getImagesByType(type) {
-        const assets = window.ASSETS[type] || [];
-        return assets.map(imgObj => {
-            const path = imgObj.src || imgObj;
-            return this.getImage(path);
-        }).filter(img => img);
+    const assets = this.getAssetsMetadata(type);
+    return assets.map(imgObj => this.getImage(imgObj.src)).filter(img => img);
     }
 
     playSound(soundName) {
@@ -153,3 +169,5 @@ class AssetManager {
         this.activeSounds.clear();
     }
 }
+
+

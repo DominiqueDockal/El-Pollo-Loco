@@ -15,6 +15,8 @@ class Character extends AnimatedGameObject {
         this.isHurt = false;
         this.isDead = false;
         this.isSleeping = false;
+        this.isMoving = false;
+        this.isJumping = false;
         this.lastActiveTime = Date.now();  
         this.inputDevice = inputDevice;
         this.currentAssetType = 'character_standing';
@@ -68,32 +70,23 @@ class Character extends AnimatedGameObject {
         }
     }
 
-    animate() {
+    handleState() {
         this.checkSleepState();
         this.action();
-        const isMoving = this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT');
-        const isJumping = !this.isGrounded;
-        let frameCount;
+        this.isMoving = this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT');
+        this.isJumping = !this.isGrounded;
+    }
+
+    animate() {
+        this.handleState();
         let assetType;
-        if (this.isDead){
-            assetType = 'character_dead';
-            frameCount = window.ASSETS.character_dead.length;
-        } else if (this.isHurt) {
-            assetType = 'character_hurt';
-            frameCount = window.ASSETS.character_hurt.length;
-        } else if (this.isSleeping) {
-            assetType = 'character_sleeping';
-            frameCount = window.ASSETS.character_sleeping.length;
-        } else if (isJumping) {
-            assetType = 'character_jumping';
-            frameCount = window.ASSETS.character_jumping.length;
-        } else if (isMoving) {
-            assetType = 'character_walking';
-            frameCount = window.ASSETS.character_walking.length;
-        } else {
-            assetType = 'character_standing';
-            frameCount = window.ASSETS.character_standing.length;
-        }
+        if (this.isDead) assetType = 'character_dead';
+        else if (this.isHurt) assetType = 'character_hurt';
+        else if (this.isSleeping) assetType = 'character_sleeping';
+        else if (this.isJumping) assetType = 'character_jumping';
+        else if (this.isMoving) assetType = 'character_walking';
+        else assetType = 'character_standing';
+        const frameCount = this.assetManager.getAssetCount(assetType);
         if (assetType !== this.currentAssetType) {
             this.currentImageIndex = 0;
             this.currentAssetType = assetType;
@@ -103,7 +96,7 @@ class Character extends AnimatedGameObject {
             this.isHurt = false;
         }
     }
-    
+
     setCurrentImage() {
         super.setImageByIndex(this.currentImageIndex, this.currentAssetType);
     }
@@ -180,6 +173,14 @@ class Character extends AnimatedGameObject {
             this.remainingBottles--;
             this.updateBottleBar();
 
+        }
+    }
+
+    jump() {
+        if (this.isGrounded) {
+            this.speedY = this.jumpForce;
+            this.isGrounded = false;
+            this.assetManager.playSound('jumping');
         }
     }
       

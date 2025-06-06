@@ -33,15 +33,18 @@ class AnimatedBottle extends AnimatedGameObject {
             this.handleGroundHit();
         }
         if (!this.isSplashing) {
-            super.animateFrames(window.ASSETS.bottle_rotation.length);
-        }  else {
+            const frameCount = this.assetManager.getAssetCount('bottle_rotation');
+            super.animateFrames(frameCount);
+        } else {
             const currentTime = Date.now();
             if (currentTime - this.splashStartTime >= this.splashDuration) {
                 this.markedForRemoval = true;
             }
-            super.animateFrames(window.ASSETS.splash.length, false);
+            const splashFrameCount = this.assetManager.getAssetCount('splash');
+            super.animateFrames(splashFrameCount, false);
         }
     }
+    
 
     handleGroundHit() {
         this.isSplashing = true;

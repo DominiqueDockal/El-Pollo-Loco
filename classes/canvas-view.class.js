@@ -19,19 +19,14 @@ class CanvasView extends View {
     }
     
     renderGameObject(gameObject) {
-        if (!gameObject.img || !gameObject.img.complete || gameObject.width === 0) {
-            return; 
-        }
+        if (!gameObject.img?.complete || gameObject.width === 0) return;
         if (gameObject.otherDirection) {
-            this.flipImage(gameObject);
-        }
-        this.context.drawImage(gameObject.img,gameObject.x,gameObject.y,gameObject.width,gameObject.height);
-        if (gameObject.otherDirection) {
-            this.flipImageBack(gameObject);
+            this.flipImage(gameObject);  
+        } else {
+            this.context.drawImage(gameObject.img,gameObject.x,gameObject.y,gameObject.width,gameObject.height);
         }
     }
-    
-    
+     
     clear() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -44,18 +39,15 @@ class CanvasView extends View {
     resetCameraTranslation() {
         this.context.restore(); 
     }
-    
 
     flipImage(gameObject) {
         this.context.save();
-        this.context.translate(gameObject.width, 0);
+        this.context.translate(gameObject.x + gameObject.width, gameObject.y);
         this.context.scale(-1, 1);
-        gameObject.x = gameObject.x * -1;
-    }
-
-    flipImageBack(gameObject) {
-        gameObject.x = gameObject.x * -1;
+        this.context.drawImage(gameObject.img, 0, 0, gameObject.width, gameObject.height);
         this.context.restore();
     }
+    
+    
 }
 

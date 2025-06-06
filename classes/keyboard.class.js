@@ -32,13 +32,13 @@ class Keyboard extends InputDevice {
     }
     
     setupMobileButtons() {
+        if (this.mobileButtons.length > 0) return;
         const buttonMapping = {
             'button_left': 'LEFT',
             'button_right': 'RIGHT',
             'button_jump': 'JUMP',
             'button_throw': 'ACTION'
         };
-        
         Object.entries(buttonMapping).forEach(([buttonId, key]) => {
             const button = document.getElementById(buttonId);
             if (!button) return;
@@ -71,7 +71,6 @@ class Keyboard extends InputDevice {
                 button.removeEventListener(event, handler, {passive:false});
             });
         });
-        
         this.mobileButtons = [];
         this.reset();
     }

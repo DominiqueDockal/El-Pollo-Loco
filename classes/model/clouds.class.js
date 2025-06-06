@@ -9,11 +9,12 @@ class Cloud extends AnimatedGameObject {
     }
 
     setCurrentImage() {
-        const cloudAsset = window.ASSETS.clouds.find(cloud => 
+        const clouds = this.assetManager.getAssetsMetadata(this.type);
+        const cloudAsset = clouds.find(cloud => 
             cloud.src.includes(`${this.cloudIndex}_level${this.level}`)
-        ); 
+        );
         if (cloudAsset) {
-            this.currentImagePath = cloudAsset.src;
+            this.setImage(cloudAsset.src);
         }
     }
 

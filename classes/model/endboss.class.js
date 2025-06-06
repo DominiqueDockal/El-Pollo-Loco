@@ -63,24 +63,13 @@ class Endboss extends AnimatedGameObject {
 
     animate() {
         this.handleState();
-        let frameCount;
         let assetType;
-        if (this.isDead) {
-            assetType = 'endboss_dead';
-            frameCount = window.ASSETS.endboss_dead.length;
-        } else if (this.isHurt) {
-            assetType = 'endboss_hurt';
-            frameCount = window.ASSETS.endboss_hurt.length;
-        } else if (this.isAttacking) {
-            assetType = 'endboss_attack';
-            frameCount = window.ASSETS.endboss_attack.length;
-        } else if (this.isWalking) {
-            assetType = 'endboss_walk';
-            frameCount = window.ASSETS.endboss_walk.length;
-        } else {
-            assetType = 'endboss_alert';
-            frameCount = window.ASSETS.endboss_alert.length;
-        }
+        if (this.isDead) assetType = 'endboss_dead';
+        else if (this.isHurt) assetType = 'endboss_hurt';
+        else if (this.isAttacking) assetType = 'endboss_attack';
+        else if (this.isWalking) assetType = 'endboss_walk';
+        else assetType = 'endboss_alert';
+        const frameCount = this.assetManager.getAssetCount(assetType);
         if (assetType !== this.currentAssetType) {
             this.currentImageIndex = 0;
             this.currentAssetType = assetType;
@@ -90,9 +79,11 @@ class Endboss extends AnimatedGameObject {
             this.isHurt = false;
         }
     }
+    
 
     handleState() {
         if (!this.character) return;
+        if (this.isDead) return;
         const distance = Math.abs(this.x - this.character.x);
         const maxLeft = this.startX - 500;
         if (distance <= 500 && !this.hasEngaged) {
@@ -119,11 +110,11 @@ class Endboss extends AnimatedGameObject {
             if (distance <= 500) {
                 this.isWalking = true;
                 this.isAlert = false;
-                this.moveLeft();
+                if (!this.isDead) this.moveLeft();
                 if (distance <= 200) {
                     this.isAttacking = true;
                     this.isWalking = false;
-                    if (Date.now() > this.nextAttackSoundTime) {
+                    if (!this.isDead && Date.now() > this.nextAttackSoundTime) {
                         this.assetManager.playSound('attack');
                         this.nextAttackSoundTime = Date.now() + 1000 + Math.random() * 2000; 
                     }   
@@ -140,7 +131,7 @@ class Endboss extends AnimatedGameObject {
             if (distance <= 100 ) {
                 this.isAttacking = true;
                 this.isAlert = false;
-                if (Date.now() > this.nextAttackSoundTime) {
+                if (!this.isDead && Date.now() > this.nextAttackSoundTime) {
                     this.assetManager.playSound('attack');
                     this.nextAttackSoundTime = Date.now() + 1000 + Math.random() * 2000; 
                 }

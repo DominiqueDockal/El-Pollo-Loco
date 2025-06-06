@@ -47,22 +47,24 @@ class Level {
     }
 
     createBackground(canvas, assetManager) {
-        const backgroundAsset = window.ASSETS.background[0];
+        const backgroundMetadata = assetManager.getAssetsMetadata('background');
+        if (backgroundMetadata.length === 0) return; 
+        const backgroundAsset = backgroundMetadata[0];
         const canvasHeight = canvas.clientHeight;
         const aspectRatio = backgroundAsset.width / backgroundAsset.height;
         const backgroundWidth = Math.floor(canvasHeight * aspectRatio);
         const backgroundCount = Math.ceil(this.length / backgroundWidth);
-        const backgroundImagePaths = window.ASSETS.background.map(imgObj => imgObj.src || imgObj);    
+        const backgroundImagePaths = assetManager.getImagePathsByType('background');
         for (let i = -1; i < backgroundCount; i++) {
             const currentX = i * backgroundWidth;
             const imageIndex = (i + 1) % backgroundImagePaths.length;
             const selectedImagePath = backgroundImagePaths[imageIndex];
             const background = new Background(currentX, 0, canvas, assetManager);
-            background.currentImagePath = selectedImagePath; 
+            background.setImage(selectedImagePath); 
             this.gameObjects.push(background);
         }
     }
-
+    
     createClouds(canvas, assetManager) {
         const levelValue = this.getLevelValue();
         const canvasWidth = canvas.clientWidth;

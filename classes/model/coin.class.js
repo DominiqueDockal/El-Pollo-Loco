@@ -14,7 +14,8 @@ class Coin extends AnimatedGameObject {
     }
     
     animate() {
-        super.animateFrames(window.ASSETS.coin.length);
+        const frameCount = this.assetManager.getAssetCount(this.type);
+        super.animateFrames(frameCount);
     }
 
     collected() {

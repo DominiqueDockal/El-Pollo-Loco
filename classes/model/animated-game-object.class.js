@@ -2,8 +2,10 @@ class AnimatedGameObject extends GameObject {
     static randomSpeed(min = 1, max = 1) {
         return Math.random() * (max - min) + min;
     }
-
     constructor(x, y, canvas, assetManager, assetType, speed = 1) {
+        if (new.target === AnimatedGameObject) {
+            throw new TypeError('Cannot instantiate abstract class AnimatedGameObject directly');
+        }
         super(x, y, canvas, assetManager, assetType);
         this.speed = speed;
         this.speedY = 0;         
@@ -19,14 +21,6 @@ class AnimatedGameObject extends GameObject {
     
     moveRight() {
         this.x += this.speed;
-    }
-
-    jump() {
-        if (this.isGrounded) {
-            this.speedY = this.jumpForce;
-            this.isGrounded = false;
-            this.assetManager.playSound('jumping');
-        }
     }
 
     updatePhysics() {

@@ -11,6 +11,8 @@ class GameObject {
         this.y = y;
         this.height = 0;
         this.width = 0;
+        this.naturalWidth = 0;
+        this.naturalHeight = 0;
         this.aspectRatio = 0;
         this.type = assetType;
         this.currentImagePath = null;
@@ -20,20 +22,19 @@ class GameObject {
         this.isFixed = false;
         this.scale = 1;
         this.setNaturalDimensions();
+        this.currentImageIndex = 0;
     }
 
     setNaturalDimensions() {
-        const assets = window.ASSETS || {};
-        if (assets[this.type] && Array.isArray(assets[this.type])) {
-            const firstAsset = assets[this.type][0]; 
-            if (firstAsset && firstAsset.width && firstAsset.height) {
-                this.naturalWidth = firstAsset.width;
-                this.naturalHeight = firstAsset.height;
-                this.aspectRatio = this.naturalWidth / this.naturalHeight;
-            }
+        const assets = this.assetManager.getAssetsMetadata(this.type);
+        if (assets.length > 0) {
+            const firstAsset = assets[0];
+            this.naturalWidth = firstAsset.width;
+            this.naturalHeight = firstAsset.height;
+            this.aspectRatio = this.naturalWidth / this.naturalHeight;
         }
     }
-
+        
     setDimensions(scale) {
         this.height = scale * this.canvas.clientHeight;
         this.width =Math.ceil(this.height * this.aspectRatio);
@@ -62,10 +63,13 @@ class GameObject {
     }
 
     setImageByIndex(index = this.currentImageIndex, assetType = this.type) {
-        const assets = window.ASSETS[assetType] || [];
-        if (assets[index] && assets[index].src) { 
-            this.setImage(assets[index].src);
+        const asset = this.assetManager.getAssetByIndex(assetType, index);
+        if (asset?.src) {
+            this.setImage(asset.src);
+        }
     }
-    }
+    
 
 }
+
+

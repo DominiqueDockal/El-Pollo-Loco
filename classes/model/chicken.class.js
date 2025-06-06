@@ -32,7 +32,8 @@ class Chicken extends AnimatedGameObject {
             }
             return; 
         }  
-        super.animateFrames(window.ASSETS.chicken_walk.length); 
+        const frameCount = this.assetManager.getAssetCount('chicken_walk');
+        super.animateFrames(frameCount);
         this.moveLeft();
     }
     
