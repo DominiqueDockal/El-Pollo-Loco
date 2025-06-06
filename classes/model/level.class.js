@@ -85,9 +85,7 @@ class Level {
         const startY = canvas.clientHeight - 0.85 * canvas.clientHeight; 
         this.endboss = new Endboss(startX, startY, canvas, assetManager);
         this.gameObjects.push(this.endboss);
-        if (this.endboss) {
-            this.endboss.setCharacter(this.character);
-        }
+        if (this.endboss) this.endboss.setCharacter(this.character);  
     }
   
     createStatusbars(canvas, assetManager) {
@@ -101,12 +99,8 @@ class Level {
         this.coinBar = Statusbar.createCoinBar(startX, startY+ (statusbarSpacing * 2), canvas, assetManager, 0);
         this.endbossBar = Statusbar.createEndbossBar(endbossX, endbossY, canvas, assetManager, 100);
         this.gameObjects.push(this.healthBar, this.coinBar, this.bottleBar, this.endbossBar);
-        if (this.character) {
-            this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
-        }
-        if (this.endboss) {
-            this.endboss.setEndbossBar(this.endbossBar);
-        }
+        if (this.character) this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
+        if (this.endboss) this.endboss.setEndbossBar(this.endbossBar);
     }
  
     createBottles(canvas, assetManager) {
@@ -187,11 +181,8 @@ class Level {
     } 
 
     spawnChicken(canvas, assetManager) {
-        const spawnedChickens = this.gameObjects.filter(obj => 
-            (obj instanceof Chicken || obj instanceof ChickenSmall) && obj.isSpawned === true
-        ).length;
+        const spawnedChickens = this.gameObjects.filter(obj => (obj instanceof Chicken || obj instanceof ChickenSmall) && obj.isSpawned === true).length;
         if (spawnedChickens >= this.spawning.maxChickens) return;
-        
         const spawnX = this.length;
         if (Math.random() < 0.6) {
             const chickenY = canvas.clientHeight - 0.32 * canvas.clientHeight;

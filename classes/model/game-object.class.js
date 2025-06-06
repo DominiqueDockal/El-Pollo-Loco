@@ -1,8 +1,7 @@
 class GameObject {
     constructor(x, y, canvas, assetManager, assetType = 'default') {
-        if (new.target === GameObject) {
-            throw new TypeError('Cannot instantiate abstract class GameObject directly');
-        } 
+        if (new.target === GameObject) throw new TypeError('Cannot instantiate abstract class GameObject directly');
+        
         this.originalX = x;
         this.originalY = y;
         this.originalCanvasWidth = canvas.width;
@@ -45,9 +44,7 @@ class GameObject {
         const scaleY = this.canvas.height / this.originalCanvasHeight;
         this.x = this.originalX * scaleX;
         this.y = this.originalY * scaleY;
-        if (this.scale && typeof this.setDimensions === 'function') {
-            this.setDimensions(this.scale);
-        }
+        if (this.scale && typeof this.setDimensions === 'function') this.setDimensions(this.scale);
     } 
 
     get img() {
@@ -64,9 +61,7 @@ class GameObject {
 
     setImageByIndex(index = this.currentImageIndex, assetType = this.type) {
         const asset = this.assetManager.getAssetByIndex(assetType, index);
-        if (asset?.src) {
-            this.setImage(asset.src);
-        }
+        if (asset?.src) this.setImage(asset.src);
     }
     
 

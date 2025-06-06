@@ -3,9 +3,8 @@ class AnimatedGameObject extends GameObject {
         return Math.random() * (max - min) + min;
     }
     constructor(x, y, canvas, assetManager, assetType, speed = 1) {
-        if (new.target === AnimatedGameObject) {
-            throw new TypeError('Cannot instantiate abstract class AnimatedGameObject directly');
-        }
+        if (new.target === AnimatedGameObject) throw new TypeError('Cannot instantiate abstract class AnimatedGameObject directly');
+        
         super(x, y, canvas, assetManager, assetType);
         this.speed = speed;
         this.speedY = 0;         
@@ -38,17 +37,13 @@ class AnimatedGameObject extends GameObject {
     animateFrames(maxFrames, shouldLoop = true) {
         const currentTime = Date.now();
         if (currentTime - this.lastAnimationTime >= this.animationSpeed) {
-            if (shouldLoop) {
-                this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
-            } else {
-                if (this.currentImageIndex < maxFrames - 1) {
-                    this.currentImageIndex++;
-                }
-            }
+            if (shouldLoop) this.currentImageIndex = (this.currentImageIndex + 1) % maxFrames;
+            else if (this.currentImageIndex < maxFrames - 1) this.currentImageIndex++;
             this.setCurrentImage();
             this.lastAnimationTime = currentTime;
         }
     }
+    
       
 
 }

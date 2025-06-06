@@ -45,20 +45,20 @@ class Endboss extends AnimatedGameObject {
         this.isHurt = true;
         this.health = Math.max(0, this.health - damage);
         this.lastHitTime = now;
-        if (!this.isDead) {
-            this.assetManager.playSound('endboss_hurt');
-        }
+        if (!this.isDead) this.assetManager.playSound('endboss_hurt');
         if (this.endbossBar) {
             const percent = (this.health / this.maxHealth) * 100;
             const step = Math.floor(percent / 20) * 20;
             this.endbossBar.setValue(step);
-            if (step === 0) {
-                this.isDead = true;
-                this.deathTime = now;
-                this.assetManager.stopSound('endboss_hurt');
-                this.assetManager.playSound('endboss_dead');
-            }
+            if (step === 0) this.handleDeath(now);
         }
+    }
+    
+    handleDeath(now) {
+        this.isDead = true;
+        this.deathTime = now;
+        this.assetManager.stopSound('endboss_hurt');
+        this.assetManager.playSound('endboss_dead');
     }
 
     animate() {
@@ -75,12 +75,9 @@ class Endboss extends AnimatedGameObject {
             this.currentAssetType = assetType;
         }
         super.animateFrames(frameCount);
-        if (this.isHurt && this.currentImageIndex >= frameCount - 1) {
-            this.isHurt = false;
-        }
+        if (this.isHurt && this.currentImageIndex >= frameCount - 1) this.isHurt = false;
     }
     
-
     handleState() {
         if (!this.character) return;
         if (this.isDead) return;
@@ -91,57 +88,61 @@ class Endboss extends AnimatedGameObject {
             this.initialEngageTime = Date.now();
         }
         const timeSinceEngagement = Date.now() - this.initialEngageTime;
-        const shouldReturn = 
-            (this.hasEngaged && timeSinceEngagement >= this.returnCooldown) || 
-            (this.hasEngaged && distance > 500);
+        const shouldReturn = (this.hasEngaged && timeSinceEngagement >= this.returnCooldown) || (this.hasEngaged && distance > 500);
         if (shouldReturn && !this.isReturning) {
             this.isReturning = true;
             this.otherDirection = true;
         }
-        if (this.isReturning) {
-            this.handleReturn();
-        } else {
-            this.handleNormalState(distance, maxLeft);
-        }
+        if (this.isReturning) this.handleReturn();
+        else this.handleNormalState(distance, maxLeft);
     }
  
     handleNormalState(distance, maxLeft) {
-        if (this.x > maxLeft) {
-            if (distance <= 500) {
-                this.isWalking = true;
-                this.isAlert = false;
-                if (!this.isDead) this.moveLeft();
-                if (distance <= 200) {
-                    this.isAttacking = true;
-                    this.isWalking = false;
-                    if (!this.isDead && Date.now() > this.nextAttackSoundTime) {
-                        this.assetManager.playSound('attack');
-                        this.nextAttackSoundTime = Date.now() + 1000 + Math.random() * 2000; 
-                    }   
-                } else {
-                    this.isAttacking = false;
-                }
-            } else {
-                this.isWalking = false;
-                this.isAttacking = false;
-                this.isAlert = true;
-            }
-        } else {
+        const now = Date.now();
+        if (this.x > maxLeft) this.handleInRangeState(distance, now);
+        else {
             this.isWalking = false;
-            if (distance <= 100 ) {
+            if (distance <= 100) {
                 this.isAttacking = true;
                 this.isAlert = false;
-                if (!this.isDead && Date.now() > this.nextAttackSoundTime) {
-                    this.assetManager.playSound('attack');
-                    this.nextAttackSoundTime = Date.now() + 1000 + Math.random() * 2000; 
-                }
+                this.handleAttack(now);
             } else {
                 this.isAttacking = false;
                 this.isAlert = true;
             }
         }
-    } 
-  
+    }
+    
+    handleInRangeState(distance, now) {
+        if (distance <= 500) {
+            this.handleWalk();
+            if (distance <= 200) {
+                this.isAttacking = true;
+                this.isWalking = false;
+                this.handleAttack(now);
+            } else this.isAttacking = false;
+        } else this.handleAlert();
+    }
+    
+    handleAttack(now) {
+        if (!this.isDead && now > this.nextAttackSoundTime) {
+            this.assetManager.playSound('attack'); 
+            this.nextAttackSoundTime = now + 1000 + Math.random() * 2000;
+        }
+    }
+    
+    handleWalk() {
+        this.isWalking = true;
+        this.isAlert = false;
+        if (!this.isDead) this.moveLeft();
+    }
+
+    handleAlert() {
+        this.isWalking = false;
+        this.isAttacking = false;
+        this.isAlert = true;
+    }
+
     handleReturn() {
         if (this.x < this.startX) {
             this.moveRight();
@@ -156,7 +157,6 @@ class Endboss extends AnimatedGameObject {
             this.hasEngaged = false;
         }
     }
-    
 
     
 }

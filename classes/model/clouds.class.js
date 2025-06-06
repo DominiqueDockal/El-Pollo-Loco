@@ -13,15 +13,11 @@ class Cloud extends AnimatedGameObject {
         const cloudAsset = clouds.find(cloud => 
             cloud.src.includes(`${this.cloudIndex}_level${this.level}`)
         );
-        if (cloudAsset) {
-            this.setImage(cloudAsset.src);
-        }
+        if (cloudAsset) this.setImage(cloudAsset.src);
     }
 
     animate() {
         this.moveLeft();
-        if (this.x < -this.width) { 
-            this.x = this.canvas.clientWidth; 
-        }
+        if (this.x < -this.width) this.x = this.canvas.clientWidth; 
     }
 }

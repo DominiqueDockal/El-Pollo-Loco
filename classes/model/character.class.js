@@ -92,9 +92,7 @@ class Character extends AnimatedGameObject {
             this.currentAssetType = assetType;
         }
         super.animateFrames(frameCount);
-        if (this.isHurt && this.currentImageIndex >= frameCount - 1) {
-            this.isHurt = false;
-        }
+        if (this.isHurt && this.currentImageIndex >= frameCount - 1) this.isHurt = false;
     }
 
     setCurrentImage() {
@@ -113,13 +111,8 @@ class Character extends AnimatedGameObject {
             if(this.x < this.levelLength-this.rightEnd) this.moveRight();
             
         }
-        if (this.inputDevice.isPressed('JUMP')) {
-            this.jump();
-            
-        }
-        if (this.inputDevice.wasPressed('ACTION')) { 
-            this.throw();
-        }
+        if (this.inputDevice.isPressed('JUMP')) this.jump();
+        if (this.inputDevice.wasPressed('ACTION')) this.throw();
     }
 
    checkSleepState() {
@@ -142,26 +135,26 @@ class Character extends AnimatedGameObject {
 
     hurt(damage) {
         const now = Date.now();
-        if (now - this.lastHitTime < this.hitCooldown) return; 
+        if (now - this.lastHitTime < this.hitCooldown) return;
         this.isHurt = true;
         this.health = Math.max(0, this.health - damage);
         this.lastHitTime = now;
-        if (!this.isDead) {
-            this.assetManager.playSound('character_hurt');
-        }
+        if (!this.isDead) this.assetManager.playSound('character_hurt');
         if (this.healthBar) {
             const percent = (this.health / this.maxHealth) * 100;
             const step = Math.floor(percent / 20) * 20;
             this.healthBar.setValue(step);
-            if (step === 0) {
-                this.isDead = true;
-                this.deathTime = now;
-                this.assetManager.stopSound('character_hurt');
-                this.assetManager.playSound('character_dead')
-            }
+            if (step === 0) this.handleDeath(now);
         }
-             
     }
+    
+    handleDeath(now) {
+        this.isDead = true;
+        this.deathTime = now;
+        this.assetManager.stopSound('character_hurt');
+        this.assetManager.playSound('character_dead');
+    }
+    
 
     throw() {
         if (this.collectedBottles > 0) {
@@ -172,7 +165,6 @@ class Character extends AnimatedGameObject {
             this.collectedBottles--;
             this.remainingBottles--;
             this.updateBottleBar();
-
         }
     }
 

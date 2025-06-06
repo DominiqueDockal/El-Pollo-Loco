@@ -6,9 +6,7 @@ async function startGame() {
     document.getElementById('end_screen').classList.add('d-none');
     document.getElementById('game_control_left').classList.add('d-none'); 
     document.getElementById('game_control_right').classList.add('d-none');
-    if (gameInstance) {
-        gameInstance = null;
-    }
+    if (gameInstance) gameInstance = null;
     gameInstance = new Game('canvas');
     try {
         await gameInstance.init(); 
@@ -39,11 +37,8 @@ function restartGame(){
 function toggleHowToPlayOverlay(show) {
     const overlay = document.getElementById('how_to_play');
     if (!overlay) return;
-    if (typeof show === 'boolean') {
-        overlay.classList.toggle('d-none', !show);
-    } else {
-        overlay.classList.toggle('d-none');
-    }
+    if (typeof show === 'boolean') overlay.classList.toggle('d-none', !show);
+    else overlay.classList.toggle('d-none');
 }
 
 function howToPlayOverlay(event) {
@@ -63,9 +58,7 @@ function toggleSoundIcon(btn) {
 
 function toggleGameSound() {
     if (window.game && window.game.assetManager) {
-        if (window.game.isPaused) {
-            return window.game.assetManager.isSoundEnabled; 
-        }
+        if (window.game.isPaused) return window.game.assetManager.isSoundEnabled; 
         const soundEnabled = window.game.assetManager.toggleSound();
         return soundEnabled;
     }
@@ -94,20 +87,13 @@ function toggleGamePause() {
             soundBtn.disabled = window.game.isPaused;
         }
         const character = window.game.currentLevel.gameObjects.find(obj => obj instanceof Character);
-        if (character) {
-            character.lastActiveTime = Date.now(); 
-        } 
+        if (character) character.lastActiveTime = Date.now(); 
     }
     if (window.game.assetManager) {
         if (window.game.isPaused) {
             window.game.assetManager.stopBackgroundMusic();
             window.game.assetManager.stopAllSounds();
-        } else {
-            setTimeout(() => {
-                window.game.assetManager.playBackgroundMusic();
-            }, 100);
-            
-        }
+        } else {setTimeout(() => {window.game.assetManager.playBackgroundMusic(); }, 100);}
     }
 }
 

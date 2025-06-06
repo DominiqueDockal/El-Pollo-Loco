@@ -55,22 +55,9 @@ function updateCanvasCssVars() {
 }
 
 function updateGameObjectScales() {
-    //debugCanvasResizeSystem(); //später weg 
     const gameObjects = window.game?.currentLevel?.gameObjects;
-    if (gameObjects && Array.isArray(gameObjects)) {
-        gameObjects.forEach(obj => {
-            if (obj.updateDimensions) {
-                obj.updateDimensions();
-            }
-        });
-    
-        /* console.log('\n=== DEBUG AFTER RESIZE ==='); //später weg
-        gameObjects
-            .filter(obj => obj instanceof Background)
-            .forEach(obj => debugGameObjectDimensions(obj)); */
-    } else {
-        console.log('No gameObjects found or game not initialized yet');
-    }
+    if (gameObjects && Array.isArray(gameObjects)) gameObjects.forEach(obj => {if (obj.updateDimensions) obj.updateDimensions();});
+    else console.log('No gameObjects found or game not initialized yet');
 }
 
 

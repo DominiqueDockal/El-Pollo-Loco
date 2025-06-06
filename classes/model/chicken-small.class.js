@@ -17,19 +17,14 @@ class ChickenSmall extends AnimatedGameObject {
     }
 
     setCurrentImage() {
-        if (this.isDead) {
-            super.setImageByIndex(0, 'chicken_small_dead');
-        } else {
-            super.setImageByIndex(this.currentImageIndex, 'chicken_small_walk');
-        }
+        if (this.isDead) super.setImageByIndex(0, 'chicken_small_dead');
+        else super.setImageByIndex(this.currentImageIndex, 'chicken_small_walk');
     }
 
     animate() {
         if (this.isDead) {
             const currentTime = Date.now();
-            if (currentTime - this.deathTime >= this.deathDuration) {
-                this.markedForRemoval = true;
-            }
+            if (currentTime - this.deathTime >= this.deathDuration) this.markedForRemoval = true;
             return; 
         } 
         const frameCount = this.assetManager.getAssetCount('chicken_small_walk');

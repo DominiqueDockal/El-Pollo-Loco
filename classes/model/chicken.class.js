@@ -17,21 +17,16 @@ class Chicken extends AnimatedGameObject {
     }
 
     setCurrentImage() {
-        if (this.isDead) {
-            super.setImageByIndex(0, 'chicken_dead');
-        } else {
-            super.setImageByIndex(this.currentImageIndex, 'chicken_walk'); 
-        }
+        if (this.isDead) super.setImageByIndex(0, 'chicken_dead');
+        else super.setImageByIndex(this.currentImageIndex, 'chicken_walk');    
     }
     
     animate() {
         if (this.isDead) {
             const currentTime = Date.now();
-            if (currentTime - this.deathTime >= this.deathDuration) {
-                this.markedForRemoval = true;
-            }
-            return; 
-        }  
+            if (currentTime - this.deathTime >= this.deathDuration) this.markedForRemoval = true;
+            return;
+        }
         const frameCount = this.assetManager.getAssetCount('chicken_walk');
         super.animateFrames(frameCount);
         this.moveLeft();

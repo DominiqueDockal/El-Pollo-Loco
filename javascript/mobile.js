@@ -21,16 +21,13 @@ function isMobileOrTabletSize() {
 }
   
 function updateRotateOverlay() {
-    const overlay = document.getElementById('rotate-device-overlay');
-    if (isTouchDevice() && isMobileOrTabletSize() && isMobileUA() || isSurfaceOrIPadPro()) {
-      if (window.matchMedia("(orientation: portrait)").matches) {
-        overlay.style.display = 'flex';
-      } else {
-        overlay.style.display = 'none';
-      }
-    } else {
+  const overlay = document.getElementById('rotate-device-overlay');
+  if (isTouchDevice() && isMobileOrTabletSize() && isMobileUA() || isSurfaceOrIPadPro()) {
+      if (window.matchMedia("(orientation: portrait)").matches) overlay.style.display = 'flex';
+      else overlay.style.display = 'none';
+  } else {
       overlay.style.display = 'none';
-    }
+  }
 }
 function updateDisplaySettings() {
     updateRotateOverlay();

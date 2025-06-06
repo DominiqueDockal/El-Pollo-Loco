@@ -20,11 +20,8 @@ class CanvasView extends View {
     
     renderGameObject(gameObject) {
         if (!gameObject.img?.complete || gameObject.width === 0) return;
-        if (gameObject.otherDirection) {
-            this.flipImage(gameObject);  
-        } else {
-            this.context.drawImage(gameObject.img,gameObject.x,gameObject.y,gameObject.width,gameObject.height);
-        }
+        if (gameObject.otherDirection) this.flipImage(gameObject);  
+        else this.context.drawImage(gameObject.img,gameObject.x,gameObject.y,gameObject.width,gameObject.height);
     }
      
     clear() {

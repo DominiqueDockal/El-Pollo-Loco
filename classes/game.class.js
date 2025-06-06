@@ -52,9 +52,7 @@ class Game {
             const animatedBottle = this.currentLevel.gameObjects.find(obj => obj instanceof AnimatedBottle);
             if (character) {
                 if (character.isDead && character.deathTime && (currentTime - character.deathTime >= 1500)) this.gameOver();
-                const offset = 100;
-                const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
-                this.view.camera_x = Math.max(-character.x + offset, maxCameraX);
+                this.updateCamera(character);
                 if (this.currentLevel.endbossBar && !this.hasEnoughBottlesToKillBoss(character, this.currentLevel)) this.gameOver();
             }
             if (endboss?.isDead && endboss.deathTime && (currentTime - endboss.deathTime >= 1000)) this.victory();
@@ -67,36 +65,35 @@ class Game {
         }
     }
 
+    updateCamera(character) {
+        const offset = 100;
+        const maxCameraX = -(this.currentLevel.length - this.view.canvas.width) + offset;
+        this.view.camera_x = Math.max(-character.x + offset, maxCameraX);
+    }
+    
+
     hasEnoughBottlesToKillBoss(character, level) {
-        if (!level.endbossBar || typeof level.endbossBar.value !== 'number') {
-            return false; 
-        }
+        if (!level.endbossBar || typeof level.endbossBar.value !== 'number') return false; 
         const bossHealthPercent = level.endbossBar.value;
         const bottlesNeeded = Math.ceil(bossHealthPercent / 20); 
         const hasEnough = character.remainingBottles >= bottlesNeeded;
         return hasEnough;
     }
     
-
     checkCollisions(character) {
         this.currentLevel.gameObjects.forEach(obj => {
             if (obj === character) return;
             const isGeneralCollision = this.isColliding(character, obj);
             const isTopCollision = (obj instanceof Chicken || obj instanceof ChickenSmall) 
                 && this.isJumpingOn(character, obj);
-            if (isGeneralCollision || isTopCollision) {
-                this.handleCollision(character, obj, isTopCollision ? 'top' : 'side');
-            }
+            if (isGeneralCollision || isTopCollision) this.handleCollision(character, obj, isTopCollision ? 'top' : 'side');
         });
     }
 
     checkBottleCollisions(animatedBottle) {
         this.currentLevel.gameObjects.forEach(obj => {
             if (obj === animatedBottle || obj instanceof Character) return;
-            
-            if (this.isColliding(animatedBottle, obj)) {
-                this.handleBottleCollision(animatedBottle, obj);
-            }
+            if (this.isColliding(animatedBottle, obj)) this.handleBottleCollision(animatedBottle, obj);
         });
     }
     
@@ -118,13 +115,8 @@ class Game {
     }
 
     handleBottleCollision(animatedBottle, obj) {
-        if (obj instanceof Endboss) {
-            if (!obj.isDead) obj.hurt(20); 
-        }
-        if (obj instanceof Chicken || obj instanceof ChickenSmall) {
-            if (!obj.isDead) obj.kill();
-        }
-
+        if (obj instanceof Endboss) if (!obj.isDead) obj.hurt(20); 
+        if (obj instanceof Chicken || obj instanceof ChickenSmall) if (!obj.isDead) obj.kill();
     }
 
     handleChickenCollision(character, chicken, collisionType) {
@@ -211,9 +203,7 @@ class Game {
     }
 
     render() {
-        if (this.currentLevel && this.assetManager.isLoaded) {
-            this.view.render(this.currentLevel.gameObjects);
-        }
+        if (this.currentLevel && this.assetManager.isLoaded) this.view.render(this.currentLevel.gameObjects);
     }
 
     gameOver() {

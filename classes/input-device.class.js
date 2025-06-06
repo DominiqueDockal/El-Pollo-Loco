@@ -1,8 +1,7 @@
 class InputDevice {
     constructor() {
-        if (new.target === InputDevice) {
-            throw new Error("InputDevice is an abstract class and cannot be instantiated directly");
-        }       
+        if (new.target === InputDevice) throw new Error("InputDevice is an abstract class and cannot be instantiated directly");
+           
         this.currentInput = new Map(); 
         this.previousInput = new Map();
     }

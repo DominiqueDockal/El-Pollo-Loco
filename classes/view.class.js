@@ -1,8 +1,6 @@
 class View {
     constructor() {
-        if (new.target === View) {
-            throw new Error("View is an abstract class and cannot be instantiated directly");
-        }
+        if (new.target === View) throw new Error("View is an abstract class and cannot be instantiated directly");
     }
     
     render(gameObjects) {

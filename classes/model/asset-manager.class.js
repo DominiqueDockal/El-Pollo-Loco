@@ -14,11 +14,8 @@ class AssetManager {
         Object.entries(assets).forEach(([key, assetArray]) => {
             if (Array.isArray(assetArray)) {
                 assetArray.forEach(assetObj => {
-                    if (key.startsWith('sounds_')) {
-                        loadPromises.push(this.loadSound(assetObj));
-                    } else {
-                        loadPromises.push(this.loadImage(assetObj));
-                    }
+                    if (key.startsWith('sounds_')) loadPromises.push(this.loadSound(assetObj));
+                    else loadPromises.push(this.loadImage(assetObj));
                 });
             }
         });   
@@ -36,9 +33,7 @@ class AssetManager {
                 audio.src = soundPath;
                 audio.preload = 'auto';
             });
-            if (assetObj.name) {
-                this.soundCache.set(assetObj.name, {audio: audio, volume: assetObj.volume || 1.0,loop: assetObj.loop || false});
-            }
+            if (assetObj.name) this.soundCache.set(assetObj.name, {audio: audio, volume: assetObj.volume || 1.0,loop: assetObj.loop || false});
         } catch (error) {
             console.warn(`Failed to load sound: ${soundPath}`, error);
         }
@@ -58,7 +53,6 @@ class AssetManager {
             console.warn(`Failed to load image: ${imagePath}`, error);
         }
     }
-    
 
     getAssetsMetadata(type) {
         return window.ASSETS[type] || [];
@@ -94,14 +88,8 @@ class AssetManager {
             const audio = soundData.audio.cloneNode(true);
             audio.volume = soundData.volume;
             audio.loop = soundData.loop;
-            audio.play().catch(error => {
-                if (error.name !== 'AbortError') { 
-                    console.error('Sound play failed:', error);
-                }
-            });
-            if (!this.activeSounds.has(soundName)) {
-                this.activeSounds.set(soundName, []);
-            }
+            audio.play().catch(error => {if (error.name !== 'AbortError') console.error('Sound play failed:', error);});
+            if (!this.activeSounds.has(soundName)) this.activeSounds.set(soundName, []);
             this.activeSounds.get(soundName).push(audio);
             audio.addEventListener('ended', () => {
                 const sounds = this.activeSounds.get(soundName);
@@ -121,15 +109,9 @@ class AssetManager {
                 this.backgroundMusic = soundData.audio.cloneNode(true);
                 this.backgroundMusic.volume = soundData.volume;
                 this.backgroundMusic.loop = soundData.loop;
-                this.backgroundMusic.play().catch(error => {
-                    console.log('Background music play failed:', error);
-                });
+                this.backgroundMusic.play().catch(error => {console.log('Background music play failed:', error);});
             } else if (this.backgroundMusic && this.backgroundMusic.paused) {
-                this.backgroundMusic.play().catch(error => {
-                    if (error.name !== 'AbortError') {
-                        console.log('Background music play failed:', error);
-                    }
-                });
+                this.backgroundMusic.play().catch(error => {if (error.name !== 'AbortError') console.log('Background music play failed:', error);});
             }
         }
     }
@@ -142,11 +124,8 @@ class AssetManager {
 
     toggleSound() {
         this.isSoundEnabled = !this.isSoundEnabled;
-        if (this.isSoundEnabled) {
-            this.playBackgroundMusic();
-        } else {
-            this.stopBackgroundMusic();
-        }
+        if (this.isSoundEnabled) this.playBackgroundMusic();
+        else this.stopBackgroundMusic();
         return this.isSoundEnabled;
     }
 

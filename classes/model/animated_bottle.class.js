@@ -21,31 +21,23 @@ class AnimatedBottle extends AnimatedGameObject {
     }
 
     setCurrentImage() {
-        if (this.isSplashing) {
-            super.setImageByIndex(this.currentImageIndex, 'splash');
-        } else {
-            super.setImageByIndex(this.currentImageIndex, 'bottle_rotation');
-        }
+        if (this.isSplashing) super.setImageByIndex(this.currentImageIndex, 'splash');
+        else super.setImageByIndex(this.currentImageIndex, 'bottle_rotation');
     }
 
     animate() {
-        if (this.isGrounded && !this.isSplashing) { 
-            this.handleGroundHit();
-        }
+        if (this.isGrounded && !this.isSplashing) this.handleGroundHit();
         if (!this.isSplashing) {
             const frameCount = this.assetManager.getAssetCount('bottle_rotation');
             super.animateFrames(frameCount);
         } else {
             const currentTime = Date.now();
-            if (currentTime - this.splashStartTime >= this.splashDuration) {
-                this.markedForRemoval = true;
-            }
+            if (currentTime - this.splashStartTime >= this.splashDuration) this.markedForRemoval = true;
             const splashFrameCount = this.assetManager.getAssetCount('splash');
             super.animateFrames(splashFrameCount, false);
         }
     }
     
-
     handleGroundHit() {
         this.isSplashing = true;
         this.currentAssetType = 'splash';
