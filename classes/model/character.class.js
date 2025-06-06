@@ -155,7 +155,6 @@ class Character extends AnimatedGameObject {
         this.assetManager.playSound('character_dead');
     }
     
-
     throw() {
         if (this.collectedBottles > 0) {
             const direction = this.otherDirection ? -1 : 1; 
