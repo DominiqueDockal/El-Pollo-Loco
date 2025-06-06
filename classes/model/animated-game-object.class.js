@@ -4,14 +4,15 @@ class AnimatedGameObject extends GameObject {
     }
     constructor(x, y, canvas, assetManager, assetType, speed = 1) {
         if (new.target === AnimatedGameObject) throw new TypeError('Cannot instantiate abstract class AnimatedGameObject directly');
-        
+
         super(x, y, canvas, assetManager, assetType);
         this.speed = speed;
         this.speedY = 0;         
         this.gravity = 0.5;   
         this.isGrounded = true;
         this.jumpForce = -12; 
-        this.groundY = y;    
+        this.groundY = y; 
+        this.lastAnimationTime = 0;   
     }
 
     moveLeft() {
