@@ -1,4 +1,22 @@
+/**
+ * Animated bottle game object with rotation and splash animation
+ * @class AnimatedBottle
+ * @extends AnimatedGameObject
+ * @description Represents a bottle that rotates in the air, falls with physics, and splashes on ground impact
+ */
 class AnimatedBottle extends AnimatedGameObject {
+    /**
+     * Creates a new AnimatedBottle instance
+     * @constructor
+     * @param {number} x - X position on the canvas
+     * @param {number} y - Y position on the canvas
+     * @param {HTMLCanvasElement} canvas - Canvas element for rendering
+     * @param {AssetManager} assetManager - Asset manager for loading assets and sounds
+     * @param {number} groundY - Y coordinate of the ground level
+     * @param {number} speedX - Horizontal speed of the bottle
+     * @param {number} [animationSpeed=100] - Speed of animation frame changes in milliseconds
+     * @description Initializes bottle with physics properties, animation, and splash effect
+     */
     constructor(x, y, canvas, assetManager, groundY, speedX, animationSpeed = 100) {
         super(x, y, canvas, assetManager, 'bottle_rotation');
         this.scale = 0.2;
@@ -19,12 +37,20 @@ class AnimatedBottle extends AnimatedGameObject {
         this.lastAnimationTime = Date.now(); 
         
     }
-
+    
+    /**
+     * Sets the current image frame based on splash state
+     * @description Uses splash frames if splashing, otherwise bottle rotation frames
+     */
     setCurrentImage() {
         if (this.isSplashing) super.setImageByIndex(this.currentImageIndex, 'splash');
         else super.setImageByIndex(this.currentImageIndex, 'bottle_rotation');
     }
-
+    
+    /**
+     * Animates the bottle or splash animation
+     * @description Plays rotation animation while airborne, splash animation on ground
+     */
     animate() {
         if (this.isGrounded && !this.isSplashing) this.handleGroundHit();
         if (!this.isSplashing) {
@@ -38,6 +64,10 @@ class AnimatedBottle extends AnimatedGameObject {
         }
     }
     
+     /**
+     * Handles the bottle hitting the ground and starting splash animation
+     * @description Sets splash state, resets animation, and plays splash sound
+     */
     handleGroundHit() {
         this.isSplashing = true;
         this.currentAssetType = 'splash';
@@ -46,7 +76,11 @@ class AnimatedBottle extends AnimatedGameObject {
         this.splashStartTime = Date.now();
         this.assetManager.playSound('bottle_smash');
     }
-
+    
+    /**
+     * Updates physics for bottle movement and collision
+     * @description Applies horizontal and vertical movement, gravity, and ground collision detection
+     */
     updatePhysics() {
         if (!this.isGrounded) {
             this.x += this.speedX; 
@@ -59,9 +93,5 @@ class AnimatedBottle extends AnimatedGameObject {
             }
         }
     }
-
-
-
-
 
 }

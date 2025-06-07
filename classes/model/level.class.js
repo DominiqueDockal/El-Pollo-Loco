@@ -1,4 +1,22 @@
+/**
+ * Game level containing all level-specific game objects and mechanics
+ * @class Level
+ * @description Manages level initialization, game object creation, positioning, and dynamic spawning mechanics
+ */
 class Level {
+    /**
+     * Creates a new Level instance
+     * @constructor
+     * @param {Object} levelData - Configuration object for the level
+     * @param {number} levelData.id - Unique identifier for the level
+     * @param {string} levelData.name - Display name of the level
+     * @param {number} levelData.length - Length of the level in pixels
+     * @param {number} levelData.bottleCount - Number of bottles to spawn
+     * @param {number} levelData.coinCount - Number of coins to spawn
+     * @param {number} levelData.chickenCount - Number of regular chickens to spawn
+     * @param {number} levelData.chickenSmallCount - Number of small chickens to spawn
+     * @description Initializes level properties and spawning configuration
+     */
     constructor(levelData) {
         this.id = levelData.id;
         this.name = levelData.name;
@@ -15,6 +33,13 @@ class Level {
         };
     }
     
+    /**
+     * Initializes the level by creating all game objects
+     * @param {HTMLCanvasElement} canvas - Canvas element for rendering
+     * @param {AssetManager} assetManager - Asset manager for loading assets
+     * @param {InputDevice} inputDevice - Input device for character control
+     * @description Creates and positions all level objects including background, characters, enemies, and collectibles
+     */
     initialize(canvas, assetManager,inputDevice) {
         this.gameObjects = [];
         this.createBackground(canvas, assetManager);
@@ -27,11 +52,25 @@ class Level {
         this.createChickens(canvas, assetManager);
         this.createChickenSmall(canvas, assetManager);
     }
-
+    
+     /**
+     * Gets the level value for asset selection
+     * @returns {number} The level ID or 1 as default
+     * @description Returns level identifier for level-specific asset loading
+     */
     getLevelValue() {
         return this.id || 1; 
     }
     
+     /**
+     * Generates a random position that maintains minimum distance from existing positions
+     * @param {number[]} usedPositions - Array of already used positions
+     * @param {number} minDistance - Minimum distance required between positions
+     * @param {number} range - Maximum range for position generation
+     * @param {number} minOffset - Minimum offset from start position
+     * @returns {number} Generated position that meets distance requirements
+     * @description Ensures proper spacing between game objects to prevent overlap
+     */
     generateRandomPosition(usedPositions, minDistance, range, minOffset) {
         let position;
         let attempts = 0;
@@ -45,7 +84,13 @@ class Level {
         );
         return position;
     }
-
+    
+    /**
+     * Creates repeating background images across the level length
+     * @param {HTMLCanvasElement} canvas - Canvas element for sizing calculations
+     * @param {AssetManager} assetManager - Asset manager for background assets
+     * @description Creates tiled background that covers the entire level length
+     */
     createBackground(canvas, assetManager) {
         const backgroundMetadata = assetManager.getAssetsMetadata('background');
         if (backgroundMetadata.length === 0) return; 
@@ -65,6 +110,12 @@ class Level {
         }
     }
     
+    /**
+     * Creates cloud objects for the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for cloud assets
+     * @description Creates level-appropriate clouds with different variants
+     */
     createClouds(canvas, assetManager) {
         const levelValue = this.getLevelValue();
         const canvasWidth = canvas.clientWidth;
@@ -72,14 +123,27 @@ class Level {
         const cloud_2 = new Cloud(canvasWidth, 0, canvas, assetManager, levelValue, 2, 0.15);
         this.gameObjects.push(cloud_1, cloud_2);
     }
-
+    
+    /**
+     * Creates the player character
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for character assets
+     * @param {InputDevice} inputDevice - Input device for character control
+     * @description Creates player character at level start position
+     */
     createCharacter(canvas, assetManager, inputDevice) {
         const startX = 0; 
         const startY = canvas.clientHeight - 0.7 * canvas.clientHeight; 
         this.character = new Character(startX, startY, canvas, assetManager, inputDevice, this);
         this.gameObjects.push(this.character);
     }
-
+    
+    /**
+     * Creates the level end boss
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for boss assets
+     * @description Creates end boss near the end of the level
+     */
     createEndboss(canvas, assetManager) {
         const startX = this.length - 500; 
         const startY = canvas.clientHeight - 0.85 * canvas.clientHeight; 
@@ -87,7 +151,13 @@ class Level {
         this.gameObjects.push(this.endboss);
         if (this.endboss) this.endboss.setCharacter(this.character);  
     }
-  
+    
+     /**
+     * Creates UI status bars for health, bottles, coins, and boss health
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for statusbar assets
+     * @description Creates fixed UI elements and connects them to character and boss
+     */
     createStatusbars(canvas, assetManager) {
         const startX = 0;
         const startY = 0;
@@ -102,7 +172,13 @@ class Level {
         if (this.character) this.character.setStatusBars(this.bottleBar, this.healthBar, this.coinBar);
         if (this.endboss) this.endboss.setEndbossBar(this.endbossBar);
     }
- 
+
+    /**
+     * Creates collectible bottles randomly positioned across the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for bottle assets
+     * @description Creates bottles with proper spacing and distance from level boundaries
+     */ 
     createBottles(canvas, assetManager) {
         if (this.bottleCount === 0) return;
         const bottleY = canvas.clientHeight - 0.31 * canvas.clientHeight;
@@ -119,6 +195,12 @@ class Level {
         }
     }
     
+    /**
+     * Creates collectible coins randomly positioned in the air across the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for coin assets
+     * @description Creates coins at random heights with proper spacing and boundary distances
+     */
     createCoins(canvas, assetManager) {
         if (this.coinCount === 0) return;
         const usedPositions = [];
@@ -136,7 +218,13 @@ class Level {
             this.gameObjects.push(coin);
         }
     }
-
+    
+    /**
+     * Creates regular chicken enemies positioned across the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for chicken assets
+     * @description Creates initial chicken enemies with spawn flags set to false
+     */
     createChickens(canvas, assetManager) {
         if (this.chickenCount === 0) return;
         const usedPositions = [];
@@ -152,7 +240,13 @@ class Level {
             this.gameObjects.push(chicken);
         }
     }
-
+    
+    /**
+     * Creates small chicken enemies positioned across the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for small chicken assets
+     * @description Creates initial small chicken enemies with spawn flags set to false
+     */
     createChickenSmall(canvas, assetManager) {
         if (this.chickenSmallCount === 0) return; 
         const usedPositions = [];
@@ -168,7 +262,14 @@ class Level {
             this.gameObjects.push(chickenSmall);
         }
     }
-
+    
+    /**
+     * Updates level state including dynamic spawning mechanics
+     * @param {number} currentTime - Current timestamp for timing calculations
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning new spawns
+     * @param {AssetManager} assetManager - Asset manager for spawned enemy assets
+     * @description Manages timed chicken spawning based on configured intervals
+     */
     update(currentTime, canvas, assetManager) {
         if (!this.spawning.enabled) return;
         if (currentTime - this.spawning.lastSpawn >= this.spawning.interval) {
@@ -176,7 +277,13 @@ class Level {
             this.spawning.lastSpawn = currentTime;
         }
     } 
-
+    
+    /**
+     * Spawns a new chicken enemy at the right edge of the level
+     * @param {HTMLCanvasElement} canvas - Canvas element for positioning
+     * @param {AssetManager} assetManager - Asset manager for chicken assets
+     * @description Creates new chicken enemies with 60% chance of regular chicken, 40% small chicken
+     */
     spawnChicken(canvas, assetManager) {
         const spawnedChickens = this.gameObjects.filter(obj => (obj instanceof Chicken || obj instanceof ChickenSmall) && obj.isSpawned === true).length;
         if (spawnedChickens >= this.spawning.maxChickens) return;
