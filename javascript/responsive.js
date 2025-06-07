@@ -57,7 +57,6 @@ function updateCanvasCssVars() {
 function updateGameObjectScales() {
     const gameObjects = window.game?.currentLevel?.gameObjects;
     if (gameObjects && Array.isArray(gameObjects)) gameObjects.forEach(obj => {if (obj.updateDimensions) obj.updateDimensions();});
-    else console.log('No gameObjects found or game not initialized yet');
 }
 
 

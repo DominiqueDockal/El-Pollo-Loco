@@ -15,7 +15,6 @@ class Game {
     async init() {
         try {
             await this.assetManager.loadAllAssets();
-            console.log(`${this.assetManager.imageCache.size} Images loaded`);
             this.loadLevel(this.currentLevelId);
             this.start();
         } catch (error) {
