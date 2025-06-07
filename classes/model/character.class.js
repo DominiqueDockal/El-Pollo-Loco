@@ -117,7 +117,7 @@ class Character extends AnimatedGameObject {
 
    checkSleepState() {
         const now = Date.now();
-        const inactivityDuration = 10000;
+        const inactivityDuration = 3000;
         if (this.isHurt || this.inputDevice.isPressed('LEFT') || this.inputDevice.isPressed('RIGHT') || this.inputDevice.isPressed('JUMP') || !this.isGrounded ||this.inputDevice.wasPressed('ACTION') ){
             this.lastActiveTime = now;
             if (this.isSleeping) {
